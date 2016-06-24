@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						'userName'  => $this->input->post('userName'),
 	          'emailID' 	=> $this->input->post('emailID'),
 	          'password'  => $encryptedPassword,
-						'salt'  => $salt
+						'salt'  		=> $salt
         	);
 				  if($this->Ansquick_model->insertUser($data)){
 						redirect('AnsQuick/success');

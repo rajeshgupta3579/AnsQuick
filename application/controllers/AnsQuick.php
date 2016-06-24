@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        $this->load->model('Ansquick_model');
 			}
 			public function index(){
-				$this->load->view('AnsQuick/HomePage');
+				$this->load->view('AnsQuick/index');
 			}
 			public function success(){
 				$this->load->view('AnsQuick/success');
