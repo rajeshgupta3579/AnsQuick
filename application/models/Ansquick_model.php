@@ -21,7 +21,7 @@ class Ansquick_model extends CI_Model{
          $password 	=	utf8_encode($password);
          $saltEncoded= 	utf8_encode($salt);
          $password 	= 	md5($password);
-         $password 	= 	md5($password + $saltEncoded);
+         $password 	= 	md5($password ."". $saltEncoded);
          $password 	=	base64_encode($password);
          return $password;
 
