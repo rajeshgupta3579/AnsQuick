@@ -1,75 +1,84 @@
-function validateEmail(email) {
+/*function validateEmail(email) {
   var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regex.test(email);
-}
-function isFilled(data){
-  if (data == null || data == "") {
+}*/
+$("#signUpSubmit").click(function(){    
+    var nameRX      = /^[A-Za-z\s]+$/ ;
+    var emailIDRX     = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var userNameRX  = /^[0-9a-zA-Z]+$/;
+    var firstName   = document.forms["signUpForm"]["firstName"].value.trim();
+    var lastName    = document.forms["signUpForm"]["lastName"].value.trim();
+    var userName    = document.forms["signUpForm"]["userName"].value.trim();
+    var emailID     = document.forms["signUpForm"]["emailID"].value.trim();
+    var password    = document.forms["signUpForm"]["password"].value.trim();
+    var cpassword   = document.forms["signUpForm"]["cpassword"].value.trim();
+    if(firstName == null || firstName == ""){
+      $("#firstNameError").html("First Name cannot be empty");
+      $("#firstNameError").show(500);
       return false;
-  }
-  else {
-      return true;
-  }
-}
-function validateForm() {
-    var firstName = document.forms["signUpForm"]["firstName"].value;
-    firstName = firstName.trim();
-    if (firstName == null || firstName == "") {
-        alert("Name must be filled out");
+    }
+    else if (!nameRX.test(firstName)) {
+        $("#firstNameError").html("First Name is invalid");
+        $("#firstNameError").show(500);
         return false;
     }
-    if (!(/^[A-Za-z\s]+$/.test(firstName))) {
-        alert("Name is in incorrect format");
-        return /^[A-Za-z\s]+$/.test(firstName);
+    else{
+        $("#firstNameError").hide();
     }
-    var lastName = document.forms["signUpForm"]["lastName"].value;
-    lastName = lastName.trim();
-    if (lastName == null || lastName == "") {
-        alert("Name must be filled out");
+    if(lastName == null || lastName == ""){
+      $("#lastNameError").html("Last Name cannot be empty");
+      $("#lastNameError").show(500);
+      return false;
+    }
+    else if (!nameRX.test(lastName)) {
+        $("#lastNameError").html("Last Name is invalid");
+        $("#lastNameError").show(500);
         return false;
     }
-    if (!(/^[A-Za-z\s]+$/.test(lastName))) {
-        alert("Name is in incorrect format");
-        return /^[A-Za-z\s]+$/.test(lastName);
+    else{
+        $("#lastNameError").hide();
     }
-    var emailID = document.forms["signUpForm"]["emailID"].value;
-    if(!validateEmail(emailID)){
-		 alert("Please enter correct email ID");
-		 return false;
+    if(userName == null || userName == ""){
+      $("#userNameError").html("Username cannot be empty");
+      $("#userNameError").show(500);
+      return false;
     }
-    var password = document.forms["signUpForm"]["password"].value;
+    else if (!userNameRX.test(userName)) {
+        $("#userNameError").html("Username is invalid");
+        $("#userNameError").show(500);
+        return false;
+    }
+    else{
+        $("#userNameError").hide();
+    }
+    if(emailID == null || emailID == ""){
+      $("#emailIDError").html("Email-ID cannot be empty");
+      $("#emailIDError").show(500);
+      return false;
+    }
+    else if (!emailIDRX.test(emailID)) {
+        $("#emailIDError").html("Email-ID is invalid");
+        $("#emailIDError").show(500);
+        return false;
+    }
+    else{
+        $("#emailIDError").hide();
+    }
     if (password == null || password == "") {
-        alert("Password must be filled out");
-        return false;
-    }
-
-    var cpassword= document.forms["myForm"]["cpassword"].value;
-    if(password!=cpassword){
-      document.getElementById("cpassword").innerHTML = "Passwords do not match!";
-    }
-    else{
-    	document.getElementById("cpassword").innerHTML = "";
-    }
-    var x = document.forms["myForm"]["ph"].value;
-    if (x == null || x == "") {
-        alert("Contact must be filled out");
-        return false;
-    }
-    if(x.length<10){
-      document.getElementById("phonev").innerHTML = "Invalid:Please enter correct phone number";
+      $("#passwordError").html("Password cannot be empty");
+      $("#passwordError").show(500);
       return false;
-
     }
     else{
-    	document.getElementById("phonev").innerHTML = "";
+        $("#passwordError").hide();
     }
-
-	  if(isNaN(x)||x.indexOf(" ")!=-1)
-           {
-            document.getElementById("phonev").innerHTML = "Invalid:Please enter correct phone number";
-              return false;
-           }
-           else{
-    	document.getElementById("phonev").innerHTML = "";
+    if(password!=cpassword){
+      $("#cpasswordError").html("Passwords do not match");
+      $("#cpasswordError").show(500);
+      return false;
+    }
+    else{
+    	$("#cpasswordError").hide();
     }
     return true;
-}
+});

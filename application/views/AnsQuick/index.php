@@ -5,8 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
   #searchBox{
     /*width: 100%;*/
@@ -129,42 +127,66 @@
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="firstName">First Name:</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName" required>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName">
+                              <div class="alert alert-danger" role="alert" id="firstNameError" hidden="true">
+                                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                  <span class="sr-only">Error:</span>
+                              </div>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-sm-2" for="lastName">Second Name:</label>
+                          <label class="control-label col-sm-2" for="lastName">Last Name:</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lastName" required >
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lastName">
+                            <div class="alert alert-danger" role="alert" id="lastNameError" hidden="true">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                            </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="userName">Username:</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="userName" name="userName"  placeholder="Enter Username" required>
+                            <input type="text" class="form-control" id="userName" name="userName"  placeholder="Enter Username">
+                            <div class="alert alert-danger" role="alert" id="userNameError" hidden="true">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                            </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="emailID">Email ID:</label>
                           <div class="col-sm-10">
-                            <input type="email" class="form-control" id="emailID" name="emailID"  placeholder="Enter Email" required>
+                            <input type="text" class="form-control" id="emailID" name="emailID"  placeholder="Enter Email">
+                            <div class="alert alert-danger" role="alert" id="emailIDError" hidden="true">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                            </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="pwd">Password:</label>
                           <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                            <div class="alert alert-danger" role="alert" id="passwordError" hidden="true">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                            </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="confirmpwd">Confirm Password:</label>
                           <div class="col-sm-10">
-                            <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password" required>
+                            <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password">
+                            <div class="alert alert-danger" role="alert" id="cpasswordError" hidden="true">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                            </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button id="signUpSubmit" type="submit" class="btn btn-success" >Submit</button>
                           </div>
                         </div>
                       <?php echo form_close(); ?>
@@ -183,10 +205,14 @@
     </div>
   </div>
 </div>
+
+</body>
 <script>
 function expand(){
   alert("expanded");
 }
 </script>
-</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url('js/index.js'); ?>"></script>
 </html>
