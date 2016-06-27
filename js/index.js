@@ -85,9 +85,9 @@ $("#signUpSubmit").click(function(){
     return true;
 });
 $("#loginSubmit").click(function(){
-  var userName    = document.forms["loginForm"]["userNameLogin"].value.trim();
-  var password    = document.forms["loginForm"]["passwordLogin"].value.trim();
-  if(userName == null || userName == ""){
+  var userNameLogin    = document.forms["loginForm"]["userNameLogin"].value.trim();
+  var passwordLogin    = document.forms["loginForm"]["passwordLogin"].value.trim();
+  if(userNameLogin == null || userNameLogin == ""){
       $("#userNameLoginError").html("User Name cannot be empty");
       $("#userNameLoginError").show(500);
       return false;
@@ -95,12 +95,26 @@ $("#loginSubmit").click(function(){
   else{
     $("#userNameLoginError").hide();
   }
-  if(password == null || password == ""){
+  if(passwordLogin == null || passwordLogin == ""){
       $("#passwordLoginError").html("Password cannot be empty");
       $("#passwordLoginError").show(500);
       return false;
   }
   else{
     $("#passwordLoginError").hide();
-  }  
+  }
+  var flag = false ;
+  data = {'userNameLogin' : userNameLogin, 'passwordLogin' : passwordLogin };
+  $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){
+    if(res=="false"){
+      $("#passwordLoginError").html("Invalid Username or Password");
+      $("#passwordLoginError").show(500);
+    }
+    else{
+      $("#passwordLoginError").hide();
+      $("#loginForm").submit();
+      flag = true;
+    }
+  });
+  return false;
 });

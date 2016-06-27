@@ -11,22 +11,25 @@ class Login extends CI_Controller{
           $this->load->model('AnsQuick_model');
      }
 
-		 public function index(){
-	      	//get the posted values
-          $userName = $this->input->post("userName");
-          $password = $this->input->post("password");
-          if ($this->AnsQuick_model->userExists($userName,$password)){
-          	$sessiondata = array(
-            	'username' => $userName,
-              'loginUser' => TRUE
-            );
-            $this->session->set_userdata($sessiondata);
-            	redirect('AnsQuick/success');
+		 public function checkUser(){
+          $userNameLogin = $this->input->post("userNameLogin");
+          $passwordLogin = $this->input->post("passwordLogin");
+          if ($this->AnsQuick_model->userExists($userNameLogin,$passwordLogin)){
+              echo "true";
           }
           else{
-              redirect('AnsQuick/error');
+              echo "false";
           }
       }
-
+      public function success(){
+           $userNameLogin = $this->input->post("userNameLogin");
+           $passwordLogin = $this->input->post("passwordLogin");           
+           $sessiondata = array(
+               	'userName' => $userNameLogin,
+                 'loginUser' => TRUE
+               );
+           $this->session->set_userdata($sessiondata);
+           redirect('AnsQuick/success');
+       }
 		}
 ?>

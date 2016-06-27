@@ -134,14 +134,12 @@
                         </br>
                         <?php
                           $attributes = array("class" => "form-horizontal", "id" => "loginForm", "name" => "loginForm","role"=>"form");
-                          echo form_open("Login/index", $attributes);?>
+                          echo form_open("Login/success", $attributes);?>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="username">Username:</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="userNameLogin" name="userName" placeholder="Enter Username or Email">
                             <div class="alert alert-danger" role="alert" id="userNameLoginError" hidden="true">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
                             </div>
                           </div>
                         </div>
@@ -150,8 +148,6 @@
                           <div class="col-sm-10">
                             <input type="password" class="form-control" id="passwordLogin" name="password" placeholder="Enter password">
                             <div class="alert alert-danger" role="alert" id="passwordLoginError" hidden="true">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
                             </div>
                           </div>
                         </div>
@@ -170,9 +166,6 @@
                         </div>
                       <?php echo form_close(); ?>
 
-
-
-
                 </div>
                 <div id="signup" class="tab-pane fade">
 
@@ -185,8 +178,7 @@
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName">
                               <div class="alert alert-danger" role="alert" id="firstNameError" hidden="true">
-                                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                  <span class="sr-only">Error:</span>
+
                               </div>
                           </div>
                         </div>
@@ -195,8 +187,6 @@
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lastName">
                             <div class="alert alert-danger" role="alert" id="lastNameError" hidden="true">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
                             </div>
                           </div>
                         </div>
@@ -205,8 +195,6 @@
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="userName" name="userName"  placeholder="Enter Username">
                             <div class="alert alert-danger" role="alert" id="userNameError" hidden="true">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
                             </div>
                           </div>
                         </div>
@@ -215,8 +203,7 @@
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="emailID" name="emailID"  placeholder="Enter Email">
                             <div class="alert alert-danger" role="alert" id="emailIDError" hidden="true">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
+
                             </div>
                           </div>
                         </div>
@@ -225,8 +212,7 @@
                           <div class="col-sm-10">
                             <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
                             <div class="alert alert-danger" role="alert" id="passwordError" hidden="true">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
+
                             </div>
                           </div>
                         </div>
@@ -235,8 +221,7 @@
                           <div class="col-sm-10">
                             <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password">
                             <div class="alert alert-danger" role="alert" id="cpasswordError" hidden="true">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
+
                             </div>
                           </div>
                         </div>
