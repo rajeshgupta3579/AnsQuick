@@ -84,3 +84,23 @@ $("#signUpSubmit").click(function(){
     }
     return true;
 });
+$("#loginSubmit").click(function(){
+  var userName    = document.forms["loginForm"]["userNameLogin"].value.trim();
+  var password    = document.forms["loginForm"]["passwordLogin"].value.trim();
+  if(userName == null || userName == ""){
+      $("#userNameLoginError").html("User Name cannot be empty");
+      $("#userNameLoginError").show(500);
+      return false;
+  }
+  else{
+    $("#userNameLoginError").hide();
+  }
+  if(password == null || password == ""){
+      $("#passwordLoginError").html("Password cannot be empty");
+      $("#passwordLoginError").show(500);
+      return false;
+  }
+  else{
+    $("#passwordLoginError").hide();
+  }  
+});

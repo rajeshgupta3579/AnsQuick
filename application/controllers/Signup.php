@@ -7,8 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        $this->load->database();
 		        $this->load->model('Ansquick_model');
 			}
-
-
 			function index(){
 					$password = $this->input->post('password');
 					$salt 		= 	uniqid(mt_rand(), true);

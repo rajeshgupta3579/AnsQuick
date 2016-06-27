@@ -71,12 +71,6 @@
   </div><!-- /.navbar-collapse -->
 </nav>
 
-
-
-
-
-
-
 <div class="modal fade" id="postQuestion" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -114,7 +108,7 @@
                           <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
                           </div>
-                        </div>    
+                        </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -122,22 +116,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <div class="modal fade" id="logIn" role="dialog">
@@ -160,13 +138,21 @@
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="username">Username:</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="userNameLogin" name="userName" placeholder="Enter Username or Email" required>
+                            <input type="text" class="form-control" id="userNameLogin" name="userName" placeholder="Enter Username or Email">
+                            <div class="alert alert-danger" role="alert" id="userNameLoginError" hidden="true">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                            </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="pwd">Password:</label>
                           <div class="col-sm-10">
-                            <input type="password" class="form-control" id="passwordLogin" name="password" placeholder="Enter password" required>
+                            <input type="password" class="form-control" id="passwordLogin" name="password" placeholder="Enter password">
+                            <div class="alert alert-danger" role="alert" id="passwordLoginError" hidden="true">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                            </div>
                           </div>
                         </div>
                         <div class="form-group">
@@ -178,7 +164,7 @@
                         </div>
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button id="loginSubmit" type="submit" class="btn btn-success">Submit</button>
                             <button  class="btn btn-success">Forgot Password</button>
                           </div>
                         </div>
