@@ -1,10 +1,6 @@
-/*function validateEmail(email) {
-  var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return regex.test(email);
-}*/
-$("#signUpSubmit").click(function(){    
+$("#signUpSubmit").click(function(){
     var nameRX      = /^[A-Za-z\s]+$/ ;
-    var emailIDRX     = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var userNameRX  = /^[0-9a-zA-Z]+$/;
     var firstName   = document.forms["signUpForm"]["firstName"].value.trim();
     var lastName    = document.forms["signUpForm"]["lastName"].value.trim();
@@ -12,6 +8,7 @@ $("#signUpSubmit").click(function(){
     var emailID     = document.forms["signUpForm"]["emailID"].value.trim();
     var password    = document.forms["signUpForm"]["password"].value.trim();
     var cpassword   = document.forms["signUpForm"]["cpassword"].value.trim();
+
     if(firstName == null || firstName == ""){
       $("#firstNameError").html("First Name cannot be empty");
       $("#firstNameError").show(500);
@@ -25,6 +22,7 @@ $("#signUpSubmit").click(function(){
     else{
         $("#firstNameError").hide();
     }
+
     if(lastName == null || lastName == ""){
       $("#lastNameError").html("Last Name cannot be empty");
       $("#lastNameError").show(500);
@@ -38,6 +36,7 @@ $("#signUpSubmit").click(function(){
     else{
         $("#lastNameError").hide();
     }
+
     if(userName == null || userName == ""){
       $("#userNameError").html("Username cannot be empty");
       $("#userNameError").show(500);
@@ -51,6 +50,7 @@ $("#signUpSubmit").click(function(){
     else{
         $("#userNameError").hide();
     }
+
     if(emailID == null || emailID == ""){
       $("#emailIDError").html("Email-ID cannot be empty");
       $("#emailIDError").show(500);
@@ -64,6 +64,7 @@ $("#signUpSubmit").click(function(){
     else{
         $("#emailIDError").hide();
     }
+
     if (password == null || password == "") {
       $("#passwordError").html("Password cannot be empty");
       $("#passwordError").show(500);
@@ -72,6 +73,7 @@ $("#signUpSubmit").click(function(){
     else{
         $("#passwordError").hide();
     }
+
     if(password!=cpassword){
       $("#cpasswordError").html("Passwords do not match");
       $("#cpasswordError").show(500);

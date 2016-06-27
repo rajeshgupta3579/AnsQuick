@@ -13,7 +13,6 @@ class Login extends CI_Controller{
 
 		 public function index(){
 	      	//get the posted values
-
           $userName = $this->input->post("userName");
           $password = $this->input->post("password");
           if ($this->AnsQuick_model->userExists($userName,$password)){

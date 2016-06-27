@@ -90,13 +90,13 @@
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="username">Username:</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter Username or Email" required>
+                            <input type="text" class="form-control" id="userNameLogin" name="userName" placeholder="Enter Username or Email" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="pwd">Password:</label>
                           <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                            <input type="password" class="form-control" id="passwordLogin" name="password" placeholder="Enter password" required>
                           </div>
                         </div>
                         <div class="form-group">
