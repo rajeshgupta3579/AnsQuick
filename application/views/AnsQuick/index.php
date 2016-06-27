@@ -58,18 +58,88 @@
             <input type="text" class="form-control col-xs-10 searchBox"  onfocus="expand()" placeholder="Search or Post Question" name="q">
             <div class="input-group-btn">
                 <button class="btn btn-success " type="submit"  ><i class="glyphicon glyphicon-search"></i></button>
-                <button class="btn btn-success" type="submit" >Post Question!!</button>
+
             </div>
         </div>
         </form>
     </div>
     <ul class="nav navbar-nav navbar-right">
+      <li><a href="#postQuestion" data-toggle="modal">Post Question!!</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#logIn" data-toggle="modal">Log In/Sign Up</a></li>
-
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
+
+
+
+
+
+
+
+<div class="modal fade" id="postQuestion" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Post a Question!!</h4>
+      </div>
+        <div class="modal-body">
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="question">Question:</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="qeustion" name="question" placeholder="Enter Question" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="tags">Tags:</label>
+                          <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" name="tags" placeholder="Enter ',' seperated tags " required>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="tags">Category</label>
+                          <div class="col-sm-10">
+                            <select id="category" name="category">
+                            <option value="Sports">Sports</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Business">Business</option>
+                            <option value="Education">Education</option>
+                          </select>
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                          </div>
+                        </div>    
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="modal fade" id="logIn" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
