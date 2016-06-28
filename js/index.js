@@ -136,13 +136,22 @@ $("#forgotPasswordSubmit").click(function(){
 
   $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
     if(res=="false"){
-      $("#userNameForgotPasswordError").html("Invalid Username or Password");
-      $("#userNameForgotPasswordError").show(500);
+        $("#userNameForgotPasswordError").html("Invalid Username or Password");
+        $("#userNameForgotPasswordError").show(500);
     }
     else{
-      $("#userNameForgotPasswordError").hide();
-      $("#forgotPasswordForm").submit();
-      flag = true;
+        $("#userNameForgotPasswordError").hide();
+        $.post("http://www.ansquick.com/index.php/ForgotPassword/sendmail",data,function(res){
+          alert(res);
+          if(res=="true"){
+            $("#forgotPasswordForm").submit();
+            flag = true;
+          }
+          else {
+              $("#userNameForgotPasswordError").html("Error Sending Email!!");
+              $("#userNameForgotPasswordError").show(500);
+          }
+        });
     }
   });
   return false;

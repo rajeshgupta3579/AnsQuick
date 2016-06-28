@@ -3,32 +3,39 @@
 
       function __construct() {
          parent::__construct();
+         $this->load->helper(array('form','url'));
+         $this->load->database();
+         $this->load->model('Forgotpassword_model');
       }
-      public function index() {
-        $config = Array(
-          'protocol' => 'smtp',
-          'smtp_host' => 'ssl://smtp.googlemail.com',
-          'smtp_port' => 465,
-          'smtp_user' => 'quickanswer16@gmail.com',
-          'smtp_pass' => 'Jindal9@',
-          'mailtype'  => 'html',
-          'charset'   => 'iso-8859-1'
-        );
+      public function sendmail() {
+        $userNameForgotPassword = $this->input->post('userNameForgotPassword');
+        $query = $this->Forgotpassword_model->get_user($userNameForgotPassword);
+        if($query->num_rows()>0){
+          $row = $query->result();
+          $config = Array(
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' =>  465,
+            'smtp_user' => 'quickanswer16@gmail.com',
+            'smtp_pass' => 'Jindal9@',
+            'mailtype'  => 'html',
+            'charset'   => 'iso-8859-1'
+          );
+          $this->load->library('email', $config);
+          $this->email->set_newline("\r\n");
 
-
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-
-        $from_email = "quickanswer16@gmail.com";
-        $to_email = "rajeshgupta3579@gmail.com";
-        $this->email->from($from_email, 'Your Name');
-        $this->email->to($to_email);
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
-        if($this->email->send())
-          echo "success";
+          $from_email = "quickanswer16@gmail.com";
+          $this->email->from($from_email, 'AnsQuick');
+          $this->email->to($row[0]->emailID);
+          $this->email->subject('Password Recovery');
+          $this->email->message(base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".$row[0]->password."/".$row[0]->salt);
+          if($this->email->send())
+            echo "true";
+          else
+            echo "false";
+        }
         else
-          echo "failure";
+          echo "false";
       }
    }
 ?>
