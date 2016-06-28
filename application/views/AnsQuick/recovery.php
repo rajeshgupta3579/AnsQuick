@@ -8,7 +8,7 @@
           <label class="control-label col-sm-2" for="username">Username / Email-ID:</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" style="width:25%" id="userNameForgotPassword" name="userName" placeholder="Enter Username or Email">
-            <div class="alert alert-danger" role="alert" id="userNameForgotPasswordError" hidden="true"> </div>
+            <div class="alert alert-danger" style="width:25%;"role="alert" id="userNameForgotPasswordError" hidden="true"> </div>
           </div>
         </div>
         <div class="form-group">

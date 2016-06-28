@@ -20,7 +20,6 @@ class Forgotpassword_model extends CI_Model{
          $password 	= 	md5($password ."". $saltEncoded);
          $password 	=	base64_encode($password);
          return $password;
-
      }
      /*
      *
@@ -30,7 +29,7 @@ class Forgotpassword_model extends CI_Model{
      function userExists($userName){
           $query = $this->get_user($userName);
           if($query->num_rows()>0){
-            return 1;            
+            return 1;
           }
           return 0;
      }
