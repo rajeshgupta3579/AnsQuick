@@ -71,6 +71,10 @@
   </div><!-- /.navbar-collapse -->
 </nav>
 
+
+
+
+
 <div class="modal fade" id="postQuestion" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -78,37 +82,28 @@
         <h4>Post a Question!!</h4>
       </div>
         <div class="modal-body">
-                        <div class="form-group">
-                          <label class="control-label col-sm-2" for="question">Question:</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="qeustion" name="question" placeholder="Enter Question" required>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-sm-2" for="tags">Tags:</label>
-                          <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="tags" placeholder="Enter ',' seperated tags " required>
-                          </div>
-                        </div>
+          <form role="form" action="http://localhost/codeigniter/index.php/Addquestion" method ="POST">
 
-                        <div class="form-group">
-                          <label class="control-label col-sm-2" for="tags">Category</label>
-                          <div class="col-sm-10">
-                            <select id="category" name="category">
-                            <option value="Sports">Sports</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Business">Business</option>
-                            <option value="Education">Education</option>
-                          </select>
-                          </div>
-                        </div>
+            <div class="form-group">
+            <label for="cate">Select Category:&emsp;</label>
+            <select class="selectpicker" id="category" name="category">
+              <option>Business</option>
+              <option>Entertainment</option>
+              <option>Sports</option>
+              <option>Education</option>
+            </select>
+            </div>
+               <div class="form-group">
+                 <label for="question">Question:</label>
+                  <textarea class="form-control" rows="3" id="question" placeholder="Type your Question" name="question"></textarea>
 
-
-                        <div class="form-group">
-                          <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                          </div>
-                        </div>
+               </div>
+               <div class="form-group">
+                 <label for="tags">Tags:</label>
+                 <input type="text" class="form-control" id="tegs" placeholder="Enter ',' seperated tags" name="tags">
+               </div>
+               <button type="submit" class="btn btn-success">Submit</button>
+          </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
