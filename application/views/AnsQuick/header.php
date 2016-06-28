@@ -155,7 +155,7 @@
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
                             <button id="loginSubmit" type="submit" class="btn btn-success">Submit</button>
-                            <button  class="btn btn-success" type="submit" formaction="index.php/ForgotPassword/"> Forgot Password</button>
+                            <button  class="btn btn-success" type="submit" formaction="<?php echo base_url('index.php/ForgotPassword/'); ?>"> Forgot Password</button>
                           </div>
                         </div>
                       <?php echo form_close(); ?>

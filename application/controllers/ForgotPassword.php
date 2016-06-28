@@ -13,7 +13,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			public function checkUser(){
 					$userNameForgotPassword = $this->input->post("userNameForgotPassword");
 					if($this->Forgotpassword_model->userExists($userNameForgotPassword)){
-					
+						echo "true";
+					}
+					else {
+							echo "false";
 					}
 			}
 			public function success(){
