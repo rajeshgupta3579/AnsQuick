@@ -132,8 +132,9 @@ $("#forgotPasswordSubmit").click(function(){
     $("#userNameForgotPasswordError").hide();
   }
   var flag = false ;
-  data = {'userNameForgotPassword' : userNameLogin };
-  $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
+  data = {'userNameForgotPassword' : userNameForgotPassword };
+
+  $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){    
     if(res=="false"){
       $("#passwordLoginError").html("Invalid Username or Password");
       $("#passwordLoginError").show(500);
