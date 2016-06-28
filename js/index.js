@@ -118,3 +118,34 @@ $("#loginSubmit").click(function(){
   });
   return false;
 });
+$('#searchBox').focus( function(){
+  alert("expanded");
+});
+$("#forgotPasswordSubmit").click(function(){
+  var userNameForgotPassword    = document.forms["forgotPasswordForm"]["userNameForgotPassword"].value.trim();
+  if(userNameForgotPassword == null || userNameForgotPassword == ""){
+      $("#userNameForgotPasswordError").html("This Field cannot be empty");
+      $("#userNameForgotPasswordError").show(500);
+      return false;
+  }
+  else{
+    $("#userNameForgotPasswordError").hide();
+  }
+  var flag = false ;
+  data = {'userNameForgotPassword' : userNameLogin };
+  $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
+    if(res=="false"){
+      $("#passwordLoginError").html("Invalid Username or Password");
+      $("#passwordLoginError").show(500);
+    }
+    else{
+      $("#passwordLoginError").hide();
+      $("#loginForm").submit();
+      flag = true;
+    }
+  });
+  return false;
+});
+$('#searchBox').focus( function(){
+  alert("expanded");
+});

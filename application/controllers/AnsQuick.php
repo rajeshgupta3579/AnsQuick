@@ -8,9 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			***/
 			public function __construct(){
 		        parent::__construct();
-		        $this->load->helper(array('form','url'));
-		        $this->load->database();
-		        $this->load->model('Ansquick_model');
+		        $this->load->helper(array('form','url'));		        
 			}
 			public function index(){
 				$this->load->view('AnsQuick/index');
