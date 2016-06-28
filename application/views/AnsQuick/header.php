@@ -100,7 +100,7 @@
                </div>
                <div class="form-group">
                  <label for="tags">Tags:</label>
-                 <input type="text" class="form-control" id="tegs" placeholder="Enter ',' seperated tags" name="tags">
+                 <input type="text" class="form-control" id="tags" placeholder="Enter ',' seperated tags" name="tags">
                </div>
                <button type="submit" class="btn btn-success">Submit</button>
           </form>
