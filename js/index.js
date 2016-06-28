@@ -134,7 +134,7 @@ $("#forgotPasswordSubmit").click(function(){
   var flag = false ;
   data = {'userNameForgotPassword' : userNameForgotPassword };
 
-  $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){    
+  $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
     if(res=="false"){
       $("#passwordLoginError").html("Invalid Username or Password");
       $("#passwordLoginError").show(500);
@@ -145,7 +145,7 @@ $("#forgotPasswordSubmit").click(function(){
       flag = true;
     }
   });
-  return false;
+  return flag;
 });
 $('#searchBox').focus( function(){
   alert("expanded");
