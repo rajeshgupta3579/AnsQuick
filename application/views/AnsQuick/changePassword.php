@@ -3,8 +3,10 @@
         </br></br></br></br></br>
         <?php
           $attributes = array("class" => "form-horizontal", "id" => "changePasswordForm", "name" => "changePasswordForm","role"=>"form");
-          echo form_open("ForgotPassword/setPassword", $attributes); $_POST['userName']=$userName; ?>
-
+          echo form_open("ForgotPassword/setPassword", $attributes); ?>
+          <div class="form-group">
+            <input type="hidden" name="userName" id="userName" value="<?php echo $userName; ?>">
+          </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="password">New password:</label>
           <div class="col-sm-10">
