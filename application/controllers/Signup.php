@@ -1,13 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+	defined('BASEPATH') OR exit('No direct script access allowed');
+
 	class Signup extends CI_Controller {
 			public function __construct(){
-		        parent::__construct();
+		        parent::__construct();					
+					  $this->redirect('/home');
 		        $this->load->helper(array('form','url'));
 		        $this->load->database();
 		        $this->load->model('Ansquick_model');
 			}
 			function index(){
+
 					$password = $this->input->post('password');
 					$salt 		= 	uniqid(mt_rand(), true);
 					$encryptedPassword = $this->Ansquick_model->encryptPassword($password,$salt);
