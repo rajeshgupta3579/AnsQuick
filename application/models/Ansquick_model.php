@@ -8,7 +8,7 @@ class Ansquick_model extends CI_Model{
     }
     //get the username & password from tbl_usrs
      function get_user($userName){
-          $sql = "select * from UserInfo where userName = '" .$userName."'OR emailID='".$userName."'";
+          $sql = "select * from UserInfo where userName = '".$userName."'OR emailID='".$userName."'";
           $query = $this->db->query($sql);
           return $query;
      }
