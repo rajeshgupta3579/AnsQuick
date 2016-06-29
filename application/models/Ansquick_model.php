@@ -93,5 +93,16 @@ class Ansquick_model extends CI_Model{
           }
           return 0;
      }
+     function userNameExists($userName){
+          $query = $this->get_user($userName);
+          if($query->num_rows()>0){
+            return 1;
+          }
+          return 0;
+     }
+     function updateUser($data,$userName){
+       $this->db->where('userName',$userName);
+       return $this->db->update('UserInfo',$data);
+     }
 }
 ?>

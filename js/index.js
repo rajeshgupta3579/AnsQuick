@@ -1,10 +1,10 @@
-
-
-
-
-
-
 $("#signUpSubmit").click(function(){
+    $("#firstNameError").hide();
+    $("#lastNameError").hide();
+    $("#userNameError").hide();
+    $("#emailIDError").hide();
+    $("#passwordError").hide();
+    $("#cpasswordError").hide();
     var nameRX      = /^[A-Za-z\s]+$/ ;
     var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var userNameRX  = /^[0-9a-zA-Z]+$/;
@@ -91,6 +91,8 @@ $("#signUpSubmit").click(function(){
     return true;
 });
 $("#loginSubmit").click(function(){
+  $("#userNameLoginError").hide();
+  $("#passwordLoginError").hide();
   var userNameLogin    = document.forms["loginForm"]["userNameLogin"].value.trim();
   var passwordLogin    = document.forms["loginForm"]["passwordLogin"].value.trim();
   if(userNameLogin == null || userNameLogin == ""){
@@ -128,6 +130,7 @@ $('#searchBox').focus( function(){
   alert("expanded");
 });
 $("#forgotPasswordSubmit").click(function(){
+  $("#userNameForgotPasswordError").hide();
   var userNameForgotPassword    = document.forms["forgotPasswordForm"]["userNameForgotPassword"].value.trim();
   if(userNameForgotPassword == null || userNameForgotPassword == ""){
       $("#userNameForgotPasswordError").html("This Field cannot be empty");
@@ -143,7 +146,6 @@ $("#forgotPasswordSubmit").click(function(){
   $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
 
     if(res=="false"){
-      alert();
         $("#userNameForgotPasswordError").html("Invalid Username or Password");
         $("#userNameForgotPasswordError").show(500);
     }
@@ -165,4 +167,35 @@ $("#forgotPasswordSubmit").click(function(){
 });
 $('#searchBox').focus( function(){
   alert("expanded");
+});
+$("#changePasswordSubmit").click(function(){
+  $("#newPasswordError").hide();
+  $("#cnewPasswordError").hide();
+  var newPassword     = document.forms["changePasswordForm"]["newPassword"].value.trim();
+  var cnewPassword    = document.forms["changePasswordForm"]["cnewPassword"].value.trim();
+  if(newPassword == null || newPassword == ""){
+      $("#newPasswordError").html("This Field cannot be empty");
+      $("#newPasswordError").show(500);
+      return false;
+  }
+  else{
+    $("#newPasswordError").hide();
+  }
+  if(cnewPassword == null || cnewPassword == ""){
+      $("#cnewPasswordError").html("This Field cannot be empty");
+      $("#cnewPasswordError").show(500);
+      return false;
+  }
+  else{
+    $("#cnewPasswordError").hide();
+  }
+  if(cnewPassword != newPassword ){
+      $("#cnewPasswordError").html("Passwords do not match");
+      $("#cnewPasswordError").show(500);
+      return false;
+  }
+  else{
+    $("#cnewPasswordError").hide();
+  }
+  return true;
 });

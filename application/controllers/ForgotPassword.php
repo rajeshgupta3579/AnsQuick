@@ -5,14 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        parent::__construct();
 		        $this->load->helper(array('form','url'));
 						$this->load->database();
-	          $this->load->model('Forgotpassword_model');
+	          $this->load->model('Ansquick_model');
 			}
 			public function index(){
 				$this->load->view('AnsQuick/recovery');
 			}
 			public function checkUser(){
 					$userNameForgotPassword = $this->input->post("userNameForgotPassword");
-					if($this->Forgotpassword_model->userExists($userNameForgotPassword)){
+					if($this->Ansquick_model->userNameExists($userNameForgotPassword)){
 						echo "true";
 					}
 					else {
@@ -20,18 +20,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 			}
 			public function changePassword($userName,$salt){
-					$query = $this->Forgotpassword_model->get_user($userName);
+					$query = $this->Ansquick_model->get_user($userName);
 	        if($query->num_rows()>0){
 	          $row = $query->result();
-						echo "true";
+						if($salt==md5($row[0]->salt)){
+							$data = Array(
+		            'userName'  => $row[0]->userName
+							);
+							$this->load->view('AnsQuick/changePassword',$data);
+						}
+						else{
+							echo "Permission Denied";
+						}
 					}
 					else {
-							echo "false";
+							echo "Permission Denied";
 					}
 			}
 			public function sendmail() {
         $userNameForgotPassword = $this->input->post('userNameForgotPassword');
-        $query = $this->Forgotpassword_model->get_user($userNameForgotPassword);
+        $query = $this->Ansquick_model->get_user($userNameForgotPassword);
         if($query->num_rows()>0){
           $row = $query->result();
           $config = Array(
@@ -59,6 +67,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         else
           echo "false";
       }
+			public function setPassword(){
+				$userName = $this->input->post('userName');
+				$newPassword = $this->input->post('newPassword');
+				$cnewPassword = $this->input->post('cnewPassword');
+				if($newPassword!=$cnewPassword){
+					echo "Passwords do not Match";
+					return ;
+				}
+				if($this->Ansquick_model->userNameExists($userName)){
+					$salt 		= 	uniqid(mt_rand(), true);
+					$encryptedPassword = $this->Ansquick_model->encryptPassword($newPassword,$salt);
+					$data = array(
+	          'password'  => $encryptedPassword,
+						'salt'  		=> $salt
+        	);
+				  if($this->Ansquick_model->updateUser($data,$userName)){
+						redirect('AnsQuick/success');
+					}
+					else{
+						echo "Password could not be changed";
+					}
+
+				}
+				else{
+					echo "User is Not registered";
+					return ;
+				}
+			}
 			public function success(){
 				$this->load->view('AnsQuick/success');
 			}

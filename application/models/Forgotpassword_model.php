@@ -32,6 +32,7 @@ class Forgotpassword_model extends CI_Model{
             return 1;
           }
           return 0;
-     }     
+     }
+     
 }
 ?>
