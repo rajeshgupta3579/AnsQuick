@@ -54,7 +54,7 @@ class Ansquick_model extends CI_Model{
      */
     function postQuestion($question,$category,$tagList){
 
-       
+
 
        $tagListQuery = implode("', '", $tagList);
 
