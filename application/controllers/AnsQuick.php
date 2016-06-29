@@ -22,8 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$this->load->view('AnsQuick/error');
 			}
 			public function logout(){
-   			$this->session->unset_userdata('userName');
-				$this->session->unset_userdata('userID');
+   			$this->session->unset_userdata('userName');				
    			$this->session->unset_userdata('loginUser');
         session_destroy();
 				redirect(base_url());
