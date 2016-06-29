@@ -24,7 +24,7 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-default "  role="navigation">
+<nav class="navbar navbar-fixed top navbar-default "  role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -54,7 +54,7 @@
       </li>
     </ul>
     <div class="col-sm-6 col-md-6">
-        <form class="navbar-form navbar-right" role="search" >
+        <form class="navbar-form " role="search" >
         <div class="input-group">
             <input id="searchBox" type="text" class="form-control col-xs-10 searchBox" placeholder="Search or Post Question" name="q">
             <div class="input-group-btn">
