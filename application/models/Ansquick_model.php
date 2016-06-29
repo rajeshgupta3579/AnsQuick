@@ -14,6 +14,27 @@ class Ansquick_model extends CI_Model{
      }
 
      /*
+     *  A function to post question into the database
+     *
+     *
+     */
+    function postQuestion($question,$category,$tagList){
+       //echo $question,$category;
+       //print_r($tagList);
+       $tagList = implode("', '", $tagList);
+       print_r($tagList);
+       echo "</br>";
+       $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagList')";
+
+       $query = $this->db->query($sql);
+       print_r($query->result());
+     }
+
+
+
+
+
+     /*
      * A function to give suggestions of tags when user is posting a question
      * Input is taken from the request made by jquery
      * Output is list of suggestions in json format

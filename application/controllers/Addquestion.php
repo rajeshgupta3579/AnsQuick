@@ -2,11 +2,35 @@
 class Addquestion extends CI_Controller{
 	public function __construct(){
 		parent:: __construct();
+		$this->load->model('Ansquick_model');
 
 	}
   public function index(){
-    	$this->load->view('AnsQuick/aq');
+    	//$this->load->view('AnsQuick/aq');
 			//echo "adad";
+
+			$question = $_GET['question'];
+			$category = $_GET['category'];
+			$tags = $_GET['tags'];
+			$tags = explode (",", $tags);
+			/*echo $question,"<br>",$category,"<br>",$tags,"<br>";
+			echo trim($chunks[0]),trim($chunks[1]);
+			print_r($chunks);
+			*/
+			//print_r($tags);
+			$tagList = array();
+			$length = count($tags);
+			for($i=0;$i<$length;$i++){
+				$s= trim($tags[$i]);
+				if($s!="")
+				$tagList[$i]=$s;
+			}
+			//echo $tags[0],$tags[1];
+			//print_r($tagList);
+
+			$this->Ansquick_model->postQuestion($question,$category,$tagList);
+
+
   }
 }
 ?>
