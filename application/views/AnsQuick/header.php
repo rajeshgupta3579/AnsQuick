@@ -66,8 +66,11 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#postQuestion" data-toggle="modal">Post Question!!</a></li>
-      <li><a href="#">About</a></li>
-      <?php if( $this->session->userdata('userName')!=null) { ?>
+      <li><a href="<?php echo base_url('index.php/AnsQuick/logout'); ?>">Logout</a></li>
+      <?php      
+      if(!$this->session->userdata('userID')) {
+
+        ?>
         <li><a href="#logIn" data-toggle="modal">Log In/Sign Up</a></li> </ul>
       <?php }  else{?>
         </ul>
