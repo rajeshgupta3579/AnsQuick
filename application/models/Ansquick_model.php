@@ -14,6 +14,138 @@ class Ansquick_model extends CI_Model{
      }
 
      /*
+     * Returns the maximum tagID present in the database
+     */
+     function topTagID(){
+        $sql = "SELECT MAX(tagID) as maxTagID FROM Tags";
+        $query = $this->db->query($sql)->result();
+        $result = $query[0]->maxTagID;
+        return $result;
+     }
+
+     /*
+     * A function to insert a new tag into database
+     * Takes input a tag in string
+     */
+     function insertTag($tag){
+       //echo $tag;
+       $topTagID=$this->topTagID();
+       //echo $topTagID;
+       $sql = "INSERT INTO Tags (tagName) VALUES ('".$tag."')";
+       $query = $this->db->query($sql);
+       return $topTagID+1;
+     }
+
+     function topQuestionID(){
+       $sql = "SELECT MAX(questionID) as maxQuestionID FROM Question";
+       $query = $this->db->query($sql)->result();
+       $result = $query[0]->maxQuestionID;
+       return $result;
+     }
+
+     function insertQuestion($question,$userID,$categoryID){
+
+       $topQuestionID=$this->topQuestionID();
+       //echo $topTagID;
+       $sql = "INSERT INTO Question (questionText,userID,categoryID) VALUES ('".$question."','".$userID."','".$categoryID."')";
+       $query = $this->db->query($sql);
+       return $topQuestionID+1;
+     }
+
+/*
+* A function to fetch tagID of the tags which already exsists in the DB
+*/
+     function getTagsArray($tagList){
+
+           $tagListQuery = implode("', '", $tagList);
+
+           $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
+           $query = $this->db->query($sql);
+           $result=$query->result();
+
+           $tagsArray = array();
+           foreach ($result as $row){
+             $tagName = $row->tagName;
+             $tagID   = $row->tagID;
+             $tagsArray[$tagName]= $tagID;
+           }
+           return $tagsArray;
+     }
+/*
+* A function to  return the categoryID of the selected Category
+*/
+     function getCategoryID($category){
+
+          $sql = "SELECT categoryID FROM Category WHERE categoryName='".$category."'";
+          $query = $this->db->query($sql);
+          $result = $query->result();
+          $categoryID = $result[0]->categoryID;
+          return $categoryID;
+
+     }
+     /*
+     * Returns the userID for a username
+     */
+     function getUserID($userName){
+       $sql = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
+       $query = $this->db->query($sql);
+       $result = $query->result();
+       $userID = $result[0]->userID;
+       return $userID;
+     }
+
+
+     function insertQuestionTag($questionID,$tagID){
+
+       $sql = "INSERT INTO QuestionTag (questionID,tagID) VALUES ('".$questionID."','".$tagID."')";
+       $query = $this->db->query($sql);
+
+     }
+     /*
+     *  A function to post question into the database
+     *  Takes input the contents of a question like discription, category and tags attached
+     *  Adds question to the database, if given tag are not present alreay then it is inserted as well.
+     */
+    function postQuestion($question,$category,$tagList,$userName){
+
+
+
+      $tagsArray = $this->getTagsArray($tagList);
+      $categoryID= $this->getCategoryID($category);
+      $userID    = $this->getUserID($userName);
+      print_r($tagsArray);
+      echo "<br>",$categoryID,"<br>";
+      print_r($tagList);
+
+
+       $questionID=$this->insertQuestion($question,$userID,$categoryID);
+       
+
+       echo "<br>",$questionID,"<br>";
+       $length = count($tagList);
+       for($i=0;$i<$length;$i++){
+         $temp_tag = $tagList[$i];
+         //echo $temp_tag;
+         $tagID=0;
+         if(!isset($tagsArray[$temp_tag])){
+            //echo "andar";
+            $tagID=$this->insertTag($temp_tag);
+         }
+         else {
+            $tagID=$tagsArray[$temp_tag];
+         }
+         echo $tagID;
+         $this->insertQuestionTag($questionID,$tagID);
+
+       }
+
+     }
+
+
+
+
+
+     /*
      * A function to give suggestions of tags when user is posting a question
      * Input is taken from the request made by jquery
      * Output is list of suggestions in json format

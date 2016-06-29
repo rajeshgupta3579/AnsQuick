@@ -24,7 +24,7 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-default "  role="navigation">
+<nav class="navbar navbar-fixed top navbar-default "  role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -33,7 +33,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="<?php echo base_url(); ?>">AnsQuick</a>
+    <a class="navbar-brand" href="#">AnsQuick</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -54,7 +54,7 @@
       </li>
     </ul>
     <div class="col-sm-6 col-md-6">
-        <form class="navbar-form navbar-right" role="search" >
+        <form class="navbar-form " role="search" >
         <div class="input-group">
             <input id="searchBox" type="text" class="form-control col-xs-10 searchBox" placeholder="Search a Question" name="q">
             <div class="input-group-btn">
@@ -130,7 +130,7 @@
       </div>
         <div class="modal-body">
 
-          <form role="form" action="http://localhost/codeigniter/index.php/Addquestion" method ="get" id="postQ">
+          <form role="form" action="index.php/Addquestion" method ="get" id="addq">
 
             <div class="form-group">
             <label for="cate">Select Category:&emsp;</label>
