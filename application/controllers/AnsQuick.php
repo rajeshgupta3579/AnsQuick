@@ -21,8 +21,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			public function error(){
 				$this->load->view('AnsQuick/error');
 			}
+			public function about(){
+				$this->load->view('AnsQuick/about');
+			}
+			public function profile(){
+				$this->load->view('AnsQuick/profile');
+			}
 			public function logout(){
-   			$this->session->unset_userdata('userName');				
+   			$this->session->unset_userdata('userName');
    			$this->session->unset_userdata('loginUser');
         session_destroy();
 				redirect(base_url());

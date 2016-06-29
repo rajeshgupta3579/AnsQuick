@@ -56,7 +56,7 @@
     <div class="col-sm-6 col-md-6">
         <form class="navbar-form navbar-right" role="search" >
         <div class="input-group">
-            <input id="searchBox" type="text" class="form-control col-xs-10 searchBox" placeholder="Search or Post Question" name="q">
+            <input id="searchBox" type="text" class="form-control col-xs-10 searchBox" placeholder="Search a Question" name="q">
             <div class="input-group-btn">
                 <button class="btn btn-success " type="submit"  ><i class="glyphicon glyphicon-search"></i></button>
 
@@ -66,10 +66,9 @@
     </div>
     <ul class="nav navbar-nav navbar-right" style="margin-right:50px">
       <li><a href="#postQuestion" data-toggle="modal">Post Question!!</a></li>
-      <li><a href="<?php echo base_url('index.php/AnsQuick/logout'); ?>">Logout</a></li>
+      <li><a href="<?php echo base_url('index.php/AnsQuick/about'); ?>">About</a></li>
       <?php
       if(!$this->session->userdata('userName')) {
-
         ?>
         <li><a href="#logIn" data-toggle="modal">Log In/Sign Up</a></li> </ul>
       <?php }  else{?>
@@ -83,25 +82,30 @@
                           </a>
                           <ul class="dropdown-menu">
                               <li>
-                                  <div class="navbar-login">
-                                      <div class="row">
-                                          <div class="col-lg-4">
-                                              <p class="text-center">
-                                                  <span class="glyphicon glyphicon-user icon-size"></span>
-                                              </p>
-                                          </div>
-
-                                      </div>
-                                  </div>
+                                <div class="navbar-login navbar-login-session">
+                                    <div class="row">
+                                        <div class="col-lg-10">                                            
+                                                <a href="<?php echo base_url('index.php/AnsQuick/profile'); ?>" class="btn btn-block">Profile</a>
+                                        </div>
+                                    </div>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <div class="navbar-login navbar-login-session">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                                <a href="<?php echo base_url('index.php/AnsQuick/activity'); ?>" class="btn btn-block">Activity</a>
+                                        </div>
+                                    </div>
                               </li>
                               <li class="divider"></li>
                               <li>
                                   <div class="navbar-login navbar-login-session">
                                       <div class="row">
-                                          <div class="col-lg-12">
-                                              <p>
-                                                  <a href="#" class="btn btn-danger btn-block">Cerrar Sesion</a>
-                                              </p>
+                                          <div class="col-lg-10">
+
+                                                  <a href="<?php echo base_url('index.php/AnsQuick/logout'); ?>" class="btn btn-block">Logout</a>
+
                                           </div>
                                       </div>
                                   </div>
