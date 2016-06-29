@@ -79,7 +79,6 @@ $("#signUpSubmit").click(function(){
     else{
         $("#passwordError").hide();
     }
-
     if(password!=cpassword){
       $("#cpasswordError").html("Passwords do not match");
       $("#cpasswordError").show(500);
@@ -121,7 +120,6 @@ $("#loginSubmit").click(function(){
     else{
       $("#passwordLoginError").hide();
       $("#loginForm").submit();
-      flag = true;
     }
   });
   return false;
@@ -165,9 +163,6 @@ $("#forgotPasswordSubmit").click(function(){
   });
   return false;
 });
-$('#searchBox').focus( function(){
-  alert("expanded");
-});
 $("#changePasswordSubmit").click(function(){
   $("#newPasswordError").hide();
   $("#cnewPasswordError").hide();
@@ -199,3 +194,7 @@ $("#changePasswordSubmit").click(function(){
   }
   return true;
 });
+
+/*$('#searchBox').focus( function(){
+  alert("expanded");
+});*/

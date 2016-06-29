@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        parent::__construct();
 		        $this->load->helper(array('form','url'));
 						$this->load->database();
+						$this->load->library('session');
 	          $this->load->model('Ansquick_model');
 			}
 			public function index(){
