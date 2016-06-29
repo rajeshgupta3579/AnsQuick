@@ -14,20 +14,82 @@ class Ansquick_model extends CI_Model{
      }
 
      /*
+     * Returns the maximum tagID present in the database
+     */
+     function topTagID(){
+        $sql = "SELECT MAX(tagID) as maxTagID FROM Tags";
+        $query = $this->db->query($sql)->result();
+        $result = $query[0]->maxTagID;
+        return $result;
+     }
+
+     /*
+     * A function to insert a new tag into database
+     * Takes input a tag in string
+     */
+     function insertTag($tag){
+       //echo $tag;
+       $topTagID=$this->topTagID();
+       //echo $topTagID;
+       $sql = "INSERT INTO Tags (tagName) VALUES ('".$tag."')";
+       $query = $this->db->query($sql);
+       return $topTagID;
+     }
+
+
+
+     function insertQuestion($question){
+
+       $topQuestionID=$this->topQuestionID();
+       //echo $topTagID;
+       $sql = "INSERT INTO Question () VALUES ('".$tag."')";
+       $query = $this->db->query($sql);
+       return $topTagID;
+     }
+
+     /*
      *  A function to post question into the database
-     *
-     *
+     *  Takes input the contents of a question like discription, category and tags attached
+     *  Adds question to the database, if given tag are not present alreay then it is inserted as well.
      */
     function postQuestion($question,$category,$tagList){
-       //echo $question,$category;
-       //print_r($tagList);
-       $tagList = implode("', '", $tagList);
-       print_r($tagList);
-       echo "</br>";
-       $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagList')";
 
+       
+
+       $tagListQuery = implode("', '", $tagList);
+
+       $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
        $query = $this->db->query($sql);
-       print_r($query->result());
+       $result=$query->result();
+
+       $tagsArray = array();
+       foreach ($result as $row){
+         $tagName = $row->tagName;
+         $tagID   = $row->tagID;
+         $tagsArray[$tagName]= $tagID;
+       }
+       print_r($tagsArray);
+
+       echo "<br>";
+       $sql = "SELECT categoryId FROM Category WHERE categoryName='".$category."'";
+       $query = $this->db->query($sql);
+       $result = $query->result();
+       $categoryId = $result[0]->categoryId;
+       echo $categoryId,"<br>";
+
+
+       print_r($tagList);
+       $length = count($tagList);
+       for($i=0;$i<$length;$i++){
+         $temp_tag = $tagList[$i];
+         echo $temp_tag;
+         if(!isset($tagsArray[$temp_tag])){
+            //echo "andar";
+            $topTagID=$this->insertTag($temp_tag);
+
+         }
+       }
+
      }
 
 

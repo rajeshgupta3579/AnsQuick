@@ -81,7 +81,7 @@
       </div>
         <div class="modal-body">
 
-          <form role="form" action="http://localhost/codeigniter/index.php/Addquestion" method ="get" id="addq">
+          <form role="form" action="index.php/Addquestion" method ="get" id="addq">
 
             <div class="form-group">
             <label for="cate">Select Category:&emsp;</label>
