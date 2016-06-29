@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							echo "false";
 					}
 			}
-			public function changePassword($userName,$password,$salt){
+			public function changePassword($userName,$salt){
 					$query = $this->Forgotpassword_model->get_user($userName);
 	        if($query->num_rows()>0){
 	          $row = $query->result();
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $this->email->from($from_email, 'AnsQuick');
           $this->email->to($row[0]->emailID);
           $this->email->subject('Password Recovery');
-          $this->email->message(base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".$row[0]->password."/".$row[0]->salt);
+          $this->email->message(base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".md5($row[0]->salt));
           if($this->email->send())
             echo "true";
           else

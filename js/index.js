@@ -135,14 +135,15 @@ $("#forgotPasswordSubmit").click(function(){
   data = {'userNameForgotPassword' : userNameForgotPassword };
 
   $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
+
     if(res=="false"){
+      alert();
         $("#userNameForgotPasswordError").html("Invalid Username or Password");
         $("#userNameForgotPasswordError").show(500);
     }
     else{
         $("#userNameForgotPasswordError").hide();
         $.post("http://www.ansquick.com/index.php/ForgotPassword/sendmail",data,function(res){
-          alert(res);
           if(res=="true"){
             $("#forgotPasswordForm").submit();
             flag = true;
