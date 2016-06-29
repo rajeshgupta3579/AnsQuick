@@ -1,4 +1,43 @@
 
+jQuery(document).ready(function(){
+alert("heello");
+                function split( val ) {
+                    return val.split( /,\s*/ );
+                }
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
+
+                $('#tags').autocomplete({
+
+
+                    minLength : 1,
+                    source: function( request, response ) {
+                              $.getJSON( "www.ansquick.com/index.php/TagSuggester", {
+                                  term: extractLast( request.term )
+                              }, response );
+                            },
+
+                    select: function( event, ui ) {
+                              var terms = split( this.value );
+                              // remove the current input
+                              terms.pop();
+                              // add the selected item
+                              terms.push( ui.item.value );
+                              // add placeholder to get the comma-and-space at the end
+                              terms.push( "" );
+                              this.value = terms.join( ", " );
+                              return false;
+                             }
+
+
+              });
+
+
+});
+
+
+
 
 
 $("#signUpSubmit").click(function(){
@@ -139,13 +178,22 @@ $("#forgotPasswordSubmit").click(function(){
 
   $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
     if(res=="false"){
-      $("#passwordLoginError").html("Invalid Username or Password");
-      $("#passwordLoginError").show(500);
+        $("#userNameForgotPasswordError").html("Invalid Username or Password");
+        $("#userNameForgotPasswordError").show(500);
     }
     else{
-      $("#passwordLoginError").hide();
-      $("#loginForm").submit();
-      flag = true;
+        $("#userNameForgotPasswordError").hide();
+        $.post("http://www.ansquick.com/index.php/ForgotPassword/sendmail",data,function(res){
+          alert(res);
+          if(res=="true"){
+            $("#forgotPasswordForm").submit();
+            flag = true;
+          }
+          else {
+              $("#userNameForgotPasswordError").html("Error Sending Email!!");
+              $("#userNameForgotPasswordError").show(500);
+          }
+        });
     }
   });
   return false;
