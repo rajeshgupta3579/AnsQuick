@@ -1,9 +1,7 @@
 
 
 
-
-
-
+//adasdasdsadasdasdd
 $("#signUpSubmit").click(function(){
     var nameRX      = /^[A-Za-z\s]+$/ ;
     var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -141,24 +139,14 @@ $("#forgotPasswordSubmit").click(function(){
   data = {'userNameForgotPassword' : userNameForgotPassword };
 
   $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
-
     if(res=="false"){
-      alert();
-        $("#userNameForgotPasswordError").html("Invalid Username or Password");
-        $("#userNameForgotPasswordError").show(500);
+      $("#passwordLoginError").html("Invalid Username or Password");
+      $("#passwordLoginError").show(500);
     }
     else{
-        $("#userNameForgotPasswordError").hide();
-        $.post("http://www.ansquick.com/index.php/ForgotPassword/sendmail",data,function(res){
-          if(res=="true"){
-            $("#forgotPasswordForm").submit();
-            flag = true;
-          }
-          else {
-              $("#userNameForgotPasswordError").html("Error Sending Email!!");
-              $("#userNameForgotPasswordError").show(500);
-          }
-        });
+      $("#passwordLoginError").hide();
+      $("#loginForm").submit();
+      flag = true;
     }
   });
   return false;

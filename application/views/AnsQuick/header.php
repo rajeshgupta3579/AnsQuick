@@ -20,6 +20,7 @@
     margin-right: 200px;
     */
   }
+  .ui-autocomplete-input, .ui-menu, .ui-menu-item {  z-index: 2006; }
   </style>
 </head>
 <body>
@@ -71,18 +72,16 @@
   </div><!-- /.navbar-collapse -->
 </nav>
 
-
-
-
-
 <div class="modal fade" id="postQuestion" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+
         <h4>Post a Question!!</h4>
       </div>
         <div class="modal-body">
-          <form role="form" action="http://localhost/codeigniter/index.php/Addquestion" method ="POST">
+
+          <form role="form" action="http://localhost/codeigniter/index.php/Addquestion" method ="get" id="postQ">
 
             <div class="form-group">
             <label for="cate">Select Category:&emsp;</label>

@@ -8,8 +8,8 @@
 	          $this->load->model('Ansquick_model');
 			}
 			public function index(){
-			//	$this->Ansquick_model->getTags();
-				$this->load->view('AnsQuick/aq.php');
+				$this->Ansquick_model->getTags();
+			//	$this->load->view('AnsQuick/aq.php');
 			}
 		}
 ?>

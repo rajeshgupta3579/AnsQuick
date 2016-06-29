@@ -18,7 +18,44 @@ class Ansquick_model extends CI_Model{
      * Input is taken from the request made by jquery
      * Output is list of suggestions in json format
      */
-     
+     function getTags(){
+        //  echo "jkj,";
+        //  die();
+
+             if(!isset($_REQUEST['term'])){
+               //$_REQUEST['term']='g';
+               //echo "adad";
+                exit();
+             }
+
+              $sql = 'SELECT * FROM Tags WHERE tagName	LIKE "'.ucfirst($_REQUEST['term']).'%" ORDER BY tagID ASC	LIMIT 0,10';
+              $query = $this->db->query($sql);
+              $data = array();
+
+            /*  $data[] = array(
+                'label' => 'nice',
+                'value' => 'nice',
+              );
+              /*while($query->result() as $row)
+              	$data[] = array(
+              		'label' => $row['tagName'],
+              		'value' => $row['tagName'],
+              	);
+              }*/
+              $result=$query->result();
+              //print_r($dd);
+              foreach ($result as $row){
+                $tag = $row->tagName;
+                $data[] = array(
+              		'label' => $tag,
+              		'value' => $tag,
+              	);
+              //  echo $row->tagName;
+              }
+              echo json_encode($data);
+              flush();
+
+     }
 
 
 
