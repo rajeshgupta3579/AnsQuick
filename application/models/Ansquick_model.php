@@ -33,61 +33,110 @@ class Ansquick_model extends CI_Model{
        //echo $topTagID;
        $sql = "INSERT INTO Tags (tagName) VALUES ('".$tag."')";
        $query = $this->db->query($sql);
-       return $topTagID;
+       return $topTagID+1;
      }
 
+     function topQuestionID(){
+       $sql = "SELECT MAX(questionID) as maxQuestionID FROM Question";
+       $query = $this->db->query($sql)->result();
+       $result = $query[0]->maxQuestionID;
+       return $result;
+     }
 
-
-     function insertQuestion($question){
+     function insertQuestion($question,$userID,$categoryID){
 
        $topQuestionID=$this->topQuestionID();
        //echo $topTagID;
-       $sql = "INSERT INTO Question () VALUES ('".$tag."')";
+       $sql = "INSERT INTO Question (questionText,userID,categoryID) VALUES ('".$question."','".$userID."','".$categoryID."')";
        $query = $this->db->query($sql);
-       return $topTagID;
+       return $topQuestionID+1;
      }
 
+/*
+* A function to fetch tagID of the tags which already exsists in the DB
+*/
+     function getTagsArray($tagList){
+
+           $tagListQuery = implode("', '", $tagList);
+
+           $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
+           $query = $this->db->query($sql);
+           $result=$query->result();
+
+           $tagsArray = array();
+           foreach ($result as $row){
+             $tagName = $row->tagName;
+             $tagID   = $row->tagID;
+             $tagsArray[$tagName]= $tagID;
+           }
+           return $tagsArray;
+     }
+/*
+* A function to  return the categoryID of the selected Category
+*/
+     function getCategoryID($category){
+
+          $sql = "SELECT categoryID FROM Category WHERE categoryName='".$category."'";
+          $query = $this->db->query($sql);
+          $result = $query->result();
+          $categoryID = $result[0]->categoryID;
+          return $categoryID;
+
+     }
+     /*
+     * Returns the userID for a username
+     */
+     function getUserID($userName){
+       $sql = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
+       $query = $this->db->query($sql);
+       $result = $query->result();
+       $userID = $result[0]->userID;
+       return $userID;
+     }
+
+
+     function insertQuestionTag($questionID,$tagID){
+
+       $sql = "INSERT INTO QuestionTag (questionID,tagID) VALUES ('".$questionID."','".$tagID."')";
+       $query = $this->db->query($sql);
+
+     }
      /*
      *  A function to post question into the database
      *  Takes input the contents of a question like discription, category and tags attached
      *  Adds question to the database, if given tag are not present alreay then it is inserted as well.
      */
-    function postQuestion($question,$category,$tagList){
+    function postQuestion($question,$category,$tagList,$userName){
 
 
 
-       $tagListQuery = implode("', '", $tagList);
-
-       $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
-       $query = $this->db->query($sql);
-       $result=$query->result();
-
-       $tagsArray = array();
-       foreach ($result as $row){
-         $tagName = $row->tagName;
-         $tagID   = $row->tagID;
-         $tagsArray[$tagName]= $tagID;
-       }
-       print_r($tagsArray);
-
-       echo "<br>";
-       $sql = "SELECT categoryId FROM Category WHERE categoryName='".$category."'";
-       $query = $this->db->query($sql);
-       $result = $query->result();
-       $categoryId = $result[0]->categoryId;
-       echo $categoryId,"<br>";
+      $tagsArray = $this->getTagsArray($tagList);
+      $categoryID= $this->getCategoryID($category);
+      $userID    = $this->getUserID($userName);
+      print_r($tagsArray);
+      echo "<br>",$categoryID,"<br>";
+      print_r($tagList);
 
 
-       print_r($tagList);
+       $questionID=$this->insertQuestion($question,$userID,$categoryID);
+       
+
+       echo "<br>",$questionID,"<br>";
        $length = count($tagList);
        for($i=0;$i<$length;$i++){
          $temp_tag = $tagList[$i];
-         echo $temp_tag;
+         //echo $temp_tag;
+         $tagID=0;
          if(!isset($tagsArray[$temp_tag])){
             //echo "andar";
-            $topTagID=$this->insertTag($temp_tag);
-
+            $tagID=$this->insertTag($temp_tag);
          }
+         else {
+            $tagID=$tagsArray[$temp_tag];
+         }
+         echo $tagID;
+         $this->insertQuestionTag($questionID,$tagID);
+
        }
 
      }
