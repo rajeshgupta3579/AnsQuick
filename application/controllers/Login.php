@@ -16,7 +16,6 @@ class Login extends CI_Controller{
           $passwordLogin = $this->input->post("passwordLogin");
           if ($this->AnsQuick_model->userExists($userNameLogin,$passwordLogin)){
               $sessiondata = array(
-                   'userID'   => 3,
                 	 'userName'  => $userNameLogin,
                   'loginUser' => TRUE
               );
@@ -28,7 +27,7 @@ class Login extends CI_Controller{
           }
       }
       public function success(){
-           redirect('AnsQuick/index');
+           redirect(base_url());
        }
 		}
 ?>

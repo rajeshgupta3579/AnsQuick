@@ -68,7 +68,7 @@
       <li><a href="#postQuestion" data-toggle="modal">Post Question!!</a></li>
       <li><a href="<?php echo base_url('index.php/AnsQuick/logout'); ?>">Logout</a></li>
       <?php
-      if(!$this->session->userdata('userID')) {
+      if(!$this->session->userdata('userName')) {
 
         ?>
         <li><a href="#logIn" data-toggle="modal">Log In/Sign Up</a></li> </ul>
@@ -78,7 +78,7 @@
                       <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                               <span class="glyphicon glyphicon-user"></span> 
-                              <strong>Nombre</strong>
+                              <strong><?php echo $this->session->userdata('userName');?></strong>
                               <span class="glyphicon glyphicon-chevron-down"></span>
                           </a>
                           <ul class="dropdown-menu">
@@ -90,13 +90,7 @@
                                                   <span class="glyphicon glyphicon-user icon-size"></span>
                                               </p>
                                           </div>
-                                          <div class="col-lg-8">
-                                              <p class="text-left"><strong>Nombre Apellido</strong></p>
-                                              <p class="text-left small">correoElectronico@email.com</p>
-                                              <p class="text-left">
-                                                  <a href="#" class="btn btn-primary btn-block btn-sm">Actualizar Datos</a>
-                                              </p>
-                                          </div>
+
                                       </div>
                                   </div>
                               </li>
