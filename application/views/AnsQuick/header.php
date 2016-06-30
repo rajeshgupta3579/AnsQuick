@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <style>
   #searchBox{
-    /*width: 100%;*/
+    width: 400px;
   }
   #searchButton{
     /*margin-left: 0px;*/
@@ -20,7 +20,20 @@
     margin-right: 200px;
     */
   }
-  .ui-autocomplete-input, .ui-menu, .ui-menu-item {  z-index: 2006; }
+  .hr {
+ margin-top: 5px;
+ margin-bottom: 5px;
+ /* The color of `hr` is set by its top border color.
+    Yeah, it's weird. */
+ border-top: 1px solid lightgray;
+}
+.list-inline {
+  margin-bottom: 0px;
+}
+.panel-body {
+  padding-bottom: 5px;
+}
+
   </style>
 </head>
 <body>
@@ -84,7 +97,7 @@
                               <li>
                                 <div class="navbar-login navbar-login-session">
                                     <div class="row">
-                                        <div class="col-lg-10">                                            
+                                        <div class="col-lg-10">
                                                 <a href="<?php echo base_url('index.php/AnsQuick/profile'); ?>" class="btn btn-block">Profile</a>
                                         </div>
                                     </div>
