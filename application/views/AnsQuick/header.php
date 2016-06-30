@@ -46,7 +46,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">AnsQuick</a>
+    <a class="navbar-brand" href="<?php echo base_url();?>">AnsQuick</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -143,7 +143,7 @@
       </div>
         <div class="modal-body">
 
-          <form role="form" action="index.php/Addquestion" method ="get" id="addq">
+          <form role="form" action="<?php echo base_url('index.php/Addquestion'); ?>" method ="get" id="addq">
 
             <div class="form-group">
             <label for="cate">Select Category:&emsp;</label>
