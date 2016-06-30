@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			public function index(){
 				//var_dump($_REQUEST);
 				//var_dump($_GET);
-					$data = $this->Ansquick_model->getRecentFeed($start,$end);
+			//		$data = $this->Ansquick_model->getRecentFeed($start,$end);
 					$this->load->view('AnsQuick/index');
 			}
 			public function success(){

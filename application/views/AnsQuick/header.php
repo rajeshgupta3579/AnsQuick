@@ -227,7 +227,7 @@
                       </br>
                       <?php
                         $attributes = array("class" => "form-horizontal", "id" => "signUpForm", "name" => "signUpForm","role"=>"form");
-                        echo form_open("Signup/index", $attributes);?>
+                        echo form_open("Signup/success", $attributes);?>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="firstName">First Name:</label>
                           <div class="col-sm-10">

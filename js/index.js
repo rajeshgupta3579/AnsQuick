@@ -87,7 +87,25 @@ $("#signUpSubmit").click(function(){
     else{
     	$("#cpasswordError").hide();
     }
-    return true;
+    data = {'firstName' : firstName, 'lastName' : lastName , 'userName' : userName, 'emailID' : emailID, 'password' : password  };
+    $.post("http://www.ansquick.com/index.php/Signup/index",data,function(res){      
+      if(res=="userNameExists"){
+        $("#userNameError").html("This user Name already Exists");
+        $("#userNameError").show(500);
+      }
+      else if(res=="emailIDExists"){
+        $("#emailIDError").html("This Email-ID already Exists");
+        $("#emailIDError").show(500);
+      }
+      else if(res=="true"){
+        $("#signUpForm").submit();
+      }
+      else{
+        $("#cpasswordError").html("Could not Register");
+        $("#cpasswordError").show(500);
+      }
+    });
+    return false;
 });
 $("#loginSubmit").click(function(){
   $("#userNameLoginError").hide();
@@ -124,9 +142,7 @@ $("#loginSubmit").click(function(){
   });
   return false;
 });
-$('#searchBox').focus( function(){
-  alert("expanded");
-});
+
 $("#forgotPasswordSubmit").click(function(){
   $("#userNameForgotPasswordError").hide();
   var userNameForgotPassword    = document.forms["forgotPasswordForm"]["userNameForgotPassword"].value.trim();
