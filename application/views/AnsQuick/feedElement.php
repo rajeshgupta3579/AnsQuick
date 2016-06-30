@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-top:75px">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
