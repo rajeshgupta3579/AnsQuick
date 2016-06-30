@@ -30,7 +30,7 @@ jQuery(document).ready(function(){
                                   term: extractLast( request.term )
                               }, response );
                             },
-										appendTo : $('#addq'),
+										appendTo : $('#postQuestionForm'),
 										autoFocus:true,
                     select: function( event, ui ) {
 											//alert("asd");

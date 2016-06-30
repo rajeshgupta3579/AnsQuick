@@ -143,27 +143,30 @@
       </div>
         <div class="modal-body">
 
-          <form role="form" action="<?php echo base_url('index.php/Addquestion'); ?>" method ="get" id="addq">
+          <form role="form" action="<?php echo base_url('index.php/Addquestion'); ?>" method ="get" id="postQuestionForm">
 
             <div class="form-group">
             <label for="cate">Select Category:&emsp;</label>
             <select class="selectpicker" id="category" name="category">
+              <option disabled selected value> -- Select a Category -- </option>
               <option>Business</option>
               <option>Entertainment</option>
               <option>Sports</option>
               <option>Education</option>
             </select>
+            <div class="alert alert-danger" role="alert" id="categoryError" hidden="true"> </div>
             </div>
                <div class="form-group">
                  <label for="question">Question:</label>
                   <textarea class="form-control" rows="3" id="question" placeholder="Type your Question" name="question"></textarea>
-
+                  <div class="alert alert-danger" role="alert" id="questionError" hidden="true"> </div>
                </div>
                <div class="form-group">
                  <label for="tags">Tags:</label>
                  <input type="text" class="form-control" id="tags" placeholder="Enter ',' seperated tags" name="tags">
+                 <div class="alert alert-danger" role="alert" id="tagsError" hidden="true"> </div>
                </div>
-               <button type="submit" class="btn btn-success">Submit</button>
+               <button type="submit" id="postQuestionSubmit" class="btn btn-success">Submit</button>
           </form>
         </div>
         <div class="modal-footer">
