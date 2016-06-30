@@ -39,8 +39,6 @@ class Addquestion extends CI_Controller{
 						 $this->Ansquick_model->postQuestion($question,$category,$tagList,$userName);
 
 			}
-
-
   }
 }
 ?>

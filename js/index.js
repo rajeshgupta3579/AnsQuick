@@ -25,10 +25,6 @@ $("#signUpSubmit").click(function(){
         $("#firstNameError").show(500);
         return false;
     }
-    else{
-        $("#firstNameError").hide();
-    }
-
     if(lastName == null || lastName == ""){
       $("#lastNameError").html("Last Name cannot be empty");
       $("#lastNameError").show(500);
@@ -39,10 +35,6 @@ $("#signUpSubmit").click(function(){
         $("#lastNameError").show(500);
         return false;
     }
-    else{
-        $("#lastNameError").hide();
-    }
-
     if(userName == null || userName == ""){
       $("#userNameError").html("Username cannot be empty");
       $("#userNameError").show(500);
@@ -53,10 +45,6 @@ $("#signUpSubmit").click(function(){
         $("#userNameError").show(500);
         return false;
     }
-    else{
-        $("#userNameError").hide();
-    }
-
     if(emailID == null || emailID == ""){
       $("#emailIDError").html("Email-ID cannot be empty");
       $("#emailIDError").show(500);
@@ -67,27 +55,35 @@ $("#signUpSubmit").click(function(){
         $("#emailIDError").show(500);
         return false;
     }
-    else{
-        $("#emailIDError").hide();
-    }
-
     if (password == null || password == "") {
       $("#passwordError").html("Password cannot be empty");
       $("#passwordError").show(500);
       return false;
-    }
-    else{
-        $("#passwordError").hide();
     }
     if(password!=cpassword){
       $("#cpasswordError").html("Passwords do not match");
       $("#cpasswordError").show(500);
       return false;
     }
-    else{
-    	$("#cpasswordError").hide();
-    }
-    return true;
+    data = {'firstName' : firstName, 'lastName' : lastName , 'userName' : userName, 'emailID' : emailID, 'password' : password  };
+    $.post("http://www.ansquick.com/index.php/Signup/index",data,function(res){
+      if(res=="userNameExists"){
+        $("#userNameError").html("This user Name already Exists");
+        $("#userNameError").show(500);
+      }
+      else if(res=="emailIDExists"){
+        $("#emailIDError").html("This Email-ID already Exists");
+        $("#emailIDError").show(500);
+      }
+      else if(res=="true"){
+        $("#signUpForm").submit();
+      }
+      else{
+        $("#cpasswordError").html("Could not Register");
+        $("#cpasswordError").show(500);
+      }
+    });
+    return false;
 });
 $("#loginSubmit").click(function(){
   $("#userNameLoginError").hide();
@@ -99,16 +95,10 @@ $("#loginSubmit").click(function(){
       $("#userNameLoginError").show(500);
       return false;
   }
-  else{
-    $("#userNameLoginError").hide();
-  }
   if(passwordLogin == null || passwordLogin == ""){
       $("#passwordLoginError").html("Password cannot be empty");
       $("#passwordLoginError").show(500);
       return false;
-  }
-  else{
-    $("#passwordLoginError").hide();
   }
   var flag = false ;
   data = {'userNameLogin' : userNameLogin, 'passwordLogin' : passwordLogin };
@@ -118,15 +108,12 @@ $("#loginSubmit").click(function(){
       $("#passwordLoginError").show(500);
     }
     else{
-      $("#passwordLoginError").hide();
       $("#loginForm").submit();
     }
   });
   return false;
 });
-$('#searchBox').focus( function(){
-  alert("expanded");
-});
+
 $("#forgotPasswordSubmit").click(function(){
   $("#userNameForgotPasswordError").hide();
   var userNameForgotPassword    = document.forms["forgotPasswordForm"]["userNameForgotPassword"].value.trim();
@@ -134,9 +121,6 @@ $("#forgotPasswordSubmit").click(function(){
       $("#userNameForgotPasswordError").html("This Field cannot be empty");
       $("#userNameForgotPasswordError").show(500);
       return false;
-  }
-  else{
-    $("#userNameForgotPasswordError").hide();
   }
   var flag = false ;
   data = {'userNameForgotPassword' : userNameForgotPassword };
@@ -173,28 +157,48 @@ $("#changePasswordSubmit").click(function(){
       $("#newPasswordError").show(500);
       return false;
   }
-  else{
-    $("#newPasswordError").hide();
-  }
   if(cnewPassword == null || cnewPassword == ""){
       $("#cnewPasswordError").html("This Field cannot be empty");
       $("#cnewPasswordError").show(500);
       return false;
-  }
-  else{
-    $("#cnewPasswordError").hide();
   }
   if(cnewPassword != newPassword ){
       $("#cnewPasswordError").html("Passwords do not match");
       $("#cnewPasswordError").show(500);
       return false;
   }
-  else{
-    $("#cnewPasswordError").hide();
-  }
   return true;
 });
-
+$("#postQuestionSubmit").click(function(){
+    $("#categoryError").hide();
+    $("#questionError").hide();
+    $("#tagsError").hide();
+    var tagsRX = /^([a-z]+)(,\s*[a-z]+)*$/i;
+    var category     = document.forms["postQuestionForm"]["category"].value.trim();
+    var question     = document.forms["postQuestionForm"]["question"].value.trim();
+    var tags         = document.forms["postQuestionForm"]["tags"].value.trim();
+    if(category  == null || category == "" ){
+        $("#categoryError").html("Select a Category");
+        $("#categoryError").show(500);
+        return false;
+    }
+    if(question  == null || question == "" ){
+        $("#questionError").html("This Field cannot be empty");
+        $("#questionError").show(500);
+        return false;
+    }
+    if(tags  == null || tags == "" ){
+        $("#tagsError").html("Enter a Tag");
+        $("#tagsError").show(500);
+        return false;
+    }
+    else if (!tagsRX.test(tags)) {
+        $("#tagsError").html("Invalid Format");
+        $("#tagsError").show(500);
+        return false;
+    }
+    return true;
+});
 /*$('#searchBox').focus( function(){
   alert("expanded");
 });*/
