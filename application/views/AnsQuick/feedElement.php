@@ -2,7 +2,11 @@
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
+
     <div class="col-md-2">
+      <?php
+      if($this->session->userdata('userName')) {
+        ?>
               <ul class="nav nav-pills nav-stacked">
               <li role="presentation"><a href="#">John Vilk</a></li>
               <li role="presentation">
@@ -26,6 +30,7 @@
 
 
             </ul>
+            <?php } ?>
     </div>
     <!-- Main feed: A cell that spans 7 columns -->
     <div class="col-md-7">
@@ -40,26 +45,37 @@
                         PIC
                       </div>
                       <div class="media-body">
-                        <a href="#">Someone</a>
-                        <br> Yesterday at 3:48pm · Austin, TX · <span class="glyphicon glyphicon-user"></span>
+
+
+
+                        <h4 class="media-heading">Media heading</h4>
+                        Posted By <a href="#">Someone</a>
+                         Yesterday at 3:48pm · Austin, TX
                       </div>
                     </div>
                   </div>
-                
+
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-12">
+                    <ui class="list-inline">
+                      Tags :
+                      <li><a href="#">c/c++</a></li>,
+                      <li><a href="#">c/c++</a></li>,
+                    </ul>
+                  </div>
                 </div>
                 <!-- Post content -->
                 <hr>
                 <div class="row">
                   <div class="col-md-12">
-                    <ul class="list-inline">
+                    <ul class ="list-inline">
                       <li>
-                      <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
+                      <a href="#"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
-                      <li>
-                      <a href="#addComment"><span class="glyphicon glyphicon-comment"></span> Comment</a>
-                      </li>
-
                     </ul>
+
 
                   </div>
                 </div>
@@ -68,7 +84,7 @@
             <div class="panel-footer">
               <div class="row">
                 <div class="col-md-12">
-                  <a href="#">13 people</a> like this
+                  <a href="#">13 people</a> have answered
                 </div>
               </div>
               <hr>
@@ -79,7 +95,7 @@
                   </div>
                   <div class="media-body">
                     <a href="#">Someone Else</a> hope everything is ok!
-                    <br><a href="#">Like</a> · <a href="#">Reply</a> · 20 hrs
+                    <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge">5</span>
                   </div>
                 </li>
                 <li class="media">
@@ -87,8 +103,8 @@
                     PIC
                   </div>
                   <div class="media-body">
-                    <a href="#">Another Person</a> sending hugs your way
-                    <br><a href="#">Like</a> · <a href="#">Reply</a> · 20 hrs
+                    <a href="#">Someone Else</a> hope everything is ok!
+                    <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge">5</span>
                   </div>
                 </li>
                 <li class="media">
@@ -97,7 +113,7 @@
                   </div>
                   <div class="media-body">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="addComment"placeholder="Write a comment...">
+                      <input type="text" class="form-control" id="addComment"placeholder="Write an answer...">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button">
                           <span class="glyphicon glyphicon-camera"></span>

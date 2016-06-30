@@ -119,7 +119,7 @@ class Ansquick_model extends CI_Model{
 
 
        $questionID=$this->insertQuestion($question,$userID,$categoryID);
-       
+
 
        echo "<br>",$questionID,"<br>";
        $length = count($tagList);
@@ -235,6 +235,39 @@ class Ansquick_model extends CI_Model{
      function updateUser($data,$userName){
        $this->db->where('userName',$userName);
        return $this->db->update('UserInfo',$data);
+     }
+
+
+     function getRecentFeed($start,$end){
+       $query = $this->db->query("SELECT
+                                  GROUP_CONCAT(a.tagID) as tag_ids,
+                                  GROUP_CONCAT(a.tagName) as tag_names,
+                                  b.questionID,c.questionText,c.time, d.firstName,d.profilePic
+                                  from
+                                  Tags a,QuestionTag b,Question c,UserInfo d
+                                  where
+                                  a.tagID=b.tagID AND
+                                  b.questionID=c.questionID AND
+                                  c.userID=d.userID
+                                  GROUP BY(c.questionID)
+                                  ORDER BY c.time DESC
+                                ");
+
+       $ansQuery=$this->db->query("SELECT
+                                        b.questionID,
+                                        GROUP_CONCAT(a.answerID) as answer_ids,
+                                        GROUP_CONCAT(a.answerText) as answers
+                                        from
+                                        Answer a,Question b
+                                        where
+                                        a.questionID=b.questionID
+                                        GROUP BY (b.questionID)");
+       $data=array(
+               'question'  =>  $query->result_array(),
+               'answer'    =>  $ansQuery->result_array()
+               );
+       return $data;
+       //$query ="";
      }
 }
 ?>
