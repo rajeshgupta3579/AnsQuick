@@ -33,8 +33,12 @@
             <?php } ?>
     </div>
     <!-- Main feed: A cell that spans 7 columns -->
+    <?php for($i=0;$i<count($questionDetails);$i++) {
+      # code...
+    ?>
     <div class="col-md-7">
                   <!-- Status update #1 -->
+
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->
@@ -48,9 +52,9 @@
 
 
 
-                        <h4 class="media-heading">Media heading</h4>
-                        Posted By <a href="#">Someone</a>
-                         Yesterday at 3:48pm · Austin, TX
+                        <h4 class="media-heading"><?php echo $questionDetails[$i]['questionText'];?></h4>
+                        Posted By <a href="#"><?php echo $questionDetails[$i]['firstName']," ",$questionDetails[$i]['lastName'];?></a>
+                         <?php echo $questionDetails[$i]['time'];?>
                       </div>
                     </div>
                   </div>
@@ -61,8 +65,12 @@
                   <div class="col-md-12">
                     <ui class="list-inline">
                       Tags :
-                      <li><a href="#">c/c++</a></li>,
-                      <li><a href="#">c/c++</a></li>,
+                      <?php $tagsOfQuestion = $questionDetails[$i]['tag_names'];
+                            $tagsOfQuestion = explode('-|::|-',$tagsOfQuestion);
+                            for($j=0;$j<count($tagsOfQuestion);$j++){
+                      ?>
+                      <li><a href="#"><?php echo $tagsOfQuestion[$j]; ?></a><?php if($j!=count($tagsOfQuestion)-1)echo " , ";?></li>
+                      <?php }?>
                     </ul>
                   </div>
                 </div>
@@ -84,51 +92,75 @@
             <div class="panel-footer">
               <div class="row">
                 <div class="col-md-12">
-                  <a href="#">13 people</a> have answered
+                  <?php if($questionDetails[$i]['answerCount']>0){?>
+                  <a href="#"><?php echo $questionDetails[$i]['answerCount'];?> people</a> have answered!!
+                    <hr>
+
+                            <ul class="media-list">
+                              <li class="media">
+                                <div class="media-left media-top">
+                                  PIC
+                                </div>
+                                <div class="media-body">
+                                  <a href="#"><?php echo $questionDetails[$i]['answerdBy'];?></a> <?php echo $questionDetails[$i]['answerText'];?>
+                                  <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails[$i]['likes']?></span>
+                                </div>
+                              </li>
+                              <li class="media">
+                                <div class="media-left media-top">
+                                  PIC
+                                </div>
+                                <div class="media-body">
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" id="addComment"placeholder="Write an answer...">
+                                    <span class="input-group-btn">
+                                      <button class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-camera"></span>
+                                      </button>
+                                      <button class="btn btn-default" type="button">
+                                        ☺
+                                      </button>
+                                    </span>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+
+
+                  <?php }
+                  else {?>
+                    No answers yet!!
+                    <hr>
+                    <ul class="media-list">
+                      <li class="media">
+                        <div class="media-left media-top">
+                          PIC
+                        </div>
+                        <div class="media-body">
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="addComment"placeholder="Write an answer...">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-camera"></span>
+                              </button>
+                              <button class="btn btn-default" type="button">
+                                ☺
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+
+                    <?php }?>
                 </div>
               </div>
-              <hr>
-              <ul class="media-list">
-                <li class="media">
-                  <div class="media-left media-top">
-                    PIC
-                  </div>
-                  <div class="media-body">
-                    <a href="#">Someone Else</a> hope everything is ok!
-                    <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge">5</span>
-                  </div>
-                </li>
-                <li class="media">
-                  <div class="media-left media-top">
-                    PIC
-                  </div>
-                  <div class="media-body">
-                    <a href="#">Someone Else</a> hope everything is ok!
-                    <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge">5</span>
-                  </div>
-                </li>
-                <li class="media">
-                  <div class="media-left media-top">
-                    PIC
-                  </div>
-                  <div class="media-body">
-                    <div class="input-group">
-                      <input type="text" class="form-control" id="addComment"placeholder="Write an answer...">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                          <span class="glyphicon glyphicon-camera"></span>
-                        </button>
-                        <button class="btn btn-default" type="button">
-                          ☺
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
+
+
             </div>
               </div>
     </div>
+    <?php }?>
     <!-- Right sidebar: A cell that spans 3 columns -->
     <div class="col-md-3">
       Right Sidebar

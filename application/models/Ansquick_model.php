@@ -238,11 +238,69 @@ class Ansquick_model extends CI_Model{
      }
 
 
+     /*
+     * A function to return the latest answer of a question.
+     * Takes questionID as an input
+     * Return an array with details about an answer
+     */
+     function getAnswer($questionID){
+          $query = "SELECT * from Answer WHERE questionID='".$questionID."' ORDER BY Answer.time DESC LIMIT 1";
+          $answerDetails = $this->db->query($query)->result_array();
+          $answerdBy="";
+          if(count($answerDetails)>0){
+          $answerdBy = $answerDetails[0]['userID'];
+          $query = "SELECT firstName,lastName from UserInfo WHERE userID='".$answerdBy."'";
+          $result = $this->db->query($query)->result_array();
+          //var_dump($result);
+          $answerdBy = $result[0]['firstName']." ".$result[0]['lastName'];
+          $answerDetails[0]['answerdBy']=$answerdBy;
+          }
+
+
+          //var_dump($answerDetails);
+          return $answerDetails;
+
+     }
+     /*
+     * A function to process feed data into one array for each question
+     * Input is data containing details about question and answer
+     * Ouputs an aray with one row for each question
+     */
+     function process_feed($data){
+        //var_dump($data);
+        $questionDetails = $data['question'];
+        $feed            = array();
+      //  var_dump($questionDetails);
+        for($i=0;$i<count($questionDetails);$i++){
+          if($questionDetails[$i]['answerCount']>0){
+                $questionID = $questionDetails[$i]['questionID'];
+                $answerDetails = $this->getAnswer($questionID);
+                $questionDetails[$i]['answerdBy']   =   $answerDetails[0]['answerdBy'];
+                $questionDetails[$i]['likes']       =   $answerDetails[0]['likes'];
+                $questionDetails[$i]['answerText']  =   $answerDetails[0]['answerText'];
+                $questionDetails[$i]['answerTime']  =   $answerDetails[0]['time'];
+          }
+          else{
+                $questionDetails[$i]['answerdBy']   =   "";
+                $questionDetails[$i]['likes']       =   "";
+                $questionDetails[$i]['answerText']  =   "";
+                $questionDetails[$i]['answerTime']  =   "";
+          }
+        }
+        //var_dump($answerDetails);
+        //var_dump($questionDetails);
+        $temp = array('questionDetails'=>$questionDetails);
+        return $temp;
+
+     }
+     /*
+     * A function to fetch recent feed from database
+     */
      function getRecentFeed($start,$end){
        $query = $this->db->query("SELECT
-                                  GROUP_CONCAT(a.tagID) as tag_ids,
-                                  GROUP_CONCAT(a.tagName) as tag_names,
-                                  b.questionID,c.questionText,c.time, d.firstName,d.profilePic
+                                  GROUP_CONCAT(a.tagID SEPARATOR '-|::|-') as tag_ids,
+                                  GROUP_CONCAT(a.tagName SEPARATOR '-|::|-') as tag_names,
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
                                   from
                                   Tags a,QuestionTag b,Question c,UserInfo d
                                   where
@@ -253,19 +311,24 @@ class Ansquick_model extends CI_Model{
                                   ORDER BY c.time DESC
                                 ");
 
-       $ansQuery=$this->db->query("SELECT
+    /*   $ansQuery=$this->db->query("SELECT
                                         b.questionID,
-                                        GROUP_CONCAT(a.answerID) as answer_ids,
-                                        GROUP_CONCAT(a.answerText) as answers
+                                        GROUP_CONCAT(a.answerID SEPARATOR '-|::|-') as answer_ids,
+                                        GROUP_CONCAT(a.answerText SEPARATOR '-|::|-') as answers,
+                                        GROUP_CONCAT(c.firstName SEPARATOR '-|::|-') as answeredBy
                                         from
-                                        Answer a,Question b
+                                        Answer a,Question b, UserInfo c
                                         where
-                                        a.questionID=b.questionID
+                                        a.questionID = b.questionID AND
+                                        c.userID     = a.userID
                                         GROUP BY (b.questionID)");
+                                        */
        $data=array(
                'question'  =>  $query->result_array(),
-               'answer'    =>  $ansQuery->result_array()
+
                );
+       $data =  $this->process_feed($data);
+      // var_dump($data);
        return $data;
        //$query ="";
      }
