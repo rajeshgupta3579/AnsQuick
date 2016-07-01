@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-top:75px">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
@@ -33,15 +33,7 @@
             </ul>
             <?php } ?>
     </div>
-    <div class="col-md-7">
 
-      <h3><?php if($questionDetails['type']=="getRecentTagFeed") echo "Tagged Questions";
-                if($questionDetails['type']=="gerRecentFeed") echo "Recent Questions";
-          ?>
-        </h3>
-      <hr>
-
-    </div>
     <!-- Main feed: A cell that spans 7 columns -->
 
     <?php /*loop is upto count-1 because last row has type of the request*/for($i=0;$i<count($questionDetails)-1;$i++) {
@@ -50,6 +42,11 @@
     <div class="col-md-7" style="margin-left:180px">
                   <!-- Status update #1 -->
 
+                    <?php if($questionDetails['type']=="getRecentTagFeed"&&$i==0) echo "<h3 > Tagged Questions</h3>
+                  <hr>";
+                              if($questionDetails['type']=="gerRecentFeed"&&$i==0) echo "<h3> Recent Questions</h3>
+                            <hr>";
+                        ?>                    
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->

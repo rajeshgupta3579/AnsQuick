@@ -58,7 +58,7 @@ class Ansquick_model extends CI_Model{
      function getTagsArray($tagList){
 
            $tagListQuery = implode("', '", $tagList);
-           
+
            $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
            $query = $this->db->query($sql);
            $result=$query->result();
@@ -338,7 +338,7 @@ class Ansquick_model extends CI_Model{
 
                                   b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
                                   from
-                                  Tags a,QuestionTag b,Question c,UserInfo d
+                                  QuestionTag b,Question c,UserInfo d
                                   where
                                   b.tagID='".$tagID."' AND
                                   b.questionID=c.questionID AND
@@ -354,7 +354,7 @@ class Ansquick_model extends CI_Model{
               );
       $data =  $this->process_feed($data);
       $data['questionDetails']['type']="getRecentTagFeed";
-      var_dump($data);
+    //  var_dump($data);
       return $data;
      }
 
@@ -369,7 +369,7 @@ class Ansquick_model extends CI_Model{
 
                                   b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
                                   from
-                                  Tags a,QuestionTag b,Question c,UserInfo d
+                                  QuestionTag b,Question c,UserInfo d
                                   where
                                   b.questionID=c.questionID AND
                                   c.userID=d.userID
@@ -395,7 +395,7 @@ class Ansquick_model extends CI_Model{
                );
        $data =  $this->process_feed($data);
        $data['questionDetails']['type']="gerRecentFeed";
-       var_dump($data);
+      // var_dump($data);
        return $data;
        //$query ="";
      }
