@@ -9,8 +9,7 @@ class Addquestion extends CI_Controller{
   public function index(){
     	//$this->load->view('AnsQuick/aq');
 			//echo "adad";
-			if($this->session->userdata('userName')==null)
-			{
+			if($this->session->userdata('userName')==null){
 				echo "No user";
 				exit();
 			}

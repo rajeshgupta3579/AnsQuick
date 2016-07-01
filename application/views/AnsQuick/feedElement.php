@@ -34,7 +34,7 @@
     </div>
 
     <!-- Main feed: A cell that spans 7 columns -->
-
+    <div >
     <?php /*loop is upto count-offset because there are two extra rows of type and currentTag last row has type of the request*/
       $offset=1;
       for($i=0;$i<count($questionDetails)-$offset;$i++) {
@@ -99,7 +99,7 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a href="#addComment<?php echo $i;?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
+                      <a href="#addAnswerText<?php echo $questionDetails[$i]['questionID'];?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                     </ul>
 
@@ -129,23 +129,7 @@
                                 <div class="media-left media-top">
                                   PIC
                                 </div>
-                                <div class="media-body">
 
-                                  <div class="input-group">
-                                    
-                                    <input type="text" class="form-control" id="addComment<?php echo $i;?>"placeholder="Write an answer...">
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-default" type="button">
-                                        <span class="glyphicon glyphicon-camera"></span>
-                                      </button>
-                                      <button class="btn btn-default" type="button">
-                                        ☺
-                                      </button>
-                                    </span>
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
 
 
                   <?php }
@@ -157,23 +141,27 @@
                         <div class="media-left media-top">
                           PIC
                         </div>
+                        <?php }?>
                         <div class="media-body">
+
                           <div class="input-group">
-                            <input type="text" class="form-control" id="addComment"placeholder="Write an answer...">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-camera"></span>
+                            <input type="text" class="form-control" id="addAnswerText<?php echo $questionDetails[$i]['questionID'];?>" placeholder="Write an answer...">
+                            <span class="input-group-btn" id="FeedElements">
+                              <button class="btn btn-default" id="addAnswerSubmit<?php echo $questionDetails[$i]['questionID'];?>" onclick="addAnswer(this)" type="button">
+                                <span class="glyphicon glyphicon-ok"></span>
                               </button>
                               <button class="btn btn-default" type="button">
                                 ☺
                               </button>
                             </span>
+
                           </div>
+                          <div class="alert alert-danger" role="alert" id="addAnswerError<?php echo $questionDetails[$i]['questionID'];?>" hidden="true"> </div>
                         </div>
                       </li>
                     </ul>
 
-                    <?php }?>
+
                 </div>
               </div>
 
@@ -182,6 +170,7 @@
               </div>
     </div>
     <?php }?>
+  </div>
     <!-- Right sidebar: A cell that spans 3 columns -->
     <div class="col-md-3">
       Right Sidebar

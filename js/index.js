@@ -100,7 +100,6 @@ $("#loginSubmit").click(function(){
       $("#passwordLoginError").show(500);
       return false;
   }
-  var flag = false ;
   data = {'userNameLogin' : userNameLogin, 'passwordLogin' : passwordLogin };
   $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){
     if(res=="false"){
@@ -122,7 +121,6 @@ $("#forgotPasswordSubmit").click(function(){
       $("#userNameForgotPasswordError").show(500);
       return false;
   }
-  var flag = false ;
   data = {'userNameForgotPassword' : userNameForgotPassword };
 
   $.post("http://www.ansquick.com/index.php/ForgotPassword/checkUser",data,function(res){
@@ -136,7 +134,6 @@ $("#forgotPasswordSubmit").click(function(){
         $.post("http://www.ansquick.com/index.php/ForgotPassword/sendmail",data,function(res){
           if(res=="true"){
             $("#forgotPasswordForm").submit();
-            flag = true;
           }
           else {
               $("#userNameForgotPasswordError").html("Error Sending Email!!");
@@ -199,6 +196,34 @@ $("#postQuestionSubmit").click(function(){
     }
     return true;
 });
+function addAnswer(obj) {
+  var idNum = obj.id.replace('addAnswerSubmit','');
+  $("#addAnswerError"+idNum).hide();
+  var addAnswerText     = $('#addAnswerText'+idNum).val().trim();
+  if(addAnswerText  == null || addAnswerText == "" ){
+      $("#addAnswerError"+idNum).html("This Field cannot be empty");
+      $("#addAnswerError"+idNum).show(500);
+      return false;
+  }
+  data = {'addAnswerText' : addAnswerText, 'questionID' : idNum };
+
+  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){    
+    if(res=="true"){
+      $("#addAnswerError"+idNum).html("Answer Posted");
+      $("#addAnswerError"+idNum).show(500);
+    }
+    else if(res=="noUser") {
+        $("#addAnswerError"+idNum).html("You Need to Login First.");
+        $("#addAnswerError"+idNum).show(500);
+    }
+    else{
+        $("#addAnswerError"+idNum).html("Error Posting Answer!!");
+        $("#addAnswerError"+idNum).show(500);
+    }
+  });
+  return false;
+}
+
 /*$('#searchBox').focus( function(){
   alert("expanded");
 });*/
