@@ -130,7 +130,9 @@
                                   PIC
                                 </div>
                                 <div class="media-body">
+
                                   <div class="input-group">
+                                    
                                     <input type="text" class="form-control" id="addComment<?php echo $i;?>"placeholder="Write an answer...">
                                     <span class="input-group-btn">
                                       <button class="btn btn-default" type="button">
