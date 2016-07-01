@@ -15,9 +15,15 @@ class Login extends CI_Controller{
           $userNameLogin = $this->input->post("userNameLogin");
           $passwordLogin = $this->input->post("passwordLogin");
           if ($this->AnsQuick_model->userExists($userNameLogin,$passwordLogin)){
+              $query = $this->AnsQuick_model->get_user($userNameLogin);
+              $row = $query->result();
               $sessiondata = array(
-                	 'userName'  => $userNameLogin,
-                  'loginUser' => TRUE
+                   'firstName' => $row[0]->firstName,
+                   'lastName'  => $row[0]->lastName,
+                   'userID'    => $row[0]->userID,
+                   'profilePic'=> $row[0]->profilePic,
+                 	 'userName'  => $userNameLogin,
+                   'loginUser' => TRUE
               );
               $this->session->set_userdata($sessiondata);
               echo "true";

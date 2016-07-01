@@ -1,10 +1,9 @@
-<div class="container" style="margin-top:75px">
+<div class="container" style="margin-top:6%">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
 
-    <div class="col-md-2" style="position: fixed;
-    left: 0;">
+    <div class="col-md-2" style="position: fixed;left: 0;">
       <?php
       if($this->session->userdata('userName')) {
         ?>
@@ -36,7 +35,7 @@
 
     <!-- Main feed: A cell that spans 7 columns -->
 
-    <?php /*loop is upto count-1 because last row has type of the request*/for($i=0;$i<count($questionDetails)-1;$i++) {
+    <?php  /*loop is upto count-1 because last row has type of the request*/for($i=0;$i<count($questionDetails)-1;$i++) {
       # code...
     ?>
     <div class="col-md-7" style="margin-left:180px">
@@ -46,7 +45,7 @@
                   <hr>";
                               if($questionDetails['type']=="gerRecentFeed"&&$i==0) echo "<h3> Recent Questions</h3>
                             <hr>";
-                        ?>                    
+                        ?>
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->
@@ -92,7 +91,7 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a href="#"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
+                      <a href="#addComment<?php echo $i;?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                     </ul>
 
@@ -124,7 +123,7 @@
                                 </div>
                                 <div class="media-body">
                                   <div class="input-group">
-                                    <input type="text" class="form-control" id="addComment"placeholder="Write an answer...">
+                                    <input type="text" class="form-control" id="addComment<?php echo $i;?>"placeholder="Write an answer...">
                                     <span class="input-group-btn">
                                       <button class="btn btn-default" type="button">
                                         <span class="glyphicon glyphicon-camera"></span>
