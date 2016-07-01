@@ -7,7 +7,7 @@
   background-color: green;
 }
 </style>
-<div class="container">
+<div class="container" style="margin-top:6%">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="well well-sm">

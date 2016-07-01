@@ -327,7 +327,13 @@ class Ansquick_model extends CI_Model{
         return $temp;
 
      }
+     function currentTag($tagID){
+       $query = $this->db->query("SELECT tagName from Tags WHERE tagID='".$tagID."'");
+       $result = $query->result_array();
+       //var_dump ($result);
+       return $result[0]['tagName'];
 
+     }
      /*
      A function fetches recent feed from the database having tag as selected tag
      */
@@ -346,14 +352,19 @@ class Ansquick_model extends CI_Model{
                                   GROUP BY(c.questionID)
                                   ORDER BY c.time DESC
                                 ");
+        $currentTag=$this->currentTag($tagID);
+        //$doesFollow = $this->currentTag($tagID,$userID);
+        //echo $currentTag;
       //$result=$query->result_array();
       //$result['type']="getRecentTagFeed";
     //  var_dump($result);
       $data=array(
               'question'  =>  $query->result_array(),
               );
+              //  var_dump($data);
       $data =  $this->process_feed($data);
       $data['questionDetails']['type']="getRecentTagFeed";
+      $data['questionDetails']['currentTag']=$currentTag;
     //  var_dump($data);
       return $data;
      }

@@ -1,4 +1,4 @@
-<div class="container" style="margin-top:75px">
+<div class="container" style="margin-top:6%">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
@@ -36,17 +36,25 @@
 
     <!-- Main feed: A cell that spans 7 columns -->
 
-    <?php /*loop is upto count-1 because last row has type of the request*/for($i=0;$i<count($questionDetails)-1;$i++) {
-      # code...
+    <?php /*loop is upto count-offset because there are two extra rows of type and currentTag last row has type of the request*/
+      $offset=1;
+      for($i=0;$i<count($questionDetails)-$offset;$i++) {
     ?>
     <div class="col-md-7" style="margin-left:180px">
                   <!-- Status update #1 -->
 
-                    <?php if($questionDetails['type']=="getRecentTagFeed"&&$i==0) echo "<h3 > Tagged Questions</h3>
-                  <hr>";
-                              if($questionDetails['type']=="gerRecentFeed"&&$i==0) echo "<h3> Recent Questions</h3>
-                            <hr>";
-                        ?>                    
+                    <?php if($questionDetails['type']=="getRecentTagFeed"&&$i==0){
+                        $offset=2;
+                          ?><h3>Tag: <a href:><?php echo $questionDetails['currentTag']; ?></a></h3><?php
+                          ?>
+                            <a href="#" >Follow</a>
+                          <?php
+                        }
+                              if($questionDetails['type']=="gerRecentFeed"&&$i==0) {
+
+
+                              }
+                        ?>
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->

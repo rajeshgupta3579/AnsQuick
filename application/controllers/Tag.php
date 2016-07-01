@@ -19,7 +19,7 @@
         }
         else{
             $start=0;$end=0;
-
+						//$userName = $this->sessiondata->
             $recentFeed = $this->Ansquick_model->getRecentTagFeed($start,$end,$tagID);
             //var_dump($recentFeed);
             $this->load->view('AnsQuick/index',$recentFeed);
