@@ -43,20 +43,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $query = $this->Ansquick_model->get_user($userNameForgotPassword);
         if($query->num_rows()>0){
           $row = $query->result();
-          $config = Array(
-            'protocol'  => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' =>  465,
-            'smtp_user' => 'quickanswer16@gmail.com',
-            'smtp_pass' => 'Jindal9@',
-            'mailtype'  => 'html',
-            'charset'   => 'iso-8859-1'
-          );
+          $config = unserialize(EMAIL_CONFIG);
           $this->load->library('email', $config);
           $this->email->set_newline("\r\n");
 
-          $from_email = "quickanswer16@gmail.com";
-          $this->email->from($from_email, 'AnsQuick');
+          $from_email = EMAIL_ADDRESS;
+          $this->email->from($from_email, HOST_NAME);
           $this->email->to($row[0]->emailID);
           $this->email->subject('Password Recovery');
           $this->email->message(base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".md5($row[0]->salt));

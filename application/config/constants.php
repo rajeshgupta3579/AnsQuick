@@ -83,3 +83,23 @@ define('EXIT_USER_INPUT', 7); // invalid user input
 define('EXIT_DATABASE', 8); // database error
 define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+
+
+
+
+
+
+/********MAILER CONSTANTS***********/
+define ("EMAIL_CONFIG", serialize (Array(
+  'protocol'  => 'smtp',
+  'smtp_host' => 'ssl://smtp.googlemail.com',
+  'smtp_port' =>  465,
+  'smtp_user' => 'quickanswer16@gmail.com',
+  'smtp_pass' => 'Jindal9@',
+  'mailtype'  => 'html',
+  'charset'   => 'iso-8859-1'
+)));
+define ("EMAIL_ADDRESS",'quickanswer16@gmail.com');
+define ("HOST_NAME",'AnsQuick');

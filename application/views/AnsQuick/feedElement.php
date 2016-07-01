@@ -1,4 +1,4 @@
-<div class="container" style="margin-top:10%">
+<div class="container" style="margin-top:6%">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
@@ -82,6 +82,8 @@
                       </div>
                       <div class="media-body">
 
+
+
                         <h4 class="media-heading"><?php echo $questionDetails[$i]['questionText'];?></h4>
                         Posted By <a href="#"><?php echo $questionDetails[$i]['firstName']," ",$questionDetails[$i]['lastName'];?></a>
                          <?php echo $questionDetails[$i]['time'];?>
@@ -114,7 +116,7 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a href="#addComment<?php echo $i;?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
+                      <a href="#addAnswerText<?php echo $questionDetails[$i]['questionID'];?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                     </ul>
 
@@ -149,21 +151,7 @@
                                 <div class="media-left media-top">
                                   PIC
                                 </div>
-                                <div class="media-body">
-                                  <div class="input-group">
-                                    <input type="text" class="form-control" id="addComment<?php echo $i;?>"placeholder="Write an answer...">
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-default" type="button">
-                                        <span class="glyphicon glyphicon-camera"></span>
-                                      </button>
-                                      <button class="btn btn-default" type="button">
-                                        ☺
-                                      </button>
-                                    </span>
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
+
 
 
                   <?php }
@@ -175,23 +163,27 @@
                         <div class="media-left media-top">
                           PIC
                         </div>
+                        <?php }?>
                         <div class="media-body">
+
                           <div class="input-group">
-                            <input type="text" class="form-control" id="addComment"placeholder="Write an answer...">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-camera"></span>
+                            <input type="text" class="form-control" id="addAnswerText<?php echo $questionDetails[$i]['questionID'];?>" placeholder="Write an answer...">
+                            <span class="input-group-btn" id="FeedElements">
+                              <button class="btn btn-default" id="addAnswerSubmit<?php echo $questionDetails[$i]['questionID'];?>" onclick="addAnswer(this)" type="button">
+                                <span class="glyphicon glyphicon-ok"></span>
                               </button>
                               <button class="btn btn-default" type="button">
                                 ☺
                               </button>
                             </span>
+
                           </div>
+                          <div class="alert alert-danger" role="alert" id="addAnswerError<?php echo $questionDetails[$i]['questionID'];?>" hidden="true"> </div>
                         </div>
                       </li>
                     </ul>
 
-                    <?php }?>
+
                 </div>
               </div>
 
@@ -201,6 +193,7 @@
               </div>
     </div>
     <?php }?>
+  </div>
     <!-- Right sidebar: A cell that spans 3 columns -->
     <div class="col-md-3">
       Right Sidebar

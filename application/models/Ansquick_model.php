@@ -467,5 +467,17 @@ class Ansquick_model extends CI_Model{
        return $data;
        //$query ="";
      }
+     function addAnswer($addAnswerText,$questionID,$userID){
+        $data=array(
+            'userID'      =>  $userID,
+            'answerText'  =>  $addAnswerText,
+            'questionID'  =>  $questionID
+        );
+        $this->db->insert('Answer', $data);
+        $this->db->set('answerCount', '`answerCount`+1', FALSE);
+        $this->db->where('questionID', $questionID);
+        $this->db->update('Question');
+        return true;
+     }
 }
 ?>
