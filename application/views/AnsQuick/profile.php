@@ -15,7 +15,7 @@
                     <div class="col-sm-6 col-md-4">
                         <img src="http://placehold.it/380x400" alt="" class="img-rounded img-responsive" />
                     </div>
-                    <div class="col-sm-6 col-md-8">
+                    <div class="col-sm-6 col-md-8" style="padding-left:15%">
                         <h4>
                             Bhaumik Patel</h4>
                         <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">

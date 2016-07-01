@@ -1,3 +1,24 @@
+function follow(obj){
+  var completeTagID = obj.id;
+  var tagID = completeTagID.replace("currentTagID","");
+  var s="http://www.ansquick.com/index.php/Tag/follow/".concat(tagID);
+  //alert(s);
+  //alert(tagID);
+  $.post(s,function(res){
+    alert(res);
+    if(res=="true"){
+        $("#completeTagID").attr("onclick","unFollow(this)");
+        $("#completeTagID").html("Unfollow");
+        
+    }
+    else if(res=="noUser"){
+        alert("please login");
+      //  $("#logIn").modal('show');
+      //  alert("asda");
+    }
+  });
+
+}
 $("#signUpSubmit").click(function(){
     $("#firstNameError").hide();
     $("#lastNameError").hide();

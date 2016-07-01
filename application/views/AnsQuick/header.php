@@ -72,7 +72,7 @@
     <div class="col-sm-6 col-md-6">
         <form class="navbar-form " role="search" >
         <div class="input-group">
-            <input id="searchBox" type="text" class="form-control col-xs-10 searchBox" placeholder="Search a Question" name="q">
+            <input id="searchBox" type="text" class="form-control searchBox" placeholder="Search a Question" name="q">
             <div class="input-group-btn">
                 <button class="btn btn-success " type="submit"  ><i class="glyphicon glyphicon-search"></i></button>
 

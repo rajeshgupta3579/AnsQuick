@@ -51,10 +51,34 @@ class Ansquick_model extends CI_Model{
        $query = $this->db->query($sql);
        return $topQuestionID+1;
      }
+     /*
+      * Returns true if currentUserID already follows current tagid
+      * returns false otherwise
+     */
+     function alradyFollows($currentUserID,$tagID){
+       $query=$this->db->query("SELECT * FROM Follow WHERE tagID='".$tagID."' AND userID='".$currentUserID."'");
+       $result = $query->result_array();
+       if(count($result)>0){
+         return 1;
+       }
+       else return 0;
+     }
 
-/*
-* A function to fetch tagID of the tags which already exsists in the DB
-*/
+
+
+     /*
+      * Add a user tag relationship to the follow table
+      *
+     */
+     function makeFollow($currentUserID,$tagID){
+       $s = "INSERT INTO Follow(tagID,userID) VALUES('".$tagID."','".$currentUserID."')";
+       //var_dump($s);
+       $query = $this->db->query($s);
+     }
+
+    /*
+    * A function to fetch tagID of the tags which already exsists in the DB
+    */
      function getTagsArray($tagList){
 
            $tagListQuery = implode("', '", $tagList);
@@ -327,17 +351,44 @@ class Ansquick_model extends CI_Model{
         return $temp;
 
      }
+     /*
+     * A function to return the tagName of currentTag
+     * Takes Input a TagID
+     * Returns a string containing the tagName
+     */
      function currentTag($tagID){
        $query = $this->db->query("SELECT tagName from Tags WHERE tagID='".$tagID."'");
        $result = $query->result_array();
        //var_dump ($result);
-       return $result[0]['tagName'];
+       $currentTag="noTag";
+       //echo count($result);
+       if(count($result)>0)
+       $currentTag= $result[0]['tagName'];
+      // echo "adasdassd",$currentTag;
+       return $currentTag;
+
+     }
+
+     /*
+     * A function to check if current user follows the current tag
+     * Takes input the userID and tagID
+     * returns a flag as 0 if does not follow pr 1 if follows
+     */
+     function doesFollow($tagID,$currentUserID)
+     {
+       $query = $this->db->query("select * from Follow where tagID='".$tagID."' AND userID='".$currentUserID."'");
+       $result = $query->result_array();
+       //echo "<br>","<br>","<br>","<br>","<br>","<br>","<br>";
+       //var_dump($result);
+       if(count($result)>0)
+       return 1;
+       else return 0;
 
      }
      /*
      A function fetches recent feed from the database having tag as selected tag
      */
-     function getRecentTagFeed($start,$end,$tagID){
+     function getRecentTagFeed($start,$end,$tagID,$currentUserID){
        //$tagID = (int)$tagID;
       // echo $tagID;
        $query = $this->db->query("SELECT
@@ -353,7 +404,10 @@ class Ansquick_model extends CI_Model{
                                   ORDER BY c.time DESC
                                 ");
         $currentTag=$this->currentTag($tagID);
-        //$doesFollow = $this->currentTag($tagID,$userID);
+        $follow=0;
+        if($currentUserID!="NoUser")
+        $follow = $this->doesFollow($tagID,$currentUserID);
+        //echo $follow;
         //echo $currentTag;
       //$result=$query->result_array();
       //$result['type']="getRecentTagFeed";
@@ -363,9 +417,12 @@ class Ansquick_model extends CI_Model{
               );
               //  var_dump($data);
       $data =  $this->process_feed($data);
-      $data['questionDetails']['type']="getRecentTagFeed";
-      $data['questionDetails']['currentTag']=$currentTag;
-    //  var_dump($data);
+      $data['questionDetails']['type']          = "getRecentTagFeed";
+      $data['questionDetails']['currentTag']    = $currentTag;
+      $data['questionDetails']['currentTagID']  = $tagID;
+      $data['questionDetails']['follow']        = $follow;
+      //var_dump($data);
+      //echo $follow;
       return $data;
      }
 

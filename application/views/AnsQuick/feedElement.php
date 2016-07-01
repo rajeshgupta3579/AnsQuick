@@ -1,4 +1,4 @@
-<div class="container" style="margin-top:6%">
+<div class="container" style="margin-top:10%">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
@@ -35,7 +35,10 @@
 
     <!-- Main feed: A cell that spans 7 columns -->
 
-    <?php /*loop is upto count-offset because there are two extra rows of type and currentTag last row has type of the request*/
+    <?php /*loop is upto count-offset because there are three
+            extra rows,  request type,currentTag,currentTagID, and follow flag.
+            Last two rows are only for tag discription page
+            */
       $offset=1;
       for($i=0;$i<count($questionDetails)-$offset;$i++) {
     ?>
@@ -43,11 +46,24 @@
                   <!-- Status update #1 -->
 
                     <?php if($questionDetails['type']=="getRecentTagFeed"&&$i==0){
-                        $offset=2;
-                          ?><h3>Tag: <a href:><?php echo $questionDetails['currentTag']; ?></a></h3><?php
-                          ?>
-                            <a href="#" >Follow</a>
+                        $offset=4;
+                        ?>
+                        <ul class="list-inline">
+                        <li >  <h3>Tag: <a href="#" id="<?php ?>"><?php echo $questionDetails['currentTag']; ?></a></h3><?php
+                          ?></li>
+                          <li class="pull-right">
+                          <?php if($questionDetails['follow']){
+                                    echo '<button type="button" class="btn btn-danger" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="unFollow(this)"><span class="glyphicon glyphicon-remove" id="tagEvent"></span>Unfollow</button>';
+
+                                            }
+                                        else {
+                                          echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><span class="glyphicon glyphicon-ok" id="tagEvent"></span>Follow</button>';
+                                        }
+                                      ?>
+                                    </li>
+                        </ul>
                           <?php
+
                         }
                               if($questionDetails['type']=="gerRecentFeed"&&$i==0) {
 
@@ -57,6 +73,7 @@
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->
+                <?php if(isset($questionDetails[$i])){?>
                 <div class="row">
                   <div class="col-md-10">
                     <div class="media">
@@ -64,8 +81,6 @@
                         PIC
                       </div>
                       <div class="media-body">
-
-
 
                         <h4 class="media-heading"><?php echo $questionDetails[$i]['questionText'];?></h4>
                         Posted By <a href="#"><?php echo $questionDetails[$i]['firstName']," ",$questionDetails[$i]['lastName'];?></a>
@@ -78,7 +93,7 @@
                 <hr>
                 <div class="row">
                   <div class="col-md-12">
-                    <ui class="list-inline">
+                    <ul class="list-inline">
                       Tags :
                       <?php $tagsOfQuestion  = $questionDetails[$i]['tag_names'];
                             $tagIDOfQuestion = $questionDetails[$i]['tag_ids'];
@@ -106,8 +121,13 @@
 
                   </div>
                 </div>
+                <?php }
+                else {
+                ?>
+                  No Questions yet.
+                <?php }?>
               </div>
-
+              <?php if(isset($questionDetails[$i])){?>
             <div class="panel-footer">
               <div class="row">
                 <div class="col-md-12">
@@ -177,6 +197,7 @@
 
 
             </div>
+            <?php }?>
               </div>
     </div>
     <?php }?>
