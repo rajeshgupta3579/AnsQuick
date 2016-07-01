@@ -3,8 +3,7 @@
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
 
-    <div class="col-md-2" style="position: fixed;
-    left: 0;">
+    <div class="col-md-2" style="position: fixed;left: 0;">
       <?php
       if($this->session->userdata('userName')) {
         ?>
@@ -100,7 +99,7 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a href="#"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
+                      <a href="#addComment<?php echo $i;?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                     </ul>
 
@@ -132,7 +131,7 @@
                                 </div>
                                 <div class="media-body">
                                   <div class="input-group">
-                                    <input type="text" class="form-control" id="addComment"placeholder="Write an answer...">
+                                    <input type="text" class="form-control" id="addComment<?php echo $i;?>"placeholder="Write an answer...">
                                     <span class="input-group-btn">
                                       <button class="btn btn-default" type="button">
                                         <span class="glyphicon glyphicon-camera"></span>
