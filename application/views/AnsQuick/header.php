@@ -40,7 +40,7 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-fixed top navbar-default "  role="navigation">
+<nav class="navbar navbar-fixed-top navbar-default "  role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">

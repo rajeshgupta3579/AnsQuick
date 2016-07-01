@@ -19,6 +19,7 @@ class Addquestion extends CI_Controller{
 						 $category = $_GET['category'];
 						 $tags = $_GET['tags'];
 						 $tags = explode (",", $tags);
+
 						 $userName = $this->session->userdata('userName');
 						 //echo $userName;
 						 /*echo $question,"<br>",$category,"<br>",$tags,"<br>";
@@ -35,7 +36,7 @@ class Addquestion extends CI_Controller{
 						 }
 						 //echo $tags[0],$tags[1];
 						 //print_r($tagList);
-
+						 $tagList = array_unique($tagList);
 						 $this->Ansquick_model->postQuestion($question,$category,$tagList,$userName);
 
 			}

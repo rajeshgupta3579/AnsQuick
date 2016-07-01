@@ -58,7 +58,7 @@ class Ansquick_model extends CI_Model{
      function getTagsArray($tagList){
 
            $tagListQuery = implode("', '", $tagList);
-
+           
            $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
            $query = $this->db->query($sql);
            $result=$query->result();
