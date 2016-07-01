@@ -3,7 +3,8 @@
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
 
-    <div class="col-md-2">
+    <div class="col-md-2" style="position: fixed;
+    left: 0;">
       <?php
       if($this->session->userdata('userName')) {
         ?>
@@ -36,7 +37,7 @@
     <?php for($i=0;$i<count($questionDetails);$i++) {
       # code...
     ?>
-    <div class="col-md-7">
+    <div class="col-md-7" style="margin-left:180px">
                   <!-- Status update #1 -->
 
               <div class="panel panel-default">
