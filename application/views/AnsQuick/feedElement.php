@@ -3,12 +3,12 @@
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
 
-    <div class="col-md-2">
+    <div class="col-md-2" id ="leftSide">
       <?php
       if($this->session->userdata('userName')) {
         ?>
               <ul class="nav nav-pills nav-stacked">
-              <li role="presentation"><a href="#">John Vilk</a></li>
+
               <li role="presentation">
                 <a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
               </li>
@@ -32,8 +32,18 @@
             </ul>
             <?php } ?>
     </div>
+    <div class="col-md-7">
+
+      <h3><?php if($questionDetails['type']=="getRecentTagFeed") echo "Tagged Questions";
+                if($questionDetails['type']=="gerRecentFeed") echo "Recent Questions";
+          ?>
+        </h3>
+      <hr>
+
+    </div>
     <!-- Main feed: A cell that spans 7 columns -->
-    <?php for($i=0;$i<count($questionDetails);$i++) {
+
+    <?php /*loop is upto count-1 because last row has type of the request*/for($i=0;$i<count($questionDetails)-1;$i++) {
       # code...
     ?>
     <div class="col-md-7">
@@ -65,11 +75,15 @@
                   <div class="col-md-12">
                     <ui class="list-inline">
                       Tags :
-                      <?php $tagsOfQuestion = $questionDetails[$i]['tag_names'];
-                            $tagsOfQuestion = explode('-|::|-',$tagsOfQuestion);
+                      <?php $tagsOfQuestion  = $questionDetails[$i]['tag_names'];
+                            $tagIDOfQuestion = $questionDetails[$i]['tag_ids'];
+                          //  echo $tagIDOfQuestion,"<br>";
+                            $tagsOfQuestion  = explode('-|::|-',$tagsOfQuestion);
+                            $tagIDOfQuestion = explode('-|::|-',$tagIDOfQuestion);
+                          //  var_dump($tagIDOfQuestion);
                             for($j=0;$j<count($tagsOfQuestion);$j++){
                       ?>
-                      <li><a href="#"><?php echo $tagsOfQuestion[$j]; ?></a><?php if($j!=count($tagsOfQuestion)-1)echo " , ";?></li>
+                      <li><a href="<?php  echo base_url("index.php/tag/recent/".$tagIDOfQuestion[$j])?>"><?php echo $tagsOfQuestion[$j]; ?></a><?php if($j!=count($tagsOfQuestion)-1)echo " , ";?></li>
                       <?php }?>
                     </ul>
                   </div>

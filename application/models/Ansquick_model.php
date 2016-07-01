@@ -244,16 +244,16 @@ class Ansquick_model extends CI_Model{
      * Return an array with details about an answer
      */
      function getAnswer($questionID){
-          $query = "SELECT * from Answer WHERE questionID='".$questionID."' ORDER BY Answer.time DESC LIMIT 1";
-          $answerDetails = $this->db->query($query)->result_array();
-          $answerdBy="";
+          $query          = "SELECT * from Answer WHERE questionID='".$questionID."' ORDER BY Answer.time DESC LIMIT 1";
+          $answerDetails  = $this->db->query($query)->result_array();
+          $answerdBy      = "";
           if(count($answerDetails)>0){
-          $answerdBy = $answerDetails[0]['userID'];
-          $query = "SELECT firstName,lastName from UserInfo WHERE userID='".$answerdBy."'";
-          $result = $this->db->query($query)->result_array();
-          //var_dump($result);
-          $answerdBy = $result[0]['firstName']." ".$result[0]['lastName'];
-          $answerDetails[0]['answerdBy']=$answerdBy;
+                                      $answerdBy = $answerDetails[0]['userID'];
+                                      $query     = "SELECT firstName,lastName from UserInfo WHERE userID='".$answerdBy."'";
+                                      $result    = $this->db->query($query)->result_array();
+                                      $answerdBy = $result[0]['firstName']." ".$result[0]['lastName'];
+                  $answerDetails[0]['answerdBy'] = $answerdBy;
+                  //var_dump($result);
           }
 
 
@@ -262,19 +262,46 @@ class Ansquick_model extends CI_Model{
 
      }
      /*
+     * A function to return tags of a question
+     * Input is questionID
+     * Output is a string of tags with deliminater
+     */
+     function getTagsOfQuestion($questionID){
+
+       $query = $this->db->query("SELECT
+                                  GROUP_CONCAT(a.tagID SEPARATOR '-|::|-') as tag_ids,
+                                  GROUP_CONCAT(a.tagName SEPARATOR '-|::|-') as tag_names
+                                  from
+                                  Tags a,QuestionTag b
+                                  where
+                                  a.tagID=b.tagID AND
+                                  b.questionID='".$questionID."'
+                                  GROUP BY(b.questionID)
+                                ");
+      //echo $questionID;
+      //var_dump($query->result());
+      $tagsOfQuestion = $query->result_array();
+      //var_dump($tagsOfQuestion);
+      return $tagsOfQuestion;
+     }
+     /*
      * A function to process feed data into one array for each question
      * Input is data containing details about question and answer
      * Ouputs an aray with one row for each question
      */
      function process_feed($data){
         //var_dump($data);
-        $questionDetails = $data['question'];
-        $feed            = array();
+        $questionDetails =   $data['question'];
+        $feed            =   array();
       //  var_dump($questionDetails);
         for($i=0;$i<count($questionDetails);$i++){
+
+          $questionID      =   $questionDetails[$i]['questionID'];
+          $tagsOfQuestion  =   $this->getTagsOfQuestion($questionID);
+
           if($questionDetails[$i]['answerCount']>0){
-                $questionID = $questionDetails[$i]['questionID'];
-                $answerDetails = $this->getAnswer($questionID);
+
+                $answerDetails                      =   $this->getAnswer($questionID);
                 $questionDetails[$i]['answerdBy']   =   $answerDetails[0]['answerdBy'];
                 $questionDetails[$i]['likes']       =   $answerDetails[0]['likes'];
                 $questionDetails[$i]['answerText']  =   $answerDetails[0]['answerText'];
@@ -286,6 +313,13 @@ class Ansquick_model extends CI_Model{
                 $questionDetails[$i]['answerText']  =   "";
                 $questionDetails[$i]['answerTime']  =   "";
           }
+        //  echo "1";
+        //  var_dump($questionDetails);
+        //  echo "2";
+          $questionDetails[$i]['tag_names'] = $tagsOfQuestion[0]['tag_names'];
+          $questionDetails[$i]['tag_ids']   = $tagsOfQuestion[0]['tag_ids'];
+          //var_dump($questionDetails);
+
         }
         //var_dump($answerDetails);
         //var_dump($questionDetails);
@@ -293,18 +327,50 @@ class Ansquick_model extends CI_Model{
         return $temp;
 
      }
+
+     /*
+     A function fetches recent feed from the database having tag as selected tag
+     */
+     function getRecentTagFeed($start,$end,$tagID){
+       //$tagID = (int)$tagID;
+      // echo $tagID;
+       $query = $this->db->query("SELECT
+
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  from
+                                  Tags a,QuestionTag b,Question c,UserInfo d
+                                  where
+                                  b.tagID='".$tagID."' AND
+                                  b.questionID=c.questionID AND
+                                  c.userID=d.userID
+                                  GROUP BY(c.questionID)
+                                  ORDER BY c.time DESC
+                                ");
+      //$result=$query->result_array();
+      //$result['type']="getRecentTagFeed";
+    //  var_dump($result);
+      $data=array(
+              'question'  =>  $query->result_array(),
+              );
+      $data =  $this->process_feed($data);
+      $data['questionDetails']['type']="getRecentTagFeed";
+      var_dump($data);
+      return $data;
+     }
+
+
+
+
      /*
      * A function to fetch recent feed from database
      */
      function getRecentFeed($start,$end){
        $query = $this->db->query("SELECT
-                                  GROUP_CONCAT(a.tagID SEPARATOR '-|::|-') as tag_ids,
-                                  GROUP_CONCAT(a.tagName SEPARATOR '-|::|-') as tag_names,
+
                                   b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
                                   from
                                   Tags a,QuestionTag b,Question c,UserInfo d
                                   where
-                                  a.tagID=b.tagID AND
                                   b.questionID=c.questionID AND
                                   c.userID=d.userID
                                   GROUP BY(c.questionID)
@@ -323,12 +389,13 @@ class Ansquick_model extends CI_Model{
                                         c.userID     = a.userID
                                         GROUP BY (b.questionID)");
                                         */
+
        $data=array(
                'question'  =>  $query->result_array(),
-
                );
        $data =  $this->process_feed($data);
-      // var_dump($data);
+       $data['questionDetails']['type']="gerRecentFeed";
+       var_dump($data);
        return $data;
        //$query ="";
      }
