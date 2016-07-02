@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="media-body">
                                   <a href="#"><?php echo $questionDetails[$i]['answerdBy'];?></a> <?php echo $questionDetails[$i]['answerText'];?>
-                                  <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails[$i]['likes']?></span>
+                                  <br><a href="#" id="likeButton<?php echo $questionDetails[$i]['questionID'];?>" onclick="addLike()">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails[$i]['likes']?></span>
                                 </div>
                               </li>
 
@@ -173,7 +173,7 @@
                   else {?>
                     No answers yet!!
                     <hr>
-                    <ul class="media-list">                      
+                    <ul class="media-list">
                         <?php }?>
                         <li class="media">
                           <div class="media-left media-top">

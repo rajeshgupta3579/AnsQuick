@@ -257,8 +257,8 @@ function addAnswer(obj) {
 
   $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){
     if(res=="true"){
-      $("#addAnswerError"+idNum).html("Answer Posted");
-      $("#addAnswerError"+idNum).show(500);
+      location.reload();
+
     }
     else if(res=="noUser") {
         $("#addAnswerError"+idNum).html("You Need to Login First.");
