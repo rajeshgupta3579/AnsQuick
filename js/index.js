@@ -8,7 +8,7 @@ function follow(obj){
   $.post(s,function(res){
     alert(res);
     if(res=="nowFollowing"){
-      alert(completeTagID);
+        alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","unFollow(this)");
         $("#".concat(completeTagID)).html("Unfollow");
         $("#".concat(completeTagID)).attr("class","btn btn-danger");
