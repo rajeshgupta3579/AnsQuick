@@ -151,7 +151,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <?php if($questionDetails[$i]['answerCount']>0){?>
-                  <a href="#"><?php echo $questionDetails[$i]['answerCount'];?> people</a> have answered!!
+                  <a href="<?php echo base_url('index.php/Question/expand/'.$questionDetails[$i]['questionID']);?>"><?php echo $questionDetails[$i]['answerCount'];?> people</a> have answered!!
                     <hr>
 
                             <ul class="media-list">

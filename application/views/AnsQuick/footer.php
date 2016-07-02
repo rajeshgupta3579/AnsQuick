@@ -27,7 +27,12 @@ jQuery(document).ready(function(){
                 function extractLast( term ) {
                     return split( term ).pop();
                 }
+                  $("#name").attr('contenteditable','false');
 
+                  $("#editName").click(function(){
+                      $("#name1").attr('contenteditable','true');
+                      alert("nandas");
+                  })
                 $('#tags').autocomplete({
 
                 //  alert("nice");

@@ -116,6 +116,8 @@
                                 <div class="media-body">
                                   <a href="#"><?php echo $questionDetails['answerDetails'][$k]['answerdBy'];?></a> <?php echo $questionDetails['answerDetails'][$k]['answerText'];?>
                                   <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails['answerDetails'][$k]['likes']?></span>
+                                  <br>
+                                  <br>
                                 </div>
                               </li>
 
