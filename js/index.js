@@ -265,10 +265,16 @@ function addAnswer(obj) {
 }
 function addLike(obj) {
   var answerID = obj.id.replace('likeAnswerButton','');
+  $likeCount = $("#likeCount"+answerID).html();
   data = {'answerID' : answerID };
   $.post("http://www.ansquick.com/index.php/Like/addLike",data,function(res){
     //alert(res);
     if(res=="true"){
+      /*
+      $("#"+obj.id).attr("onclick","removeLike(this)");
+      $("#"+obj.id).html("Unlike");
+      $("#likeCount"+answerID).html(parseInt($likeCount,10)+1);
+      */
       location.reload();
     }
     else if(res=="noUser") {
@@ -280,14 +286,20 @@ function addLike(obj) {
         $("#likeAnswerError"+answerID).show(500);
     }
   });
-  return false;
+  return true;
 }
 function removeLike(obj) {
   var answerID = obj.id.replace('likeAnswerButton','');
+  $likeCount = $("#likeCount"+answerID).html();
   data = {'answerID' : answerID };
   $.post("http://www.ansquick.com/index.php/Like/removeLike",data,function(res){
     //alert(res);
     if(res=="true"){
+      /*
+      $("#"+obj.id).attr("onclick","addLike(this)");
+      $("#"+obj.id).html("Like");
+      $("#likeCount"+answerID).html(parseInt($likeCount,10)-1);
+      */
       location.reload();
     }
     else if(res=="noUser") {
