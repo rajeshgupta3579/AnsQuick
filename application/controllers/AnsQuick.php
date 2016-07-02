@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					//var_dump($recentFeed);
 					$this->load->view('AnsQuick/index',$topFeed);
 					*/
-					$this->top();
+					$this->recent();
 			}
 			public function top(){
 				if($this->session->userdata('userID')){

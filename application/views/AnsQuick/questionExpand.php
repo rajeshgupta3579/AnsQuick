@@ -48,7 +48,6 @@
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->
-                <?php if(isset($questionDetails[$i])){?>
                 <div class="row">
                   <div class="col-md-10">
                     <div class="media">
@@ -59,9 +58,9 @@
 
 
 
-                        <h4 class="media-heading"><?php echo $questionDetails[$i]['questionText'];?></h4>
-                        Posted By <a href="#"><?php echo $questionDetails[$i]['firstName']," ",$questionDetails[$i]['lastName'];?></a>
-                         <?php echo $questionDetails[$i]['time'];?>
+                        <h4 class="media-heading"><?php echo $questionDetails['questionDiscription'][0]['questionText'];?></h4>
+                        Posted By <a href="#"><?php echo $questionDetails['questionDiscription'][0]['firstName']," ",$questionDetails['questionDiscription'][0]['lastName'];?></a>
+                         <?php echo $questionDetails['questionDiscription'][0]['time'];?>
                       </div>
                     </div>
                   </div>
@@ -72,8 +71,8 @@
                   <div class="col-md-12">
                     <ul class="list-inline">
                       Tags :
-                      <?php $tagsOfQuestion  = $questionDetails[$i]['tag_names'];
-                            $tagIDOfQuestion = $questionDetails[$i]['tag_ids'];
+                      <?php $tagsOfQuestion  = $questionDetails['tags'][0]['tag_names'];
+                            $tagIDOfQuestion = $questionDetails['tags'][0]['tag_ids'];
                           //  echo $tagIDOfQuestion,"<br>";
                             $tagsOfQuestion  = explode('-|::|-',$tagsOfQuestion);
                             $tagIDOfQuestion = explode('-|::|-',$tagIDOfQuestion);
@@ -91,38 +90,32 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a href="#addAnswerText<?php echo $questionDetails[$i]['questionID'];?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
+                      <a href="#addAnswerText<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                       <li>
-                      <a href="<?php echo base_url('index.php/Question/expand/'.$questionDetails[$i]['questionID']);?>"><span class="glyphicon glyphicon-comment"></span> View All Answers</a>
+                      <a href="<?php echo base_url('index.php/Question/expand/'.$questionDetails['questionDiscription'][0]['questionID']);?>"><span class="glyphicon glyphicon-comment"></span> View All Answers</a>
                       </li>
                     </ul>
 
 
                   </div>
                 </div>
-                <?php }
-                else {
-                ?>
-                  No Questions yet.
-                <?php }?>
               </div>
-              <?php if(isset($questionDetails[$i])){?>
             <div class="panel-footer">
               <div class="row">
                 <div class="col-md-12">
-                  <?php if($questionDetails[$i]['answerCount']>0){?>
-                  <a href="#"><?php echo $questionDetails[$i]['answerCount'];?> people</a> have answered!!
+                  <?php if($questionDetails['questionDiscription'][0]['answerCount']>0){?>
+                  <a href="#"><?php echo $questionDetails['questionDiscription'][0]['answerCount'];?> people</a> have answered!!
                     <hr>
-
+                    <?php for($k=0;$k<$questionDetails['questionDiscription'][0]['answerCount'];$k++){?>
                             <ul class="media-list">
                               <li class="media">
                                 <div class="media-left media-top">
                                   PIC
                                 </div>
                                 <div class="media-body">
-                                  <a href="#"><?php echo $questionDetails[$i]['answerdBy'];?></a> <?php echo $questionDetails[$i]['answerText'];?>
-                                  <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails[$i]['likes']?></span>
+                                  <a href="#"><?php echo $questionDetails['answerDetails'][$k]['answerdBy'];?></a> <?php echo $questionDetails['answerDetails'][$k]['answerText'];?>
+                                  <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails['answerDetails'][$k]['likes']?></span>
                                 </div>
                               </li>
                               <li class="media">
@@ -132,7 +125,7 @@
 
 
 
-                  <?php }
+                  <?php }}
                   else {?>
                     No answers yet!!
                     <hr>
@@ -145,9 +138,9 @@
                         <div class="media-body">
 
                           <div class="input-group">
-                            <input type="text" class="form-control" id="addAnswerText<?php echo $questionDetails[$i]['questionID'];?>" placeholder="Write an answer...">
+                            <input type="text" class="form-control" id="addAnswerText<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" placeholder="Write an answer...">
                             <span class="input-group-btn" id="FeedElements">
-                              <button class="btn btn-default" id="addAnswerSubmit<?php echo $questionDetails[$i]['questionID'];?>" onclick="addAnswer(this)" type="button">
+                              <button class="btn btn-default" id="addAnswerSubmit<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" onclick="addAnswer(this)" type="button">
                                 <span class="glyphicon glyphicon-ok"></span>
                               </button>
                               <button class="btn btn-default" type="button">
@@ -156,7 +149,7 @@
                             </span>
 
                           </div>
-                          <div class="alert alert-danger" role="alert" id="addAnswerError<?php echo $questionDetails[$i]['questionID'];?>" hidden="true"> </div>
+                          <div class="alert alert-danger" role="alert" id="addAnswerError<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" hidden="true"> </div>
                         </div>
                       </li>
                     </ul>
@@ -167,7 +160,6 @@
 
 
             </div>
-            <?php }?>
               </div>
     </div>
   </div>

@@ -499,7 +499,7 @@ class Ansquick_model extends CI_Model{
                   );
        $data =  $this->process_feed($data);
        $data['questionDetails']['type']="getTopFeed";
-       var_dump($data);
+      // var_dump($data);
        return $data;
        //$query ="";
      }

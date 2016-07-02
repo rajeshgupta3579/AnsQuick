@@ -69,7 +69,7 @@
 							redirect(base_url(""));
 						}
             $recentFeed = $this->Ansquick_model->getRecentTagFeed($start,$end,$tagID,$currentUserID);
-             var_dump($recentFeed);
+            // var_dump($recentFeed);
 
 						//echo $currentUserID;
             $this->load->view('AnsQuick/index',$recentFeed);
