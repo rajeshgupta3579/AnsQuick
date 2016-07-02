@@ -115,7 +115,8 @@
                                 </div>
                                 <div class="media-body">
                                   <a href="#"><?php echo $questionDetails['answerDetails'][$k]['answerdBy'];?></a> <?php echo $questionDetails['answerDetails'][$k]['answerText'];?>
-                                  <br><a href="#" id="likeButton<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" onclick="addLike(this)">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails['answerDetails'][$k]['likes']?></span>
+                                  <br><a id="likeAnswerButton<?php echo $questionDetails['answerDetails'][$k]['answerID'];?>" onclick="<?php if(in_array($questionDetails['answerDetails'][$k]['answerID'],$questionDetails['userLikes'])){ echo "removeLike(this)";} else{echo "addLike(this)";}?>"><?php if(in_array($questionDetails['answerDetails'][$k]['answerID'],$questionDetails['userLikes'])) echo"Unlike"; else echo"Like"; ?></a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails['answerDetails'][$k]['likes']?></span>
+                                  <div class="alert alert-danger" role="alert" id="likeAnswerError<?php echo $questionDetails['answerDetails'][$k]['answerID'];?>" hidden="true"> </div>
                                 </div>
                               </li>
 

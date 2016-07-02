@@ -8,7 +8,7 @@
             $this->load->helper(array('form','url'));
             $this->load->database();
             //load the login model
-            $this->load->model('AnsQuick_model');
+            $this->load->model('Ansquick_model');
        }
        public function index(){
            $this->load->view('AnsQuick/profile.php');

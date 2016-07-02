@@ -506,6 +506,11 @@ class Ansquick_model extends CI_Model{
        //$query ="";
      }
 
+     /*
+     * A function to add an answer to a question.
+     * Takes addAnswerText,questionID and userID as input
+     * returns true
+     */
      function addAnswer($addAnswerText,$questionID,$userID){
         $data=array(
             'userID'      =>  $userID,
@@ -516,6 +521,42 @@ class Ansquick_model extends CI_Model{
         $this->db->set('answerCount', '`answerCount`+1', FALSE);
         $this->db->where('questionID', $questionID);
         $this->db->update('Question');
+        return true;
+     }
+
+     /*
+     * A function to add a like to an answer.
+     * Takes answerID and userID as input
+     * returns true
+     */
+     function addLike($answerID,$userID){
+        $data=array(
+            'userID'      =>  $userID,
+            'answerID'    =>  $answerID
+        );
+        $this->db->insert('`Like`', $data);
+        $this->db->set('likes', '`likes`+1', FALSE);
+        $this->db->where('answerID', $answerID);
+        $this->db->update('Answer');
+        return true;
+     }
+
+     /*
+     * A function to remove a like from an answer.
+     * Takes answerID and userID as input
+     * returns true
+     */
+     function removeLike($answerID,$userID){
+        $query = $this->db->query("DELETE
+                                    FROM `Like`
+                                    WHERE
+                                    userID = '".$userID."'
+                                    AND
+                                    answerID = '".$answerID."'
+                                    ");
+        $this->db->set('likes', '`likes`-1', FALSE);
+        $this->db->where('answerID', $answerID);
+        $this->db->update('Answer');
         return true;
      }
 

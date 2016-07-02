@@ -47,12 +47,7 @@ function unFollow(obj){
 
 }
 $("#signUpSubmit").click(function(){
-    $("#firstNameError").hide();
-    $("#lastNameError").hide();
-    $("#userNameError").hide();
-    $("#emailIDError").hide();
-    $("#passwordError").hide();
-    $("#cpasswordError").hide();
+    $(".alert").hide();
     var nameRX      = /^[A-Za-z\s]+$/ ;
     var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var userNameRX  = /^[0-9a-zA-Z]+$/;
@@ -134,8 +129,7 @@ $("#signUpSubmit").click(function(){
     return false;
 });
 $("#loginSubmit").click(function(){
-  $("#userNameLoginError").hide();
-  $("#passwordLoginError").hide();
+  $(".alert").hide();
   var userNameLogin    = document.forms["loginForm"]["userNameLogin"].value.trim();
   var passwordLogin    = document.forms["loginForm"]["passwordLogin"].value.trim();
   if(userNameLogin == null || userNameLogin == ""){
@@ -193,8 +187,7 @@ $("#forgotPasswordSubmit").click(function(){
   return false;
 });
 $("#changePasswordSubmit").click(function(){
-  $("#newPasswordError").hide();
-  $("#cnewPasswordError").hide();
+  $(".alert").hide();
   var newPassword     = document.forms["changePasswordForm"]["newPassword"].value.trim();
   var cnewPassword    = document.forms["changePasswordForm"]["cnewPassword"].value.trim();
   if(newPassword == null || newPassword == ""){
@@ -215,9 +208,7 @@ $("#changePasswordSubmit").click(function(){
   return true;
 });
 $("#postQuestionSubmit").click(function(){
-    $("#categoryError").hide();
-    $("#questionError").hide();
-    $("#tagsError").hide();
+    $(".alert").hide();
     var tagsRX = /^([a-z]+)(,\s*[a-z]+)*$/i;
     var category     = document.forms["postQuestionForm"]["category"].value.trim();
     var question     = document.forms["postQuestionForm"]["question"].value.trim();
@@ -245,15 +236,15 @@ $("#postQuestionSubmit").click(function(){
     return true;
 });
 function addAnswer(obj) {
-  var idNum = obj.id.replace('addAnswerSubmit','');
-  $("#addAnswerError"+idNum).hide();
-  var addAnswerText     = $('#addAnswerText'+idNum).val().trim();
+  $(".alert").hide();
+  var questionID = obj.id.replace('addAnswerSubmit','');
+  var addAnswerText     = $('#addAnswerText'+questionID).val().trim();
   if(addAnswerText  == null || addAnswerText == "" ){
-      $("#addAnswerError"+idNum).html("This Field cannot be empty");
-      $("#addAnswerError"+idNum).show(500);
+      $("#addAnswerError"+questionID).html("This Field cannot be empty");
+      $("#addAnswerError"+questionID).show(500);
       return false;
   }
-  data = {'addAnswerText' : addAnswerText, 'questionID' : idNum };
+  data = {'addAnswerText' : addAnswerText, 'questionID' : questionID };
 
   $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){
     if(res=="true"){
@@ -261,39 +252,50 @@ function addAnswer(obj) {
 
     }
     else if(res=="noUser") {
-        $("#addAnswerError"+idNum).html("You Need to Login First.");
-        $("#addAnswerError"+idNum).show(500);
+        $("#addAnswerError"+questionID).html("You Need to Login First.");
+        $("#addAnswerError"+questionID).show(500);
     }
     else{
-        $("#addAnswerError"+idNum).html("Error Posting Answer!!");
-        $("#addAnswerError"+idNum).show(500);
+        $("#addAnswerError"+questionID).html("Error Posting Answer!!");
+        $("#addAnswerError"+questionID).show(500);
     }
   });
   return false;
 }
 function addLike(obj) {
-  var idNum = obj.id.replace('addAnswerSubmit','');
-  $("#addAnswerError"+idNum).hide();
-  var addAnswerText     = $('#addAnswerText'+idNum).val().trim();
-  if(addAnswerText  == null || addAnswerText == "" ){
-      $("#addAnswerError"+idNum).html("This Field cannot be empty");
-      $("#addAnswerError"+idNum).show(500);
-      return false;
-  }
-  data = {'addAnswerText' : addAnswerText, 'questionID' : idNum };
-
-  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){
+  var answerID = obj.id.replace('likeAnswerButton','');
+  data = {'answerID' : answerID };
+  $.post("http://www.ansquick.com/index.php/Like/addLike",data,function(res){
+    //alert(res);
     if(res=="true"){
       location.reload();
-
     }
     else if(res=="noUser") {
-        $("#addAnswerError"+idNum).html("You Need to Login First.");
-        $("#addAnswerError"+idNum).show(500);
+        $("#likeAnswerError"+answerID).html("You Need to Login First.");
+        $("#likeAnswerError"+answerID).show(500);
     }
     else{
-        $("#addAnswerError"+idNum).html("Error Posting Answer!!");
-        $("#addAnswerError"+idNum).show(500);
+        $("#likeAnswerError"+answerID).html("Error Liking Answer!!");
+        $("#likeAnswerError"+answerID).show(500);
+    }
+  });
+  return false;
+}
+function removeLike(obj) {
+  var answerID = obj.id.replace('likeAnswerButton','');
+  data = {'answerID' : answerID };
+  $.post("http://www.ansquick.com/index.php/Like/removeLike",data,function(res){
+    //alert(res);
+    if(res=="true"){
+      location.reload();
+    }
+    else if(res=="noUser") {
+        $("#likeAnswerError"+answerID).html("You Need to Login First.");
+        $("#likeAnswerError"+answerID).show(500);
+    }
+    else{
+        $("#likeAnswerError"+answerID).html("Error Unliking Answer!!");
+        $("#likeAnswerError"+answerID).show(500);
     }
   });
   return false;

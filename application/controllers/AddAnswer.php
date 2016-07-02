@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 class AddAnswer extends CI_Controller{
 	public function __construct(){
 		parent:: __construct();
@@ -8,7 +9,7 @@ class AddAnswer extends CI_Controller{
 
 	}
   public function index(){
-			if($this->session->userdata('userName')==null){
+			if(!$this->session->userdata('userID')){
 				echo "noUser";
 			}
 			else {
