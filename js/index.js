@@ -6,10 +6,37 @@ function follow(obj){
   //alert(tagID);
   $.post(s,function(res){
     alert(res);
-    if(res=="true"){
-        $("#completeTagID").attr("onclick","unFollow(this)");
-        $("#completeTagID").html("Unfollow");
-        
+    if(res=="nowFollowing"){
+      alert(completeTagID);
+        $("#".concat(completeTagID)).attr("onclick","unFollow(this)");
+        $("#".concat(completeTagID)).html("Unfollow");
+        $("#".concat(completeTagID)).attr("class","btn btn-danger");
+        $('#asdtagEvent').attr("class","glyphicon glyphicon-remove");
+
+    }
+    else if(res=="noUser"){
+        alert("please login");
+      //  $("#logIn").modal('show');
+      //  alert("asda");
+    }
+  });
+
+}
+function unFollow(obj){
+  var completeTagID = obj.id;
+  var tagID = completeTagID.replace("currentTagID","");
+  var s="http://www.ansquick.com/index.php/Tag/Unfollow/".concat(tagID);
+  //alert(s);
+  //alert(tagID);
+  $.post(s,function(res){
+    alert(res);
+    if(res=="nowNotFollowing"){
+        alert(completeTagID);
+        $("#".concat(completeTagID)).attr("onclick","follow(this)");
+        $("#".concat(completeTagID)).html("Follow");
+        $("#".concat(completeTagID)).attr("class","btn btn-success");
+        $('#asdtagEvent').attr("class","glyphicon glyphicon-ok");
+
     }
     else if(res=="noUser"){
         alert("please login");
@@ -228,7 +255,7 @@ function addAnswer(obj) {
   }
   data = {'addAnswerText' : addAnswerText, 'questionID' : idNum };
 
-  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){    
+  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){
     if(res=="true"){
       $("#addAnswerError"+idNum).html("Answer Posted");
       $("#addAnswerError"+idNum).show(500);

@@ -76,6 +76,17 @@ class Ansquick_model extends CI_Model{
        $query = $this->db->query($s);
      }
 
+     /*
+      * Removes a user tag relationship from the follow table
+      *
+     */
+     function makeUnFollow($currentUserID,$tagID){
+       $s = "DELETE FROM Follow WHERE tagID='".$tagID."' AND userID ='".$currentUserID."'";
+       //var_dump($s);
+       $query = $this->db->query($s);
+     }
+
+
     /*
     * A function to fetch tagID of the tags which already exsists in the DB
     */
@@ -357,7 +368,7 @@ class Ansquick_model extends CI_Model{
      * Returns a string containing the tagName
      */
      function currentTag($tagID){
-       $query = $this->db->query("SELECT tagName from Tags WHERE tagID='".$tagID."'");
+       $query  = $this->db->query("SELECT tagName from Tags WHERE tagID='".$tagID."'");
        $result = $query->result_array();
        //var_dump ($result);
        $currentTag="noTag";
@@ -376,7 +387,7 @@ class Ansquick_model extends CI_Model{
      */
      function doesFollow($tagID,$currentUserID)
      {
-       $query = $this->db->query("select * from Follow where tagID='".$tagID."' AND userID='".$currentUserID."'");
+       $query  = $this->db->query("select * from Follow where tagID='".$tagID."' AND userID='".$currentUserID."'");
        $result = $query->result_array();
        //echo "<br>","<br>","<br>","<br>","<br>","<br>","<br>";
        //var_dump($result);
@@ -434,7 +445,6 @@ class Ansquick_model extends CI_Model{
      */
      function getRecentFeed($start,$end){
        $query = $this->db->query("SELECT
-
                                   b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
                                   from
                                   QuestionTag b,Question c,UserInfo d
@@ -462,11 +472,38 @@ class Ansquick_model extends CI_Model{
                'question'  =>  $query->result_array(),
                );
        $data =  $this->process_feed($data);
-       $data['questionDetails']['type']="gerRecentFeed";
+       $data['questionDetails']['type']="getRecentFeed";
       // var_dump($data);
        return $data;
        //$query ="";
      }
+
+     /*
+     * A function to fetch recent feed from database
+     */
+     function getTopFeed($start,$end,$currentUserID){
+       $query = $this->db->query("SELECT
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  from
+                                  Follow a,QuestionTag b,Question c,UserInfo d
+                                  where
+                                  a.userID='".$currentUserID."' AND
+                                  a.tagID = b.tagID AND
+                                  b.questionID=c.questionID AND
+                                  c.userID=d.userID
+                                  GROUP BY(c.questionID)
+                                  ORDER BY c.time DESC
+                                ");
+       $data=array(
+                    'question'  =>  $query->result_array(),
+                  );
+       $data =  $this->process_feed($data);
+       $data['questionDetails']['type']="getTopFeed";
+       var_dump($data);
+       return $data;
+       //$query ="";
+     }
+
      function addAnswer($addAnswerText,$questionID,$userID){
         $data=array(
             'userID'      =>  $userID,
@@ -478,6 +515,67 @@ class Ansquick_model extends CI_Model{
         $this->db->where('questionID', $questionID);
         $this->db->update('Question');
         return true;
+     }
+
+     /*
+     * A function to return All the answers of a question.
+     * Takes questionID as an input
+     * Return an array with details about an answer
+     */
+     function getAllAnswer($questionID){
+          $query          = "SELECT * from Answer WHERE questionID='".$questionID."' ORDER BY Answer.time DESC";
+          $answerDetails  = $this->db->query($query)->result_array();
+          $answerdBy      = "";
+          for($i=0;$i<count($answerDetails);$i++){
+                                      $answerdBy = $answerDetails[$i]['userID'];
+                                      $query     = "SELECT firstName,lastName from UserInfo WHERE userID='".$answerdBy."'";
+                                      $result    = $this->db->query($query)->result_array();
+                                      $answerdBy = $result[0]['firstName']." ".$result[0]['lastName'];
+                  $answerDetails[$i]['answerdBy'] = $answerdBy;
+                  //var_dump($result);
+          }
+
+
+          //var_dump($answerDetails);
+          return $answerDetails;
+
+     }
+
+
+     /*
+     * A function to return only dicription of a question
+     * Input is a questionID
+     */
+
+     function getquestionDetails($questionID){
+       $query = $this->db->query("SELECT
+                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  from
+                                  Question c,UserInfo d
+                                  where
+                                  c.userID=d.userID AND
+                                  c.questionID='".$questionID."'
+
+                                ");
+       $data=$query->result_array();
+       return $data;
+     }
+
+     /*
+     * A function which returns complete data about a question.
+     * Input is a questionID
+     */
+     function expandQuestion($questionID){
+                $tags                 = $this->getTagsOfQuestion($questionID);
+                $answerDetails        = $this->getAllAnswer($questionID);
+                $questionDiscription  = $this->getquestionDetails($questionID);
+                $questionDetails      = array('questionDiscription'=>$questionDiscription,
+                                              'tags'=>$tags,
+                                              'answerDetails'=>$answerDetails
+                                             );
+                                $data = array("questionDetails"=>$questionDetails);
+                return $data;
+
      }
 }
 ?>

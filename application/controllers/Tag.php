@@ -13,16 +13,39 @@
 			function index(){
         redirect(base_url(""));
     	}
+			/*
+			A function which makes current user follow the tag with give tagID
+			*/
 			function follow($tagID){
 					if($this->session->userdata('userID')){
 						$currentUserID = $this->session->userdata('userID');
 						if(!$this->Ansquick_model->alradyFollows($currentUserID,$tagID)){
 									//echo "not following";
 									$this->Ansquick_model->makeFollow($currentUserID,$tagID);
-									echo "now following";
+									echo "nowFollowing";
 						}
 						else {
-							echo "already follows";
+							echo "alreadyFollows";
+						}
+
+					}
+					else{
+						echo "noUser";
+					}
+			}
+			/*
+			A function which makes current user Unfollow the tag with give tagID
+			*/
+			function Unfollow($tagID){
+					if($this->session->userdata('userID')){
+						$currentUserID = $this->session->userdata('userID');
+						if($this->Ansquick_model->alradyFollows($currentUserID,$tagID)){
+									//echo "not following";
+									$this->Ansquick_model->makeUnFollow($currentUserID,$tagID);
+									echo "nowNotFollowing";
+						}
+						else {
+							echo "notFollowing";
 						}
 
 					}

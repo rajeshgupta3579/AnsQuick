@@ -1,3 +1,5 @@
+<?php// var_dump($questionDetails);
+?>
 <div class="container" style="margin-top:6%">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
@@ -34,56 +36,15 @@
     </div>
 
     <!-- Main feed: A cell that spans 7 columns -->
-
-    <?php /*loop is upto count-offset because there are three
-            extra rows,  request type,currentTag,currentTagID, and follow flag.
-            Last two rows are only for tag discription page
-            */
-      $offset=1;
-      for($i=0;$i<count($questionDetails)-$offset;$i++) {
-    ?>
     <div class="col-md-7" style="margin-left:180px">
                   <!-- Status update #1 -->
 
-                    <?php if($questionDetails['type']=="getRecentTagFeed"&&$i==0){
-                        $offset=4;
-                        ?>
-                        <ul class="list-inline">
-                        <li >  <h3>Tag: <a href="#" id="<?php ?>"><?php echo $questionDetails['currentTag']; ?></a></h3><?php
-                          ?></li>
-                          <li class="pull-right">
-                          <?php if($questionDetails['follow']){
-                                    echo '<button type="button" class="btn btn-danger" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="unFollow(this)"><span class="glyphicon glyphicon-remove" id="asdtagEvent"></span>Unfollow</button>';
-
-                                            }
-                                        else {
-                                          echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><span class="glyphicon glyphicon-ok" id="asdtagEvent"></span>Follow</button>';
-                                        }
-                                      ?>
-                                    </li>
-                        </ul>
-                          <?php
-
-                        }
-                              if($questionDetails['type']=="getRecentFeed"&&$i==0) {
-                                ?>
                                 <ul class="list-inline">
                                 <li>
-                                <h3>Recent Questions</h3>
+                                <h3>Question Details</h3>
                                   </li>
                                 </ul>
-                                <?php
-                              }
-                              if($questionDetails['type']=="getTopFeed"&&$i==0) {
-                                ?>
-                                <ul class="list-inline">
-                                <li>
-                                <h3>Top Questions</h3>
-                                  </li>
-                                </ul>
-                                <?php
-                              }
-                        ?>
+
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->
@@ -209,7 +170,6 @@
             <?php }?>
               </div>
     </div>
-    <?php }?>
   </div>
     <!-- Right sidebar: A cell that spans 3 columns -->
     <div class="col-md-3">

@@ -15,6 +15,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			public function index(){
 				//var_dump($_REQUEST);
 				//var_dump($_GET);
+				/*	$start=0;$end=0;
+					$topFeed = $this->Ansquick_model->getTopFeed($start,$end);
+					//var_dump($recentFeed);
+					$this->load->view('AnsQuick/index',$topFeed);
+					*/
+					$this->top();
+			}
+			public function top(){
+				if($this->session->userdata('userID')){
+					$currentUserID = $this->session->userdata('userID');
+					$start=0;$end=0;
+					$topFeed = $this->Ansquick_model->getTopFeed($start,$end,$currentUserID);
+					$this->load->view('AnsQuick/index',$topFeed);
+				}
+				else{
+					redirect(base_url(""));
+				}
+			}
+			public function recent(){
+
+				//var_dump($_REQUEST);
+				//var_dump($_GET);
 				  $start=0;$end=0;
 					$recentFeed = $this->Ansquick_model->getRecentFeed($start,$end);
 					//var_dump($recentFeed);
