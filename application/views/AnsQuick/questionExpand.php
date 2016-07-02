@@ -118,10 +118,7 @@
                                   <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails['answerDetails'][$k]['likes']?></span>
                                 </div>
                               </li>
-                              <li class="media">
-                                <div class="media-left media-top">
-                                  PIC
-                                </div>
+
 
 
 
@@ -130,11 +127,12 @@
                     No answers yet!!
                     <hr>
                     <ul class="media-list">
-                      <li class="media">
-                        <div class="media-left media-top">
-                          PIC
-                        </div>
+
                         <?php }?>
+                        <li class="media">
+                          <div class="media-left media-top">
+                            PIC
+                          </div>
                         <div class="media-body">
 
                           <div class="input-group">
