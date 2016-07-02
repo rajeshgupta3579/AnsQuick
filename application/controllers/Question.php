@@ -18,7 +18,9 @@
           redirect(base_url());
         }
         else{
-            $data= $this->Ansquick_model->expandQuestion($questionID);
+						$currentUserID = $this->session->userdata('userID');
+            $data = $this->Ansquick_model->expandQuestion($questionID);
+						$data['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
             //var_dump($data);
             $this->load->view('AnsQuick/question.php',$data);
         }

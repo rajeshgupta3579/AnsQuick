@@ -70,7 +70,7 @@
 						}
             $recentFeed = $this->Ansquick_model->getRecentTagFeed($start,$end,$tagID,$currentUserID);
             // var_dump($recentFeed);
-
+						$recentFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
 						//echo $currentUserID;
             $this->load->view('AnsQuick/index',$recentFeed);
         }

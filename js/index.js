@@ -271,7 +271,33 @@ function addAnswer(obj) {
   });
   return false;
 }
+function addLike(obj) {
+  var idNum = obj.id.replace('addAnswerSubmit','');
+  $("#addAnswerError"+idNum).hide();
+  var addAnswerText     = $('#addAnswerText'+idNum).val().trim();
+  if(addAnswerText  == null || addAnswerText == "" ){
+      $("#addAnswerError"+idNum).html("This Field cannot be empty");
+      $("#addAnswerError"+idNum).show(500);
+      return false;
+  }
+  data = {'addAnswerText' : addAnswerText, 'questionID' : idNum };
 
+  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){
+    if(res=="true"){
+      location.reload();
+
+    }
+    else if(res=="noUser") {
+        $("#addAnswerError"+idNum).html("You Need to Login First.");
+        $("#addAnswerError"+idNum).show(500);
+    }
+    else{
+        $("#addAnswerError"+idNum).html("Error Posting Answer!!");
+        $("#addAnswerError"+idNum).show(500);
+    }
+  });
+  return false;
+}
 /*$('#searchBox').focus( function(){
   alert("expanded");
 });*/

@@ -74,8 +74,8 @@
                       <?php $tagsOfQuestion  = $questionDetails['tags'][0]['tag_names'];
                             $tagIDOfQuestion = $questionDetails['tags'][0]['tag_ids'];
                           //  echo $tagIDOfQuestion,"<br>";
-                            $tagsOfQuestion  = explode('-|::|-',$tagsOfQuestion);
-                            $tagIDOfQuestion = explode('-|::|-',$tagIDOfQuestion);
+                            $tagsOfQuestion  = explode(DELIMITER,$tagsOfQuestion);
+                            $tagIDOfQuestion = explode(DELIMITER,$tagIDOfQuestion);
                           //  var_dump($tagIDOfQuestion);
                             for($j=0;$j<count($tagsOfQuestion);$j++){
                       ?>
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="media-body">
                                   <a href="#"><?php echo $questionDetails['answerDetails'][$k]['answerdBy'];?></a> <?php echo $questionDetails['answerDetails'][$k]['answerText'];?>
-                                  <br><a href="#">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails['answerDetails'][$k]['likes']?></span>
+                                  <br><a href="#" id="likeButton<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" onclick="addLike(this)">Like</a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><?php echo $questionDetails['answerDetails'][$k]['likes']?></span>
                                 </div>
                               </li>
 

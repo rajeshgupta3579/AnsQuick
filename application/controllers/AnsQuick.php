@@ -27,6 +27,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$currentUserID = $this->session->userdata('userID');
 					$start=0;$end=0;
 					$topFeed = $this->Ansquick_model->getTopFeed($start,$end,$currentUserID);
+					$topFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
+					//var_dump($topFeed);
 					$this->load->view('AnsQuick/index',$topFeed);
 				}
 				else{
@@ -37,8 +39,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				//var_dump($_REQUEST);
 				//var_dump($_GET);
+					$currentUserID = $this->session->userdata('userID');
 				  $start=0;$end=0;
 					$recentFeed = $this->Ansquick_model->getRecentFeed($start,$end);
+					$recentFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
 					//var_dump($recentFeed);
 					$this->load->view('AnsQuick/index',$recentFeed);
 			}

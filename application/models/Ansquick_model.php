@@ -304,8 +304,8 @@ class Ansquick_model extends CI_Model{
      function getTagsOfQuestion($questionID){
 
        $query = $this->db->query("SELECT
-                                  GROUP_CONCAT(a.tagID SEPARATOR '-|::|-') as tag_ids,
-                                  GROUP_CONCAT(a.tagName SEPARATOR '-|::|-') as tag_names
+                                  GROUP_CONCAT(a.tagID SEPARATOR '".DELIMITER."') as tag_ids,
+                                  GROUP_CONCAT(a.tagName SEPARATOR '".DELIMITER."') as tag_names
                                   from
                                   Tags a,QuestionTag b
                                   where
@@ -341,12 +341,14 @@ class Ansquick_model extends CI_Model{
                 $questionDetails[$i]['likes']       =   $answerDetails[0]['likes'];
                 $questionDetails[$i]['answerText']  =   $answerDetails[0]['answerText'];
                 $questionDetails[$i]['answerTime']  =   $answerDetails[0]['time'];
+                $questionDetails[$i]['answerID']    =   $answerDetails[0]['answerID'];
           }
           else{
                 $questionDetails[$i]['answerdBy']   =   "";
                 $questionDetails[$i]['likes']       =   "";
                 $questionDetails[$i]['answerText']  =   "";
                 $questionDetails[$i]['answerTime']  =   "";
+                $questionDetails[$i]['answerID']    =   "";
           }
         //  echo "1";
         //  var_dump($questionDetails);
@@ -457,9 +459,9 @@ class Ansquick_model extends CI_Model{
 
     /*   $ansQuery=$this->db->query("SELECT
                                         b.questionID,
-                                        GROUP_CONCAT(a.answerID SEPARATOR '-|::|-') as answer_ids,
-                                        GROUP_CONCAT(a.answerText SEPARATOR '-|::|-') as answers,
-                                        GROUP_CONCAT(c.firstName SEPARATOR '-|::|-') as answeredBy
+                                        GROUP_CONCAT(a.answerID SEPARATOR '".DELIMITER."') as answer_ids,
+                                        GROUP_CONCAT(a.answerText SEPARATOR '".DELIMITER."') as answers,
+                                        GROUP_CONCAT(c.firstName SEPARATOR '".DELIMITER."') as answeredBy
                                         from
                                         Answer a,Question b, UserInfo c
                                         where
@@ -576,6 +578,17 @@ class Ansquick_model extends CI_Model{
                                 $data = array("questionDetails"=>$questionDetails);
                 return $data;
 
+     }
+     function getUserLikes($userID){
+       $query = $this->db->query("SELECT
+                                  GROUP_CONCAT(answerID SEPARATOR '".DELIMITER."') as answerIDs
+                                  from
+                                  `Like`
+                                  where
+                                  userID='".$userID."'
+                                ");
+       $data=$query->result_array();
+       return explode(DELIMITER,$data[0]['answerIDs']);
      }
 }
 ?>
