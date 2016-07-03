@@ -264,6 +264,7 @@ function addAnswer(obj) {
   return false;
 }
 function addLike(obj) {
+  $(".alert").hide();
   var answerID = obj.id.replace('likeAnswerButton','');
   $likeCount = $("#likeCount"+answerID).html();
   data = {'answerID' : answerID };
@@ -286,9 +287,10 @@ function addLike(obj) {
         $("#likeAnswerError"+answerID).show(500);
     }
   });
-  return true;
+  return false;
 }
 function removeLike(obj) {
+  $(".alert").hide();
   var answerID = obj.id.replace('likeAnswerButton','');
   $likeCount = $("#likeCount"+answerID).html();
   data = {'answerID' : answerID };
