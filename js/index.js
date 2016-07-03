@@ -1,3 +1,5 @@
+
+
 function follow(obj){
   var completeTagID = obj.id;
   var tagID = completeTagID.replace("currentTagID","");

@@ -15,12 +15,12 @@
               <!-- List items that are just text are not indented, and look like the
                    Facebook section labels. -->
               <!-- The class "active" highlights this item in the list -->
-              <li role="presentation" class="active">
+              <li role="presentation" >
                 <a href="<?php echo base_url("index.php/AnsQuick/top");?>"><span class="glyphicon glyphicon-list-alt"></span>   Top</a>
               </li>
               <!-- We can use badges in pills to add numbers beside them. -->
               <li role="presentation">
-                <a href="<?php echo base_url("index.php/AnsQuick/recent");?>">
+                <a href="<?php echo base_url("index.php/AnsQuick/recent");?>" >
                   <span class="glyphicon glyphicon-flash"></span> Recent
                 </a>
               </li>

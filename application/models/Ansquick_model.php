@@ -440,12 +440,7 @@ class Ansquick_model extends CI_Model{
        else return 0;
 
      }
-     /*
-     A function fetches recent feed from the database having tag as selected tag
-     */
-     function getRecentTagFeed($start,$end,$tagID,$currentUserID){
-       //$tagID = (int)$tagID;
-      // echo $tagID;
+     function countRowsRecentTagFeed($tagID){
        $query = $this->db->query("SELECT
 
                                   b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
@@ -458,6 +453,32 @@ class Ansquick_model extends CI_Model{
                                   GROUP BY(c.questionID)
                                   ORDER BY c.time DESC
                                 ");
+
+      $result = $query->result_array();
+    //  var_dump($result);
+      $numRows = count($result);
+    //  var_dump($numRows);
+      return $numRows;
+     }
+     /*
+     A function fetches recent feed from the database having tag as selected tag
+     */
+     function getRecentTagFeed($limit,$start,$tagID,$currentUserID){
+       //$tagID = (int)$tagID;$limit,$start
+      // echo $tagID;
+       $query = $this->db->query("SELECT
+
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  from
+                                  QuestionTag b,Question c,UserInfo d
+                                  where
+                                  b.tagID='".$tagID."' AND
+                                  b.questionID=c.questionID AND
+                                  c.userID=d.userID
+                                  GROUP BY(c.questionID)
+                                  ORDER BY c.time DESC
+                                  limit " . $start . ", " . $limit
+                                  );
         $currentTag=$this->currentTag($tagID);
         $follow=0;
         if($currentUserID!="NoUser")
@@ -470,7 +491,7 @@ class Ansquick_model extends CI_Model{
       $data=array(
               'question'  =>  $query->result_array(),
               );
-              //  var_dump($data);
+            //   var_dump($data);
       $data =  $this->process_feed($data);
       $data['questionDetails']['type']          = "getRecentTagFeed";
       $data['questionDetails']['currentTag']    = $currentTag;
@@ -482,12 +503,10 @@ class Ansquick_model extends CI_Model{
      }
 
 
-
-
      /*
-     * A function to fetch recent feed from database
+     * A function which returns number of total questions in RecentFeed
      */
-     function getRecentFeed($start,$end){
+     function countRowsRecentFeed(){
        $query = $this->db->query("SELECT
                                   b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
                                   from
@@ -498,6 +517,26 @@ class Ansquick_model extends CI_Model{
                                   GROUP BY(c.questionID)
                                   ORDER BY c.time DESC
                                 ");
+      $result = $query->result_array();
+      $numRows = count($result);
+      return $numRows;
+     }
+     /*
+     * A function to fetch recent feed from database
+     */
+     function getRecentFeed($limit,$start){
+       $this->db->limit($limit,$start);
+       $query = $this->db->query("SELECT
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  from
+                                  QuestionTag b,Question c,UserInfo d
+                                  where
+                                  b.questionID=c.questionID AND
+                                  c.userID=d.userID
+                                  GROUP BY(c.questionID)
+                                  ORDER BY c.time DESC
+                                  limit " . $start . ", " . $limit
+                                );
 
     /*   $ansQuery=$this->db->query("SELECT
                                         b.questionID,
@@ -511,7 +550,8 @@ class Ansquick_model extends CI_Model{
                                         c.userID     = a.userID
                                         GROUP BY (b.questionID)");
                                         */
-
+                                    //      var_dump("<br><br><br><br>");
+        //var_dump($query->result_array());
        $data=array(
                'question'  =>  $query->result_array(),
                );
@@ -522,10 +562,31 @@ class Ansquick_model extends CI_Model{
        //$query ="";
      }
 
+
+     /*
+     * A function to return total number of questions in top feed of current user
+     */
+     function countRowsTopFeed($currentUserID){
+       $query = $this->db->query("SELECT
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  from
+                                  Follow a,QuestionTag b,Question c,UserInfo d
+                                  where
+                                  a.userID='".$currentUserID."' AND
+                                  a.tagID = b.tagID AND
+                                  b.questionID=c.questionID AND
+                                  c.userID=d.userID
+                                  GROUP BY(c.questionID)
+                                  ORDER BY c.time DESC"
+                                );
+      $result = $query->result_array();
+      $numRows = count($result);
+      return $numRows;
+     }
      /*
      * A function to fetch recent feed from database
      */
-     function getTopFeed($start,$end,$currentUserID){
+     function getTopFeed($limit,$start,$currentUserID){
        $query = $this->db->query("SELECT
                                   b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
                                   from
@@ -537,7 +598,8 @@ class Ansquick_model extends CI_Model{
                                   c.userID=d.userID
                                   GROUP BY(c.questionID)
                                   ORDER BY c.time DESC
-                                ");
+                                  limit " . $start . ", " . $limit
+                                );
        $data=array(
                     'question'  =>  $query->result_array(),
                   );
