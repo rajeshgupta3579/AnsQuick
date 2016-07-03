@@ -25,7 +25,7 @@
                 </a>
               </li>
               <li role="presentation">
-                <a href="#"><span class="glyphicon glyphicon-calendar"></span> Activity</a>
+                <a href=<?php echo base_url('index.php/Activity')?>><span class="glyphicon glyphicon-calendar"></span> Activity</a>
               </li>
 
 
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="media-body">
                                   <a href="#"><?php echo $questionDetails[$i]['answerdBy'];?></a> <?php echo $questionDetails[$i]['answerText'];?>
-                                  <br><a style="cursor: pointer;" id="likeAnswerButton<?php echo $questionDetails[$i]['answerID'];?>" onclick="<?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes'])){ echo "removeLike(this)";} else{echo "addLike(this)";} ?>"><?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes'])) echo"Unlike"; else echo"Like"; ?></a> · <a href="#">Comment</a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge" id="likeCount<?php echo $questionDetails[$i]['answerID'];?>"><?php echo $questionDetails[$i]['likes']?></span>
+                                  <br><?php echo $questionDetails[$i]['answerTime']; ?> ·<a style="cursor: pointer;" id="likeAnswerButton<?php echo $questionDetails[$i]['answerID'];?>" onclick="<?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes'])){ echo "removeLike(this)";} else{echo "addLike(this)";} ?>"><?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes'])) echo"Unlike"; else echo"Like"; ?></a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge" id="likeCount<?php echo $questionDetails[$i]['answerID'];?>"><?php echo $questionDetails[$i]['likes']?></span>
                                   <div class="alert alert-danger" role="alert" id="likeAnswerError<?php echo $questionDetails[$i]['answerID'];?>" hidden="true"> </div>
                                 </div>
                               </li>

@@ -12,6 +12,44 @@ class Ansquick_model extends CI_Model{
           $query = $this->db->query($sql);
           return $query;
      }
+     /*
+     * Returns the name of the based on the number of the month
+     */
+     function getMonth($monthNumber){
+       $arr = array("1"=>"Jan",
+                    "2"=>"Feb",
+                    "3"=>"Mar",
+                    "4"=>"Apr",
+                    "5"=>"May",
+                    "6"=>"Jun",
+                    "7"=>"Jul",
+                    "8"=>"Aug",
+                    "9"=>"Sep",
+                    "10"=>"Oct",
+                    "11"=>"Nov",
+                    "12"=>"Dec"
+                  );
+          //  return $arr[$monthNumber];
+
+     }
+     /*
+     * A function which returns the date from the timestamp
+     * Input is a timestamp
+     */
+     function getDate($timee){
+       $arr = explode(" ",$timee);
+       $date= $arr[0];
+
+       $date = explode("-",$date);
+       //print_r($date);
+       $day  = $date[2];
+       $month = $date[1];
+       $year = $date[0];
+        $date2 = $day.",".$month.",".$year;
+        //var_dump($date2)
+        return $date2;
+
+     }
 
      /*
      * Returns the maximum tagID present in the database
@@ -287,7 +325,11 @@ class Ansquick_model extends CI_Model{
                                       $query     = "SELECT firstName,lastName from UserInfo WHERE userID='".$answerdBy."'";
                                       $result    = $this->db->query($query)->result_array();
                                       $answerdBy = $result[0]['firstName']." ".$result[0]['lastName'];
+                                      $answerTime= $answerDetails[0]['time'];
                   $answerDetails[0]['answerdBy'] = $answerdBy;
+                  //$answerTime = getDate($answerTime);;
+                  //var_dump($answerTime);
+                  $answerDetails[0]['answerTime'] = $answerTime;
                   //var_dump($result);
           }
 
@@ -574,7 +616,9 @@ class Ansquick_model extends CI_Model{
                                       $query     = "SELECT firstName,lastName from UserInfo WHERE userID='".$answerdBy."'";
                                       $result    = $this->db->query($query)->result_array();
                                       $answerdBy = $result[0]['firstName']." ".$result[0]['lastName'];
+                                      $answerTime = $answerDetails[0]['time'];
                   $answerDetails[$i]['answerdBy'] = $answerdBy;
+                  $answerDetails[$i]['answerTime'] = $answerTime;
                   //var_dump($result);
           }
 
@@ -586,7 +630,7 @@ class Ansquick_model extends CI_Model{
 
 
      /*
-     * A function to return only dicription of a question
+     * A function to return only dicription and stuff of a question
      * Input is a questionID
      */
 
