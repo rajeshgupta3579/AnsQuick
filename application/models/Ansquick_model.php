@@ -320,8 +320,8 @@ class Ansquick_model extends CI_Model{
       return $tagsOfQuestion;
      }
      /*
-     * A function to process feed data into one array for each question
-     * Input is data containing details about question and answer
+     * A function to fetch tags and latest answer of a question and put data into an array fo
+     * Input is data containing basic details about a question
      * Ouputs an aray with one row for each question
      */
      function process_feed($data){
@@ -630,6 +630,30 @@ class Ansquick_model extends CI_Model{
                                 ");
        $data=$query->result_array();
        return explode(DELIMITER,$data[0]['answerIDs']);
+     }
+     /*
+     * A function which returns the current user Activity,  Questions ansked by the current user and answers posted.
+     * Input is current user userID.
+     * Output is a data variable which contains all the details about question asked by the current user.
+     */
+     function getAskedQuestion($currentUserID){
+
+       $query = $this->db->query("SELECT
+                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  from
+                                  Question c,UserInfo d
+                                  where
+                                  c.userID='".$currentUserID."' AND
+                                  c.userID=d.userID
+                                  ORDER BY c.time DESC
+                                ");
+       $data=array(
+                    'question'  =>  $query->result_array(),
+                  );
+       $data =  $this->process_feed($data);
+       $data['questionDetails']['type']="getAskedQuestion";
+       return $data;
+
      }
 }
 ?>

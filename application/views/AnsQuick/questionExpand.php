@@ -119,8 +119,7 @@
                                   <div class="alert alert-danger" role="alert" id="likeAnswerError<?php echo $questionDetails['answerDetails'][$k]['answerID'];?>" hidden="true"> </div>
                                 </div>
                               </li>
-
-
+                                <hr>
 
 
                   <?php }}

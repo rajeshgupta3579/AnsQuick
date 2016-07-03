@@ -35,11 +35,11 @@
 
     <!-- Main feed: A cell that spans 7 columns -->
 
-    <?php /*loop is upto count-offset because there are three
+    <?php /*loop is upto count-offset because there are four
             extra rows,  request type,currentTag,currentTagID, and follow flag.
             Last two rows are only for tag discription page
             */
-      $offset=1;
+      $offset=2;
       for($i=0;$i<count($questionDetails)-$offset;$i++) {
     ?>
     <div class="col-md-7" style="margin-left:180px">
@@ -83,6 +83,15 @@
                                 </ul>
                                 <?php
                               }
+                              if($questionDetails['type']=="getAskedQuestion" &&$i==0){
+                              ?>
+                              <ul class="list-inline">
+                              <li>
+                              <h3>Posted Questions</h3>
+                                </li>
+                              </ul>
+                              <?php
+                            }
                         ?>
               <div class="panel panel-default">
               <div class="panel-body">
