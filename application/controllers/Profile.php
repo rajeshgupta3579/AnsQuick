@@ -9,6 +9,7 @@
             $this->load->database();
             //load the login model
             $this->load->model('Ansquick_model');
+            $this->load->library('pagination');
        }
        public function index(){
            $this->load->view('AnsQuick/profile.php');
