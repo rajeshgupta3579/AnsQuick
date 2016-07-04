@@ -737,13 +737,9 @@ class Ansquick_model extends CI_Model{
        $data=$query->result_array();
        return explode(DELIMITER,$data[0]['answerIDs']);
      }
-     /*
-     * A function which returns the current user Activity,  Questions ansked by the current user and answers posted.
-     * Input is current user userID.
-     * Output is a data variable which contains all the details about question asked by the current user.
-     */
-     function getAskedQuestion($currentUserID){
 
+
+     function countRowsAskedQuestion($currentUserID){
        $query = $this->db->query("SELECT
                                   c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
                                   from
@@ -753,6 +749,28 @@ class Ansquick_model extends CI_Model{
                                   c.userID=d.userID
                                   ORDER BY c.time DESC
                                 ");
+       $result = $query->result_array();
+       $rows = count($result);
+       return $rows;
+     }
+
+     /*
+     * A function which returns the current user Activity,  Questions ansked by the current user and answers posted.
+     * Input is current user userID.
+     * Output is a data variable which contains all the details about question asked by the current user.
+     */
+     function getAskedQuestion($limit,$start,$currentUserID){
+
+       $query = $this->db->query("SELECT
+                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  from
+                                  Question c,UserInfo d
+                                  where
+                                  c.userID='".$currentUserID."' AND
+                                  c.userID=d.userID
+                                  ORDER BY c.time DESC
+                                  limit " . $start . ", " . $limit
+                                );
        $data=array(
                     'question'  =>  $query->result_array(),
                   );
