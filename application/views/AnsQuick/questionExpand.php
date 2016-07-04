@@ -56,11 +56,12 @@
                       </div>
                       <div class="media-body">
 
-
-                        <ul class="list-inline"> <li><img src="<?php echo base_url("Uploads/Profile/".$questionDetails['questionDiscription'][0]['profilePic']);?>" class="img-rounded img-responsive" style="height:35px;width:35px" /> </li> <li><h4 class="media-heading"><?php echo $questionDetails['questionDiscription'][0]['questionText'];?></h4></li></ul>
+                        <div class="clearfix content-heading">
+                        <img src="<?php echo base_url("Uploads/Profile/".$questionDetails['questionDiscription'][0]['profilePic']);?>" class="pull-left img-responsive" style="margin-right:5px;height:60px;width:60px" /> <h4 class="media-heading"><?php echo $questionDetails['questionDiscription'][0]['questionText'];?></h4>
                         Posted By <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails['questionDiscription'][0]['userName']);?>"><?php echo $questionDetails['questionDiscription'][0]['firstName']," ",$questionDetails['questionDiscription'][0]['lastName'];?></a>
-                         <?php echo $questionDetails['questionDiscription'][0]['time'];?>
+                        <br> <?php echo $questionDetails['questionDiscription'][0]['time'];?>
                       </div>
+                    </div>
                     </div>
                   </div>
 
@@ -110,11 +111,14 @@
                             <ul class="media-list">
                               <li class="media">
                                 <div class="media-left media-top">
-                                  <img src="<?php echo base_url("Uploads/Profile/".$questionDetails['answerDetails'][$k]['answerdByPic']);?>" class="img-rounded img-responsive" style="position:absolute;height:35px;width:35px" />
+
                                 </div>
                                 <div class="media-body">
+                                    <div class="clearfix content-heading">
+                                  <img src="<?php echo base_url("Uploads/Profile/".$questionDetails['answerDetails'][$k]['answerdByPic']);?>" class="pull-left img-responsive" style="margin-right:5px;height:35px;width:35px" />
                                   <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails['answerDetails'][$k]['answerdByUserName']);?>"><?php echo $questionDetails['answerDetails'][$k]['answerdBy'];?></a> <?php echo $questionDetails['answerDetails'][$k]['answerText'];?>
                                   <br><?php echo $questionDetails['answerDetails'][$k]['answerTime']; ?> ·<a style="cursor: pointer;" id="likeAnswerButton<?php echo $questionDetails['answerDetails'][$k]['answerID'];?>" onclick="<?php if(in_array($questionDetails['answerDetails'][$k]['answerID'],$questionDetails['userLikes'])){ echo "removeLike(this)";} else{echo "addLike(this)";}?>"><?php if(in_array($questionDetails['answerDetails'][$k]['answerID'],$questionDetails['userLikes'])) echo"Unlike"; else echo"Like"; ?></a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge" id="likeCount<?php echo $questionDetails['answerDetails'][$k]['answerID'];?>"><?php echo $questionDetails['answerDetails'][$k]['likes']?></span>
+                                </div>
                                   <div class="alert alert-danger" role="alert" id="likeAnswerError<?php echo $questionDetails['answerDetails'][$k]['answerID'];?>" hidden="true"> </div>
                                 </div>
                               </li>
@@ -130,7 +134,7 @@
                         <?php }?>
                         <li class="media">
                           <div class="media-left media-top">
-                            <?php if($this->session->userdata('userID')){ ?> <img src="<?php echo base_url("Uploads/Profile/".$this->session->userdata('profilePic'));?>" class="img-rounded img-responsive" style="position:absolute;height:35px;width:35px" /> <?php } ?>
+
                           </div>
                         <div class="media-body">
 

@@ -63,12 +63,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 								$topFeed = $this->Ansquick_model->getTopFeed($config["per_page"], $data['page'],$currentUserID);
 								$topFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
-					//var_dump($topFeed);
+						//			var_dump($topFeed);
 
 					$data['questionDetails'] = $topFeed['questionDetails'];
 					$data['pagination'] = $this->pagination->create_links();
 
-
+					//	var_dump($data['pagination']);
 					$this->load->view('AnsQuick/index',$data);
 
 				}
