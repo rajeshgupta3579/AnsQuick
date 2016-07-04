@@ -160,10 +160,11 @@
             </div>
               </div>
     </div>
-  </div>
     <!-- Right sidebar: A cell that spans 3 columns -->
     <div class="col-md-3">
       Right Sidebar
     </div>
+  </div>
+
   </div>
 </div>

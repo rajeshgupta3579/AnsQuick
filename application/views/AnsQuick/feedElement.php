@@ -218,10 +218,11 @@
               </div>
     </div>
     <?php }?>
-  </div>
     <!-- Right sidebar: A cell that spans 3 columns -->
-    <div class="col-md-3">
+    <div class="col-md-2" style="position: fixed;right: 0;">
       Right Sidebar
     </div>
+  </div>
+
   </div>
 </div>
