@@ -12,16 +12,9 @@ if(!defined('BASEPATH'))exit ('No direct scripts allowed');
     }
     public function index(){
 
-
-
-
-
-
-
-
       	if($this->session->userdata('userID')){
 
-                  $currentUserID = $this->session->userdata('userID');
+                $currentUserID = $this->session->userdata('userID');
                 $config['base_url'] = base_url('index.php/Activity/index');
                 $config['total_rows'] = $this->Ansquick_model->countRowsAskedQuestion($currentUserID);
                 $config['per_page'] = "1";

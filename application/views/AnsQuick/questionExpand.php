@@ -18,16 +18,16 @@
                    Facebook section labels. -->
               <!-- The class "active" highlights this item in the list -->
               <li role="presentation" class="active">
-                <a href="<?php echo base_url("index.php/AnsQuick/top");?>"><span class="glyphicon glyphicon-list-alt"></span>   Top</a>
+                <a href="<?php echo base_url("index.php/AnsQuick/top");?>"><span class="glyphicon glyphicon-list-alt"></span> My Interests</a>
               </li>
               <!-- We can use badges in pills to add numbers beside them. -->
               <li role="presentation">
                 <a href="<?php echo base_url("index.php/AnsQuick/recent");?>">
-                  <span class="glyphicon glyphicon-flash"></span> Recent
+                  <span class="glyphicon glyphicon-flash"></span> Recent Questions
                 </a>
               </li>
               <li role="presentation">
-                <a href="<?php echo base_url('index.php/Activity')?>"><span class="glyphicon glyphicon-calendar"></span> Activity</a>
+                <a href="<?php echo base_url('index.php/Activity')?>"><span class="glyphicon glyphicon-calendar"></span> Posted Questions</a>
               </li>
 
 
@@ -141,9 +141,7 @@
                               <button class="btn btn-default" id="addAnswerSubmit<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" onclick="addAnswer(this)" type="button">
                                 <span class="glyphicon glyphicon-ok"></span>
                               </button>
-                              <button class="btn btn-default" type="button">
-                                ☺
-                              </button>
+                            
                             </span>
 
                           </div>
