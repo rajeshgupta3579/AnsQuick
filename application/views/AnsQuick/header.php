@@ -101,7 +101,7 @@
                                 <div class="navbar-login navbar-login-session">
                                     <div class="row">
                                         <div class="col-lg-10">
-                                                <a href="<?php echo base_url('index.php/AnsQuick/profile'); ?>" class="btn btn-block">Profile</a>
+                                                <a href="<?php echo base_url("index.php/AnsQuick/profile/".$this->session->userdata('userName')); ?>" class="btn btn-block">Profile</a>
                                         </div>
                                     </div>
                               </li>

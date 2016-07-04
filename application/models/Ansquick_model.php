@@ -321,16 +321,20 @@ class Ansquick_model extends CI_Model{
           $answerDetails  = $this->db->query($query)->result_array();
           $answerdBy      = "";
           if(count($answerDetails)>0){
-                                      $answerdBy = $answerDetails[0]['userID'];
-                                      $query     = "SELECT firstName,lastName from UserInfo WHERE userID='".$answerdBy."'";
-                                      $result    = $this->db->query($query)->result_array();
-                                      $answerdBy = $result[0]['firstName']." ".$result[0]['lastName'];
-                                      $answerTime= $answerDetails[0]['time'];
-                  $answerDetails[0]['answerdBy'] = $answerdBy;
+                                      $answerdBy          = $answerDetails[0]['userID'];
+                                      $query              = "SELECT userName,firstName,lastName,profilePic from UserInfo WHERE userID='".$answerdBy."'";
+                                      $result             = $this->db->query($query)->result_array();
+                                      $answerdBy          = $result[0]['firstName']." ".$result[0]['lastName'];
+                                      $answerdByPic       = $result[0]['profilePic'];
+                                      $answerdByUserName  = $result[0]['userName'];
+                                      $answerTime         = $answerDetails[0]['time'];
+                  $answerDetails[0]['answerdBy']          = $answerdBy;
                   //$answerTime = getDate($answerTime);;
                   //var_dump($answerTime);
-                  $answerDetails[0]['answerTime'] = $answerTime;
+                  $answerDetails[0]['answerTime']         = $answerTime;
                   //var_dump($result);
+                  $answerDetails[0]['answerdByPic']       = $answerdByPic;
+                  $answerDetails[0]['answerdByUserName']  = $answerdByUserName;
           }
 
 
@@ -378,19 +382,23 @@ class Ansquick_model extends CI_Model{
 
           if($questionDetails[$i]['answerCount']>0){
 
-                $answerDetails                      =   $this->getAnswer($questionID);
-                $questionDetails[$i]['answerdBy']   =   $answerDetails[0]['answerdBy'];
-                $questionDetails[$i]['likes']       =   $answerDetails[0]['likes'];
-                $questionDetails[$i]['answerText']  =   $answerDetails[0]['answerText'];
-                $questionDetails[$i]['answerTime']  =   $answerDetails[0]['time'];
-                $questionDetails[$i]['answerID']    =   $answerDetails[0]['answerID'];
+                $answerDetails                              =   $this->getAnswer($questionID);
+                $questionDetails[$i]['answerdBy']           =   $answerDetails[0]['answerdBy'];
+                $questionDetails[$i]['likes']               =   $answerDetails[0]['likes'];
+                $questionDetails[$i]['answerText']          =   $answerDetails[0]['answerText'];
+                $questionDetails[$i]['answerTime']          =   $answerDetails[0]['time'];
+                $questionDetails[$i]['answerID']            =   $answerDetails[0]['answerID'];
+                $questionDetails[$i]['answerdByPic']        =   $answerDetails[0]['answerdByPic'];
+                $questionDetails[$i]['answerdByUserName']   =   $answerDetails[0]['answerdByUserName'];
           }
           else{
-                $questionDetails[$i]['answerdBy']   =   "";
-                $questionDetails[$i]['likes']       =   "";
-                $questionDetails[$i]['answerText']  =   "";
-                $questionDetails[$i]['answerTime']  =   "";
-                $questionDetails[$i]['answerID']    =   "";
+                $questionDetails[$i]['answerdBy']           =   "";
+                $questionDetails[$i]['likes']               =   "";
+                $questionDetails[$i]['answerText']          =   "";
+                $questionDetails[$i]['answerTime']          =   "";
+                $questionDetails[$i]['answerID']            =   "";
+                $questionDetails[$i]['answerdByPic']        =   "";
+                $questionDetails[$i]['answerdByUserName']   =   "";
           }
         //  echo "1";
         //  var_dump($questionDetails);
@@ -674,13 +682,17 @@ class Ansquick_model extends CI_Model{
           $answerDetails  = $this->db->query($query)->result_array();
           $answerdBy      = "";
           for($i=0;$i<count($answerDetails);$i++){
-                                      $answerdBy = $answerDetails[$i]['userID'];
-                                      $query     = "SELECT firstName,lastName from UserInfo WHERE userID='".$answerdBy."'";
-                                      $result    = $this->db->query($query)->result_array();
-                                      $answerdBy = $result[0]['firstName']." ".$result[0]['lastName'];
-                                      $answerTime = $answerDetails[0]['time'];
-                  $answerDetails[$i]['answerdBy'] = $answerdBy;
-                  $answerDetails[$i]['answerTime'] = $answerTime;
+                                      $answerdBy          = $answerDetails[$i]['userID'];
+                                      $query              = "SELECT userName,firstName,lastName,profilePic from UserInfo WHERE userID='".$answerdBy."'";
+                                      $result             = $this->db->query($query)->result_array();
+                                      $answerdBy          = $result[0]['firstName']." ".$result[0]['lastName'];
+                                      $answerdByPic       = $result[0]['profilePic'];
+                                      $answerdByUserName  = $result[0]['userName'];
+                                      $answerTime         = $answerDetails[0]['time'];
+                  $answerDetails[$i]['answerdBy']         = $answerdBy;
+                  $answerDetails[$i]['answerTime']        = $answerTime;
+                  $answerDetails[$i]['answerdByPic']      = $answerdByPic;
+                  $answerDetails[$i]['answerdByUserName'] = $answerdByUserName;
                   //var_dump($result);
           }
 

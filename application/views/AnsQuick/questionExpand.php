@@ -52,13 +52,12 @@
                   <div class="col-md-10">
                     <div class="media">
                       <div class="media-left media-top">
-                        PIC
+
                       </div>
                       <div class="media-body">
 
 
-
-                        <h4 class="media-heading"><?php echo $questionDetails['questionDiscription'][0]['questionText'];?></h4>
+                        <ul class="list-inline"> <li><img src="<?php echo base_url("Uploads/Profile/".$questionDetails['questionDiscription'][0]['profilePic']);?>" class="img-rounded img-responsive" style="height:35px;width:35px" /> </li> <li><h4 class="media-heading"><?php echo $questionDetails['questionDiscription'][0]['questionText'];?></h4></li></ul>
                         Posted By <a href="#"><?php echo $questionDetails['questionDiscription'][0]['firstName']," ",$questionDetails['questionDiscription'][0]['lastName'];?></a>
                          <?php echo $questionDetails['questionDiscription'][0]['time'];?>
                       </div>
@@ -111,7 +110,7 @@
                             <ul class="media-list">
                               <li class="media">
                                 <div class="media-left media-top">
-                                  PIC
+                                  <img src="<?php echo base_url("Uploads/Profile/".$questionDetails['answerDetails'][$k]['answerdByPic']);?>" class="img-rounded img-responsive" style="position:absolute;height:35px;width:35px" />
                                 </div>
                                 <div class="media-body">
                                   <a href="#"><?php echo $questionDetails['answerDetails'][$k]['answerdBy'];?></a> <?php echo $questionDetails['answerDetails'][$k]['answerText'];?>
@@ -131,7 +130,7 @@
                         <?php }?>
                         <li class="media">
                           <div class="media-left media-top">
-                            PIC
+                            <img src="<?php echo base_url("Uploads/Profile/".$this->session->userdata('profilePic'));?>" class="img-rounded img-responsive" style="position:absolute;height:35px;width:35px" />
                           </div>
                         <div class="media-body">
 
@@ -141,7 +140,7 @@
                               <button class="btn btn-default" id="addAnswerSubmit<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" onclick="addAnswer(this)" type="button">
                                 <span class="glyphicon glyphicon-ok"></span>
                               </button>
-                            
+
                             </span>
 
                           </div>
