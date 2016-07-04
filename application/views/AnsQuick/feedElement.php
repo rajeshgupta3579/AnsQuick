@@ -217,12 +217,15 @@
             <?php }?>
               </div>
     </div>
+
     <?php }?>
+    <div class="col-md-7" style="margin-left:180px;text-align:right"> <p><?php  if(isset($pagination))echo $pagination; ?> </p></div>
     <!-- Right sidebar: A cell that spans 3 columns -->
-    <div class="col-md-2" style="position: fixed;right: 0;">
+    <div class="col-md-3" style="position: fixed;right: 0;">
       Right Sidebar
     </div>
   </div>
 
   </div>
+
 </div>

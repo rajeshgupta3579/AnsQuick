@@ -1,6 +1,7 @@
-      <div class="footer navbar-bottom panel panel-default">
-        <p><?php  if(isset($pagination))echo $pagination; ?> </p>
-          <div class="col-md-4"></div>
+
+    <div class="footer navbar-bottom panel panel-default">
+
+          <div class="col-md-4"> </div>
               <div class=" col-md-4" style="text-align: center;">
                 <h4>  © 2016 Copyright: <a href="http://www.AnsQuick.com"> AnsQuick.com </a></h4>
               </div>
