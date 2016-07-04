@@ -451,7 +451,7 @@ class Ansquick_model extends CI_Model{
      function countRowsRecentTagFeed($tagID){
        $query = $this->db->query("SELECT
 
-                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   QuestionTag b,Question c,UserInfo d
                                   where
@@ -476,7 +476,7 @@ class Ansquick_model extends CI_Model{
       // echo $tagID;
        $query = $this->db->query("SELECT
 
-                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   QuestionTag b,Question c,UserInfo d
                                   where
@@ -516,7 +516,7 @@ class Ansquick_model extends CI_Model{
      */
      function countRowsRecentFeed(){
        $query = $this->db->query("SELECT
-                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   QuestionTag b,Question c,UserInfo d
                                   where
@@ -535,7 +535,7 @@ class Ansquick_model extends CI_Model{
      function getRecentFeed($limit,$start){
        $this->db->limit($limit,$start);
        $query = $this->db->query("SELECT
-                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   QuestionTag b,Question c,UserInfo d
                                   where
@@ -576,7 +576,7 @@ class Ansquick_model extends CI_Model{
      */
      function countRowsTopFeed($currentUserID){
        $query = $this->db->query("SELECT
-                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   Follow a,QuestionTag b,Question c,UserInfo d
                                   where
@@ -596,7 +596,7 @@ class Ansquick_model extends CI_Model{
      */
      function getTopFeed($limit,$start,$currentUserID){
        $query = $this->db->query("SELECT
-                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   Follow a,QuestionTag b,Question c,UserInfo d
                                   where
@@ -710,7 +710,7 @@ class Ansquick_model extends CI_Model{
 
      function getquestionDetails($questionID){
        $query = $this->db->query("SELECT
-                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   Question c,UserInfo d
                                   where
@@ -734,7 +734,7 @@ class Ansquick_model extends CI_Model{
                                               'tags'=>$tags,
                                               'answerDetails'=>$answerDetails
                                              );
-                                $data = array("questionDetails"=>$questionDetails);
+                $data = array("questionDetails"=>$questionDetails);
                 return $data;
 
      }
@@ -753,7 +753,7 @@ class Ansquick_model extends CI_Model{
 
      function countRowsAskedQuestion($currentUserID){
        $query = $this->db->query("SELECT
-                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   Question c,UserInfo d
                                   where
@@ -774,7 +774,7 @@ class Ansquick_model extends CI_Model{
      function getAskedQuestion($limit,$start,$currentUserID){
 
        $query = $this->db->query("SELECT
-                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic
+                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
                                   from
                                   Question c,UserInfo d
                                   where

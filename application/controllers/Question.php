@@ -22,7 +22,7 @@
 						$currentUserID = $this->session->userdata('userID');
             $data = $this->Ansquick_model->expandQuestion($questionID);
 						$data['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
-            //var_dump($data);
+            //var_dump($data); return ;
             $this->load->view('AnsQuick/question.php',$data);
         }
       }

@@ -108,7 +108,7 @@
 
 
                         <ul class="list-inline"> <li><img src="<?php echo base_url("Uploads/Profile/".$questionDetails[$i]['profilePic']);?>" class="img-rounded img-responsive" style="height:35px;width:35px" /> </li> <li><h4 class="media-heading"><?php echo $questionDetails[$i]['questionText'];?></h4></li></ul>
-                        Posted By <a href="#"><?php echo $questionDetails[$i]['firstName']," ",$questionDetails[$i]['lastName'];?></a>
+                        Posted By <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails[$i]['userName']); ?>"><?php echo $questionDetails[$i]['firstName']," ",$questionDetails[$i]['lastName'];?></a>
                          <?php echo $questionDetails[$i]['time'];?>
                       </div>
                     </div>
