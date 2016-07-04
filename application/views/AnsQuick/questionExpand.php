@@ -130,7 +130,7 @@
                         <?php }?>
                         <li class="media">
                           <div class="media-left media-top">
-                            <img src="<?php echo base_url("Uploads/Profile/".$this->session->userdata('profilePic'));?>" class="img-rounded img-responsive" style="position:absolute;height:35px;width:35px" />
+                            <?php if($this->session->userdata('userID')){ ?> <img src="<?php echo base_url("Uploads/Profile/".$this->session->userdata('profilePic'));?>" class="img-rounded img-responsive" style="position:absolute;height:35px;width:35px" /> <?php } ?>
                           </div>
                         <div class="media-body">
 
