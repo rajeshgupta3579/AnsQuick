@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        $this->load->helper(array('form','url'));
 						$this->load->library('session');
 						$this->load->model('Ansquick_model');
+						$this->load->library('pagination');
 			}
 			public function index(){
 				$this->recent();
