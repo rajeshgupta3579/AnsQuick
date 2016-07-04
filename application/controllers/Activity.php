@@ -8,6 +8,7 @@ if(!defined('BASEPATH'))exit ('No direct scripts allowed');
       $this->load->helper(array('form','url'));
       $this->load->database();
       $this->load->model('Ansquick_model');
+      	$this->load->library('pagination');
     }
     public function index(){
 

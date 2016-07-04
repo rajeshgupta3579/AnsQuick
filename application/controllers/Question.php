@@ -9,6 +9,7 @@
 		        $this->load->database();
 						$this->load->library(array('session', 'form_validation', 'email'));
 		        $this->load->model('Ansquick_model');
+						$this->load->library('pagination');
 			}
 			function index(){
 					redirect(base_url());
