@@ -40,7 +40,7 @@ jQuery(document).ready(function(){
                 //  alert("nice");
                     minLength : 1,
                     source: function( request, response ) {
-                              $.getJSON( "index.php/TagSuggester", {
+                              $.getJSON( "http://www.AnsQuick.com/index.php/TagSuggester", {
                                   term: extractLast( request.term )
                               }, response );
                             },

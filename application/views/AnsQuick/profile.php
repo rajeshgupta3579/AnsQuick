@@ -8,7 +8,7 @@
 }
 </style>
 
-<div class="container" style="margin-top:20%">
+<div class="container" style="margin-top:6%">
     <div class="row">
 
 
@@ -90,7 +90,7 @@
                           </div>
 
                           </form>
-                        
+
 
                     </div>
                 </div>
