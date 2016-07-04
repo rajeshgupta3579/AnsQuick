@@ -122,9 +122,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$data['questionDetails'] = $recentFeed['questionDetails'];
 					$data['pagination'] = $this->pagination->create_links();
 
-
+					//var_dump($data);return ;
 					$this->load->view('AnsQuick/index',$data);
 			}
+
 			public function success(){
 				$this->load->view('AnsQuick/success');
 			}
@@ -134,8 +135,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			public function about(){
 				$this->load->view('AnsQuick/about');
 			}
-			public function profile(){
-				$this->load->view('AnsQuick/profile');
+			public function profile($userName){
+				if(!isset($userName)){
+          redirect(base_url());
+        }
+				if($this->Ansquick_model->userNameExists($userName)){
+					$query = $this->Ansquick_model->get_user($userName);
+	        if($query->num_rows()>0){
+	          $row = $query->result_array();
+						$data = array('userInfo' => $row[0] );
+						//var_dump($row[0]);
+						$this->load->view('AnsQuick/profile',$data);
+					}
+				}
+				else{
+					redirect(base_url());
+				}
 			}
 			public function logout(){
    			$this->session->unset_userdata('userName');

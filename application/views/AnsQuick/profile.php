@@ -16,7 +16,7 @@
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img src="http://placehold.it/380x400" alt="" class="img-rounded img-responsive" />
+                        <img src="<?php echo base_url("Uploads/Profile/".$userInfo['profilePic']);?>" alt="" class="img-rounded img-responsive" />
                         <h4>UserName</h4>
                         <h4  id = "emaiID2">Patel@gmail.com</h4>
                     </div>
