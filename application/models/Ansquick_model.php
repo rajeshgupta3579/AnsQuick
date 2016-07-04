@@ -791,5 +791,21 @@ class Ansquick_model extends CI_Model{
        return $data;
 
      }
+     /*
+     * A function which returns the tagIDs and tagNames of tags followed by any user
+     * Input is the userID.
+     * Output is a data variable which contains the details of the tags followed by the user
+     */
+     function getUserTags($userID){
+       $query = $this->db->query("SELECT
+                                  b.tagName,a.tagID
+                                  from
+                                  Follow a,Tags b
+                                  where
+                                  a.userID= '".$userID."' AND
+                                  b.tagID=a.tagID
+                                ");
+       return $query->result_array();
+     }
 }
 ?>

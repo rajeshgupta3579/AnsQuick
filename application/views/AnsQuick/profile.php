@@ -17,15 +17,16 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
                         <img src="<?php echo base_url("Uploads/Profile/".$userInfo['profilePic']);?>" alt="" class="img-rounded img-responsive" />
-                        <h4>UserName</h4>
-                        <h4  id = "emaiID2">Patel@gmail.com</h4>
+                        <h4><?php echo $userInfo['userName']; ?></h4>
+                        <h4  id = "emaiID2"><?php echo $userInfo['emailID'] ?></h4>
+                        <h4  id = "tags">Tags Followed : <?php foreach($userTags as $tag) echo $tag['tagName']."<br>" ; ?></h4>
                     </div>
                     <div class="col-sm-6 col-md-8" style="padding-left:15%">
 
                       <form>
                           <div class="form-group">
                                 <label for="firstName2">First Name: </label>
-                              <h4  id = "firstname2">Bhaumik </h4>
+                              <h4  id = "firstname2"><?php echo $userInfo['firstName']; ?> </h4>
                           </div>
 
                           <div class="form-group">
@@ -33,7 +34,7 @@
                               <li>
                                 <label for="lastName2">Last Name: </label>
 
-                              <h4  id = "lstName2">Patel</h4>
+                              <h4  id = "lstName2"><?php echo $userInfo['lastName']; ?></h4>
                               </li>
                             </ul>
                           </div>
