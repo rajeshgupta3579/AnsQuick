@@ -54,9 +54,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $this->email->subject('Password Recovery');
           $this->email->message(base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".md5($row[0]->salt));
           if($this->email->send())
-            echo "true";
-          else
-            echo "false";
+						echo "true";
+					else
+						echo "false";
         }
         else
           echo "false";

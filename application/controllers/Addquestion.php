@@ -4,6 +4,7 @@ class Addquestion extends CI_Controller{
 		parent:: __construct();
 		$this->load->model('Ansquick_model');
 		$this->load->library('session');
+		$this->load->helper(array('form','url'));
 
 	}
   public function index(){
@@ -36,8 +37,8 @@ class Addquestion extends CI_Controller{
 						 //echo $tags[0],$tags[1];
 						 //print_r($tagList);
 						 $tagList = array_unique($tagList);
-						 $this->Ansquick_model->postQuestion($question,$category,$tagList,$userName);
-
+						 $questionID=$this->Ansquick_model->postQuestion($question,$category,$tagList,$userName);
+						 redirect(base_url("index.php/Question/expand/".$questionID));
 			}
   }
 }

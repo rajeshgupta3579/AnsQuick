@@ -161,8 +161,8 @@ class Ansquick_model extends CI_Model{
      */
      function getUserID($userName){
        $sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
-       $result   = $query->result();
        $query    = $this->db->query($sql);
+       $result   = $query->result();
        $userID   = $result[0]->userID;
        return $userID;
      }
@@ -186,15 +186,15 @@ class Ansquick_model extends CI_Model{
       $tagsArray = $this->getTagsArray($tagList);
       $categoryID= $this->getCategoryID($category);
       $userID    = $this->getUserID($userName);
-      print_r($tagsArray);
+      /*print_r($tagsArray);
       echo "<br>",$categoryID,"<br>";
       print_r($tagList);
-
+      */
 
        $questionID=$this->insertQuestion($question,$userID,$categoryID);
 
 
-       echo "<br>",$questionID,"<br>";
+       //echo "<br>",$questionID,"<br>";
        $length = count($tagList);
        for($i=0;$i<$length;$i++){
          $temp_tag = $tagList[$i];
@@ -207,10 +207,11 @@ class Ansquick_model extends CI_Model{
          else {
             $tagID=$tagsArray[$temp_tag];
          }
-         echo $tagID;
+         //echo $tagID;
          $this->insertQuestionTag($questionID,$tagID);
 
        }
+       return $questionID;
 
      }
 
