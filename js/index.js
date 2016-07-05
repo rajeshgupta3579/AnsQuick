@@ -1,5 +1,7 @@
-
-
+var nameRX      = /^[A-Za-z\s]+$/ ;
+var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+var userNameRX  = /^[0-9a-zA-Z]+$/;
+var mobileNoRX  = /^\d{10}$/;
 function follow(obj){
   var completeTagID = obj.id;
   var tagID = completeTagID.replace("currentTagID","");
@@ -50,9 +52,7 @@ function unFollow(obj){
 }
 $("#signUpSubmit").click(function(){
     $(".alert").hide();
-    var nameRX      = /^[A-Za-z\s]+$/ ;
-    var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var userNameRX  = /^[0-9a-zA-Z]+$/;
+
     var firstName   = document.forms["signUpForm"]["firstName"].value.trim();
     var lastName    = document.forms["signUpForm"]["lastName"].value.trim();
     var userName    = document.forms["signUpForm"]["userName"].value.trim();
@@ -316,6 +316,153 @@ function removeLike(obj) {
   });
   return false;
 }
+
+$(document).ready(function() {
+    //toggle `popup` / `inline` mode
+    $.fn.editable.defaults.mode = 'inline';
+
+
+    //make First Name editable
+    $('#profileFirstName').editable({
+        type: 'text',
+        validate: function(value) {
+          value = $.trim(value);
+          if(value == '') {
+              return 'This field is required';
+          }
+          else if (!nameRX.test(value)) {
+              return "First Name is invalid";
+          }
+        },
+        send: 'always',
+        autotext: $.trim($(this).text),
+        //name: 'profileFirstName',
+        url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
+        success: function(response, newValue) {
+          if(response!="success"){
+            return response;
+          }
+        }
+    });
+
+    //make Last Name editable
+    $('#profileLastName').editable({
+        type: 'text',
+        validate: function(value) {
+          value = $.trim(value);
+          if(value == '') {
+              return 'This field is required';
+          }
+          else if (!nameRX.test(value)) {
+              return "Last Name is invalid";
+          }
+        },
+        send: 'always',
+        autotext: $.trim($(this).text),
+        //name: 'profileFirstName',
+        url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
+        success: function(response, newValue) {
+          if(response!="success"){
+            return response;
+          }
+        }
+    });
+
+    //make Title editable
+    $('#profileTitle').editable({
+        type: 'text',
+        validate: function(value) {
+          value = $.trim(value);
+          if(value == '') {
+              return 'This field is required';
+          }
+        },
+        send: 'always',
+        autotext: $.trim($(this).text),
+        //name: 'profileFirstName',
+        url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
+        success: function(response, newValue) {
+          if(response!="success"){
+            return response;
+          }
+        }
+    });
+
+
+    //make AboutMe editable
+    $('#profileAboutMe').editable({
+        type: 'text',
+        validate: function(value) {
+          value = $.trim(value);
+          if(value == '') {
+              return 'This field is required';
+          }
+        },
+        send: 'always',
+        autotext: $.trim($(this).text),
+        //name: 'profileFirstName',
+        url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
+        success: function(response, newValue) {
+          if(response!="success"){
+            return response;
+          }
+        }
+    });
+
+
+    //make MobileNo editable
+    $('#profileMobileNo').editable({
+        type: 'text',
+        validate: function(value) {
+          value = $.trim(value);
+          if(value == '') {
+              return 'This field is required';
+          }
+          else if (!mobileNoRX.test(value)) {
+              return "Mobile No is invalid";
+          }
+        },
+        send: 'always',
+        autotext: $.trim($(this).text),
+        //name: 'profileFirstName',
+        url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
+        success: function(response, newValue) {
+          if(response!="success"){
+            return response;
+          }
+        }
+    });
+
+
+    //make Gender editable
+    $('#profileGender').editable({
+        type: 'select',
+        title: 'Select Gender',
+        source: [
+            {value: 'male', text: 'Male'},
+            {value: 'female', text: 'Female'}
+        ],
+        validate: function(value) {
+          value = $.trim(value);
+          if(value == '') {
+              return 'This field is required';
+          }
+        },
+        send: 'always',
+        autotext: $.trim($(this).text),
+        //name: 'profileFirstName',
+        url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
+        success: function(response, newValue) {
+          //alert(response);
+          if(response!="success"){
+            return response;
+          }
+        }
+    });
+
+    
+
+});
 /*$('#searchBox').focus( function(){
   alert("expanded");
 });*/

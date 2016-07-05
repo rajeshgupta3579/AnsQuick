@@ -1,17 +1,26 @@
-<footer class="footer" style="position:absolute; bottom:0" ;>
-      <div class="container">
-        <p class="text-muted">Place sticky footer content here.</p>
-      </div>
-    </footer>
+
+    <div class="footer">
+
+          <div class="col-md-4"> </div>
+              <div class=" col-md-4" style="text-align: center;">
+                <h4>  © 2016 Copyright: <a href="http://www.AnsQuick.com"> AnsQuick.com </a></h4>
+              </div>
+          <div class="col-md-4"></div>
+        </div>
         </body>
 
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- x-editable Jquery (bootstrap version) -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+
+<!--Jquery for Autocomplete -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-			<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <script src="<?php echo base_url('js/index.js'); ?>"></script>
 
@@ -25,6 +34,12 @@ jQuery(document).ready(function(){
                 function extractLast( term ) {
                     return split( term ).pop();
                 }
+                  $("#name").attr('contenteditable','false');
+
+                  $("#editName").click(function(){
+                      $("#name1").attr('contenteditable','true');
+                      alert("nandas");
+                  })
                 $('#tags').autocomplete({
 
                 //  alert("nice");

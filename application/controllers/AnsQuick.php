@@ -155,6 +155,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					redirect(base_url());
 				}
 			}
+			public function editProfile(){
+					if(!$this->session->userdata('userName')){
+						redirect(base_url());
+					}
+					else{
+						//var_dump($_POST); return;
+						$data = array();
+						if($this->input->post("name")=="profileFirstName"){
+							$data['firstName'] = trim($this->input->post("value"));
+						}
+						else if($this->input->post("name")=="profileLastName"){
+							$data['lastName'] = trim($this->input->post("value"));
+						}
+						else if($this->input->post("name")=="profileTitle"){
+							$data['title'] = trim($this->input->post("value"));
+						}
+						else if($this->input->post("name")=="profileAboutMe"){
+							$data['aboutMe'] = trim($this->input->post("value"));
+						}
+						else if($this->input->post("name")=="profileMobileNo"){
+							$data['mobileNo'] = trim($this->input->post("value"));
+						}
+						else if($this->input->post("name")=="profileGender"){
+							$data['gender'] = trim($this->input->post("value"));
+						}
+						else if($this->input->post("name")=="profileBirthday"){
+							$data['dateOfBirth'] = trim($this->input->post("value"));
+						}
+						if($this->Ansquick_model->updateUser($data,$this->session->userdata('userName'))){
+							echo "success";
+						}
+						else {
+							echo "Error in updating";
+						}
+					}
+			}
 			public function logout(){
    			$this->session->unset_userdata('userName');
    			$this->session->unset_userdata('loginUser');

@@ -12,12 +12,12 @@
               <ul class="nav nav-pills nav-stacked">
 
               <li role="presentation">
-                <a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
+                <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$this->session->userdata('userName'));?>"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
               </li>
               <!-- List items that are just text are not indented, and look like the
                    Facebook section labels. -->
               <!-- The class "active" highlights this item in the list -->
-              <li role="presentation" class="active">
+              <li role="presentation">
                 <a href="<?php echo base_url("index.php/AnsQuick/top");?>"><span class="glyphicon glyphicon-list-alt"></span> My Interests</a>
               </li>
               <!-- We can use badges in pills to add numbers beside them. -->
