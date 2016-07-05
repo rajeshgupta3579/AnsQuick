@@ -151,6 +151,3 @@ $("#forgotPasswordSubmit").click(function(){
   });
   return false;
 });
-$('#searchBox').focus( function(){
-  alert("expanded");
-});

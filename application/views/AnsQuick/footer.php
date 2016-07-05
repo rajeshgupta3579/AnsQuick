@@ -1,5 +1,5 @@
 
-    <div class="footer navbar-bottom panel panel-default">
+    <div class="footer">
 
           <div class="col-md-4"> </div>
               <div class=" col-md-4" style="text-align: center;">
