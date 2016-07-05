@@ -178,11 +178,12 @@ $("#forgotPasswordSubmit").click(function(){
         $("#userNameForgotPasswordError").html("Your Request has been accepted");
         $("#userNameForgotPasswordError").show(500);
         $.post("http://www.ansquick.com/index.php/ForgotPassword/sendmail",data,function(res){
-          //alert(res);
+
           if(res=="true"){
-            //$("#forgotPasswordForm").submit();
+            $(".alert").hide();
           }
           else {
+              alert(res);
               $("#userNameForgotPasswordError").html("Error Sending Email!!");
               $("#userNameForgotPasswordError").show(500);
           }
