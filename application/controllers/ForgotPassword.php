@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						'salt'  		=> $salt
         	);
 				  if($this->Ansquick_model->updateUser($data,$userName)){
-						redirect('AnsQuick/success');
+						redirect(base_url());
 					}
 					else{
 						echo "Password could not be changed";
