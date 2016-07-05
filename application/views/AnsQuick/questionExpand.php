@@ -162,8 +162,8 @@
               </div>
     </div>
     <!-- Right sidebar: A cell that spans 3 columns -->
-    <div class="col-md-3">
-      Right Sidebar
+    <div class="col-md-3" style="position: absolute;right: 0;">
+      <img src="<?php echo base_url("Uploads/Ads/banner.png");?>" class="pull-left img-responsive" style="margin-right:5px; height:75%" />
     </div>
   </div>
 
