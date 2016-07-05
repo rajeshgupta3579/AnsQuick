@@ -155,6 +155,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					redirect(base_url());
 				}
 			}
+			public function editProfile(){
+					if(!isset($userName)){
+						redirect(base_url());
+					}
+
+			}
 			public function logout(){
    			$this->session->unset_userdata('userName');
    			$this->session->unset_userdata('loginUser');

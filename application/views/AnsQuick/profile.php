@@ -19,31 +19,30 @@
                         <img src="<?php echo base_url("Uploads/Profile/".$userInfo['profilePic']);?>" alt="" class="img-rounded img-responsive" />
                         <h4><?php echo $userInfo['userName']; ?></h4>
                         <h4  id = "emaiID2"><?php echo $userInfo['emailID'] ?></h4>
-                        <h4  id = "tags">Tags Followed : <?php foreach($userTags as $tag) echo $tag['tagName']."<br>" ; ?></h4>
+                        <h4  id = "tags">Tags Followed : <ul class="list-inline"> <?php if(count($userTags)){foreach($userTags as $tag) {?> <li> <a href="<?php echo base_url("index.php/tag/recent/".$tag['tagID']) ; ?>"><?php echo $tag['tagName'] ; ?></a> </li> <?php }}else{ echo "<li>No Tags Followed Yet</li>";}?> </ul></h4>
                     </div>
                     <div class="col-sm-6 col-md-8" style="padding-left:15%">
 
                       <form>
                           <div class="form-group">
-                                <label for="firstName2">First Name: </label>
-                              <h4  id = "firstname2"><?php echo $userInfo['firstName']; ?> </h4>
+                                <label for="profileFirstName">First Name: </label>
+                              <a href="#" id="profileFirstName" data-type="text" data-placement="right" data-title="Enter First Name"><?php echo $userInfo['firstName']; ?></a>
+
                           </div>
 
                           <div class="form-group">
                             <ul class="list-inline">
                               <li>
-                                <label for="lastName2">Last Name: </label>
-
-                              <h4  id = "lstName2"><?php echo $userInfo['lastName']; ?></h4>
+                                <label for="profileLastName">Last Name: </label>
+                              <a href="#" id="profileLastName" data-type="text" data-placement="right" data-title="Enter Last Name"><?php echo $userInfo['lastName']; ?></a>
                               </li>
                             </ul>
                           </div>
                           <div class="form-group">
                             <ul class="list-inline">
                               <li>
-                                <label for="title2">Title: </label>
-
-                              <h4  id = "title2">I am god</h4>
+                                <label for="profileTitle">Title: </label>
+                                  <a href="#" id="profileTitle" data-type="text" data-placement="right" data-title="Enter Last Name"><?php echo $userInfo['title']; ?></a>
                             </li>
                             </ul>
                           </div>

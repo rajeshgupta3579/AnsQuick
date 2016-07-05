@@ -1,5 +1,3 @@
-
-
 function follow(obj){
   var completeTagID = obj.id;
   var tagID = completeTagID.replace("currentTagID","");
@@ -316,6 +314,18 @@ function removeLike(obj) {
   });
   return false;
 }
+
+$(document).ready(function() {
+    //toggle `popup` / `inline` mode
+    $.fn.editable.defaults.mode = 'inline';
+
+    //make username editable
+    $('#profileFirstName').editable();
+    $('#profileLastName').editable();
+    $('#profileTitle').editable();
+
+
+});
 /*$('#searchBox').focus( function(){
   alert("expanded");
 });*/

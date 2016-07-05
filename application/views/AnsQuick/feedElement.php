@@ -10,7 +10,7 @@
               <ul class="nav nav-pills nav-stacked">
 
               <li role="presentation">
-                <a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
+                <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$this->session->userdata('userName'));?>"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
               </li>
               <!-- List items that are just text are not indented, and look like the
                    Facebook section labels. -->
@@ -197,7 +197,7 @@
                         <?php }?>
                         <li class="media">
                           <div class="media-left media-top">
-                            
+
                           </div>
                         <div class="media-body">
 
