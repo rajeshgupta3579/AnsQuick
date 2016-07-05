@@ -1,12 +1,8 @@
-
-    <div class="footer">
-
-          <div class="col-md-4"> </div>
-              <div class=" col-md-4" style="text-align: center;">
-                <h4>  © 2016 Copyright: <a href="http://www.AnsQuick.com"> AnsQuick.com </a></h4>
-              </div>
-          <div class="col-md-4"></div>
-        </div>
+<footer class="footer" style="position:absolute; bottom:0" ;>
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
         </body>
 
 
@@ -29,16 +25,10 @@ jQuery(document).ready(function(){
                 function extractLast( term ) {
                     return split( term ).pop();
                 }
-                  $("#name").attr('contenteditable','false');
-
-                  $("#editName").click(function(){
-                      $("#name1").attr('contenteditable','true');
-                      alert("nandas");
-                  })
                 $('#tags').autocomplete({
 
                 //  alert("nice");
-                    minLength : 1,
+                minLength : 1,
                     source: function( request, response ) {
                               $.getJSON( "http://www.AnsQuick.com/index.php/TagSuggester", {
                                   term: extractLast( request.term )
@@ -61,6 +51,36 @@ jQuery(document).ready(function(){
 
 
               });
+
+
+
+
+
+        var URL_PREFIX="http://localhost:8983/solr/collection1/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&wt=json&suggest.q=";
+        var a = "http://localhost:8983/solr/jcg/select?q=name:";
+        var URL_SUFFIX = "";
+        $("#searchBox").autocomplete({
+          minLength : 1,
+          source: function( request, response ) {
+                    $.getJSON( "http://www.AnsQuick.com/index.php/TagSuggester", {
+                        term: extractLast( request.term )
+                    }, response );
+                  },
+          appendTo : $('#searchBoxForm'),
+          autoFocus:true,
+          select: function( event, ui ) {
+            //alert("asd");
+                    var terms = split( this.value );
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push( ui.item.value );
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push( "" );
+                    this.value = terms.join( ", " );
+                    return false;
+                   }
+        });
 
 
 });

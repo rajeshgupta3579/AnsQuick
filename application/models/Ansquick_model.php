@@ -160,10 +160,10 @@ class Ansquick_model extends CI_Model{
      * Returns the userID for a username
      */
      function getUserID($userName){
-       $sql = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
-       $query = $this->db->query($sql);
-       $result = $query->result();
-       $userID = $result[0]->userID;
+       $sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
+       $result   = $query->result();
+       $query    = $this->db->query($sql);
+       $userID   = $result[0]->userID;
        return $userID;
      }
 
@@ -215,7 +215,37 @@ class Ansquick_model extends CI_Model{
      }
 
 
+          /*
+          * A function to give suggestions of tags when user is posting a question
+          * Input is taken from the request made by jquery
+          * Output is list of suggestions in json format
+          */
+    function searchTags(){
 
+
+      if(!isset($_REQUEST['term'])){
+         exit();
+      }
+
+        $json= file_get_contents('http://localhost:8983/solr/collection1/select?q=firstName+%3A+%22Ashu%22%0A&wt=json&indent=true');
+        $obj=json_decode($json);
+        $questionObj=$obj->response->docs;
+      //  print_r($obj);
+      //  echo "<br><br>";
+      //  print_r($questionObj);
+        $noOfQuestion = count($questionObj);
+        $questions = array();
+        for($i=0;$i<$noOfQuestion;$i++){
+          $question  = $questionObj[$i]->firstName;
+        //  var_dump($question);
+          $questions[]=array("label"=>$question,"value"=>$question);
+        }
+
+      //  var_dump($obj);
+      echo json_encode($questions);
+      flush();
+
+     }
 
 
      /*
@@ -250,10 +280,12 @@ class Ansquick_model extends CI_Model{
               $result=$query->result();
               //print_r($dd);
               foreach ($result as $row){
-                $tag = $row->tagName;
+                $tagName = $row->tagName;
+                $tagID   = $row->tagID;
                 $data[] = array(
-              		'label' => $tag,
-              		'value' => $tag,
+              		'label' => $tagName,
+              		'value' => $tagName,
+                  'name' =>$tagID,
               	);
               //  echo $row->tagName;
               }

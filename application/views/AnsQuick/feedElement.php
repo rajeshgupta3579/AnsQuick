@@ -197,7 +197,7 @@
                         <?php }?>
                         <li class="media">
                           <div class="media-left media-top">
-                            
+
                           </div>
                         <div class="media-body">
 
@@ -235,5 +235,3 @@
   </div>
 
   </div>
-
-</div>
