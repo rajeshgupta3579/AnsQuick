@@ -33,12 +33,7 @@ jQuery(document).ready(function(){
                 function extractLast( term ) {
                     return split( term ).pop();
                 }
-                  $("#name").attr('contenteditable','false');
 
-                  $("#editName").click(function(){
-                      $("#name1").attr('contenteditable','true');
-                      alert("nandas");
-                  })
                 $('#tags').autocomplete({
 
                 //  alert("nice");
@@ -71,9 +66,10 @@ jQuery(document).ready(function(){
 
 
 
-        var URL_PREFIX="http://localhost:8983/solr/collection1/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&wt=json&suggest.q=";
+      /*  var URL_PREFIX="http://localhost:8983/solr/collection1/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&wt=json&suggest.q=";
         var a = "http://localhost:8983/solr/jcg/select?q=name:";
         var URL_SUFFIX = "";
+        */
         $("#searchBox").autocomplete({
           minLength : 1,
           source: function( request, response ) {

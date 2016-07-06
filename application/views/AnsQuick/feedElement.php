@@ -3,7 +3,7 @@
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
 
-    <div class="col-md-2" style="position: fixed;left: 0;">
+    <div class="col-md-2" style="position: fixed;left: 0;margin-top:2%">
       <?php
       if($this->session->userdata('userName')) {
         ?>
@@ -101,22 +101,20 @@
                 <?php if(isset($questionDetails[$i])){?>
                 <div class="row">
                   <div class="col-md-10">
+
                     <div class="media">
-                      <div class="media-left media-top">
-
-                      </div>
+                      <a class="media-left" href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails[$i]['userName']);?>">
+                        <img src="<?php echo base_url("Uploads/Profile/".$questionDetails[$i]['profilePic']);?>"  style="margin-right:5px;heigh:60px;width:60px">
+                      </a>
                       <div class="media-body">
+                        <p class="media-heading"> <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails[$i]['userName']); ?>"><?php echo $questionDetails[$i]['firstName']," ",$questionDetails[$i]['lastName'];?></a></p>
+                        <b><?php echo $questionDetails[$i]['time'];?></b>
+                        <br>
+                        <?php $a=$questionDetails[$i]['questionText'];
+                           echo wordwrap($a,70,"<br>\n",TRUE);;
 
+                         ?>
 
-
-
-
-                        <div class="clearfix content-heading">
-                        <img src="<?php echo base_url("Uploads/Profile/".$questionDetails[$i]['profilePic']);?>" class="pull-left img-responsive" style="margin-right:5px;heigh:60px;width:60px" />
-                        <p class="media-heading"><?php echo $questionDetails[$i]['questionText'];?></p>
-                        Posted By <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails[$i]['userName']); ?>"><?php echo $questionDetails[$i]['firstName']," ",$questionDetails[$i]['lastName'];?></a>
-                        <br><?php echo $questionDetails[$i]['time'];?>
-                      </div>
 
                       </div>
                     </div>
@@ -173,15 +171,17 @@
 
                             <ul class="media-list">
                               <li class="media">
-                                <div class="media-left media-top">
-
-                                </div>
+                                  <a class="media-left"href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails[$i]['userName']);?>">
+                                    <img src="<?php echo base_url("Uploads/Profile/".$questionDetails[$i]['answerdByPic']);?>"  style="margin-right:5px;height:35px;width:35px" />
+                                </a>
                                 <div class="media-body">
-                                  <div class="clearfix content-heading">
-                                  <img src="<?php echo base_url("Uploads/Profile/".$questionDetails[$i]['answerdByPic']);?>" class="pull-left img-responsive" style="margin-right:5px;height:35px;width:35px" />
-                                  <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails[$i]['answerdByUserName']);?>"><?php echo $questionDetails[$i]['answerdBy'];?></a> <?php echo $questionDetails[$i]['answerText'];?>
+
+                                  <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$questionDetails[$i]['answerdByUserName']);?>"><?php echo $questionDetails[$i]['answerdBy'];?></a>
+                                  <br><?php $a= $questionDetails[$i]['answerText'];
+                                  echo wordwrap($a,70,"<br>\n",TRUE);;
+                                  ?>
                                   <br><?php echo $questionDetails[$i]['answerTime']; ?> ·<a style="cursor: pointer;" id="likeAnswerButton<?php echo $questionDetails[$i]['answerID'];?>" onclick="<?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes'])){ echo "removeLike(this)";} else{echo "addLike(this)";} ?>"><?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes'])) echo"Unlike"; else echo"Like"; ?></a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge" id="likeCount<?php echo $questionDetails[$i]['answerID'];?>"><?php echo $questionDetails[$i]['likes']?></span>
-                                </div>
+
 
                                   <div class="alert alert-danger" role="alert" id="likeAnswerError<?php echo $questionDetails[$i]['answerID'];?>" hidden="true"> </div>
                                 </div>
