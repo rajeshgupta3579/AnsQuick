@@ -9,6 +9,7 @@
           $this->load->database();
           //load the login model
           $this->load->model('Ansquick_model');
+          $this->load->model('Ansquick_model');
       }
       public function index(){
 
@@ -34,7 +35,7 @@
            }
            else {
                 $answerID  = $this->input->post('answerID');
-                $userID    = $this->session->userdata('userID');                
+                $userID    = $this->session->userdata('userID');
                 if($this->Ansquick_model->removeLike($answerID,$userID)){
                   echo "true";
                 }

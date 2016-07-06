@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$this->load->library('session');
 	          $this->load->model('Ansquick_model');
 						$this->load->library('pagination');
+						$this->load->model('Ansquick_model');
 			}
 			public function index(){
 				$this->load->view('AnsQuick/recovery');
