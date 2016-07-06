@@ -15,7 +15,7 @@ function follow(obj){
         $("#".concat(completeTagID)).attr("onclick","unFollow(this)");
         $("#".concat(completeTagID)).html('<i class="glyphicon glyphicon-remove"></i>Unfollow');
         $("#".concat(completeTagID)).attr("class","btn btn-danger");
-        $('#asdtagEvent').attr("class","glyphicon glyphicon-remove");
+        //$('#asdtagEvent').attr("class","glyphicon glyphicon-remove");
 
     }
     else if(res=="noUser"){
@@ -39,7 +39,7 @@ function unFollow(obj){
         $("#".concat(completeTagID)).attr("onclick","follow(this)");
         $("#".concat(completeTagID)).html('<i class="glyphicon glyphicon-ok"></i>Follow');
         $("#".concat(completeTagID)).attr("class","btn btn-success");
-        $('#asdtagEvent').attr("class","glyphicon glyphicon-ok");
+        //$('#asdtagEvent').attr("class","glyphicon glyphicon-ok");
 
     }
     else if(res=="noUser"){
