@@ -7,7 +7,12 @@
   background-color: green;
 }
 </style>
-
+<!-- Check if Edit Access is allowed -->
+<?php if($this->session->userdata('userName')==$userInfo['userName'])
+        $editAccess = true;
+      else
+        $editAccess = false;
+?>
 <div class="container" style="margin-top:6%">
     <div class="row">
 
@@ -16,7 +21,18 @@
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img src="<?php echo base_url("Uploads/Profile/".$userInfo['profilePic']);?>" alt="" class="img-rounded img-responsive" />
+
+                        <img src="<?php echo base_url("Uploads/Profile/".$userInfo['profilePic']);?>" alt="" class="img-rounded img-responsive" /><br>
+                        <?php
+                        if($editAccess){
+                              $attributes = array("class" => "form-horizontal", "id" => "profilePicForm", "name" => "profilePicForm","role"=>"form");
+                              echo form_open_multipart("AnsQuick/editProfilePic", $attributes);?>
+                                <label class="btn btn-default btn-file">
+                                    <span class="glyphicon glyphicon-upload"></span> Edit Image <input name="profilePicFile" id="profilePicFile" type="file" style="display: none;" accept="image/*"><span id="imagePath"></span>
+                                </label>
+                                <button type="submit" class="btn btn-success pull-right" id="profilePicSubmit" >Submit</button>
+                                <div class="alert alert-danger" role="alert" id="profilePicError" hidden="true"> </div>
+                        <?php echo form_close(); }?>
                         <h4><?php echo $userInfo['userName']; ?></h4>
                         <h4  id = "emaiID2"><?php echo $userInfo['emailID'] ?></h4>
                         <h4  id = "tags"><b>Tags Followed</b> : <ul class="list-inline"> <?php if(count($userTags)){foreach($userTags as $tag) {?> <li> <a href="<?php echo base_url("index.php/tag/recent/".$tag['tagID']) ; ?>"><?php echo $tag['tagName'] ; ?></a> </li> <?php }}else{ echo "<li>No Tags Followed Yet</li>";}?> </ul></h4>
@@ -24,12 +40,7 @@
                     <div class="col-sm-6 col-md-8" style="padding-left:15%">
 
 
-                        <!-- Check if Edit Access is allowed -->
-                        <?php if($this->session->userdata('userName')==$userInfo['userName'])
-                                $editAccess = true;
-                              else
-                                $editAccess = false;
-                        ?>
+
                         <?php if($editAccess||isset($userInfo['firstName'])){?>
                           <div class="form-group">
                             <ul class="list-inline">
