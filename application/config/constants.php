@@ -107,7 +107,15 @@ define ("Pagination_links",serialize(Array(
 								'num_tag_close'   => '</li>',
 )));
 
+define ("imageConfig",serialize(Array(
 
+                'upload_path'   => './Uploads/Profile/',
+                'allowed_types' => 'gif|jpg|jpeg|png',
+                'max_size'      => 12000,
+                'max_width'     => 5000,
+                'max_height'    => 5000,
+                'overwrite'     => TRUE,
+)));
 
 
 /********MAILER CONSTANTS***********/

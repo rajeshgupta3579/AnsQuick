@@ -60,7 +60,7 @@
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="navbar-collapse-1">
-    <ul class="nav navbar-nav">
+    <!-- <ul class="nav navbar-nav">
 
       <li class="Category">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></a>
@@ -75,19 +75,21 @@
         </ul>
       </li>
     </ul>
+  -->
     <div class="col-sm-6 col-md-6">
         <form class="navbar-form" id="searchBoxForm" role="search" >
         <div class="input-group">
             <input id="searchBox" type="text" class="form-control searchBox" placeholder="Search a Tag" name="q">
-            <div class="input-group-btn">
+            <!-- <div class="input-group-btn">
                 <button class="btn btn-success " type="submit"  ><i class="glyphicon glyphicon-search"></i></button>
 
             </div>
+          -->
         </div>
         </form>
     </div>
     <ul class="nav navbar-nav navbar-right" style="margin-right:50px">
-      <li><a href="#postQuestion" data-toggle="modal">Post Question!!</a></li>
+      <?php if($this->session->userdata('userName')){?><li><a href="#postQuestion" data-toggle="modal">Post Question!!</a></li><?php }?>
       <li><a href="<?php echo base_url('index.php/AnsQuick/about'); ?>">About</a></li>
       <?php
       if(!$this->session->userdata('userName')) {
@@ -142,7 +144,7 @@
     <?php }?>
   </div><!-- /.navbar-collapse -->
 </nav>
-
+<?php if($this->session->userdata('userName')){?>
 <div class="modal fade" id="postQuestion" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -185,7 +187,7 @@
   </div>
 </div>
 
-
+<?php }?>
 <div class="modal fade" id="logIn" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

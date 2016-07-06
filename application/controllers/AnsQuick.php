@@ -167,12 +167,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						redirect(base_url());
 					}
 					else{
-							$config['upload_path']   = './Uploads/Profile/';
-						  $config['allowed_types'] = 'gif|jpg|jpeg|png';
-						  $config['max_size']      = 200;
-						  $config['max_width']     = 1920;
-						  $config['max_height']    = 1080;
-							$config['overwrite'] = TRUE;
+							$config = unserialize(imageConfig);
 							$config['file_name'] 		 = $this->session->userdata('userID').".png";
 						  $this->load->library('upload', $config);
 							if ( ! is_dir($config['upload_path'])) {
