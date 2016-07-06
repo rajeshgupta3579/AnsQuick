@@ -5,6 +5,7 @@ class Addquestion extends CI_Controller{
 		$this->load->model('Ansquick_model');
 		$this->load->library('session');
 		$this->load->helper(array('form','url'));
+		$this->load->model('Ansquick_model');
 
 	}
   public function index(){

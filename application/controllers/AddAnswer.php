@@ -6,7 +6,7 @@ class AddAnswer extends CI_Controller{
 		$this->load->model('Ansquick_model');
 		$this->load->library('session');
 		$this->load->database();
-
+		$this->load->model('Ansquick_model');
 	}
   public function index(){
 			if(!$this->session->userdata('userID')){

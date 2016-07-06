@@ -3,6 +3,7 @@ class Ansquick_model extends CI_Model{
     function __construct(){
         parent::__construct();
     }
+
     function insertUser($data){
         return $this->db->insert('UserInfo', $data);
     }
@@ -15,6 +16,155 @@ class Ansquick_model extends CI_Model{
           $query = $this->db->query($sql);
           return $query;
      }
+
+
+     /*
+      * Returns true if currentUserID already follows current tagid
+      * returns false otherwise
+     */
+     function alradyFollows($currentUserID,$tagID){
+       $query=$this->db->query("SELECT * FROM Follow WHERE tagID='".$tagID."' AND userID='".$currentUserID."'");
+       $result = $query->result_array();
+       if(count($result)>0){
+         return 1;
+       }
+       else return 0;
+     }
+
+
+     /*
+      * Add a user tag relationship to the follow table
+      *
+     */
+     function makeFollow($currentUserID,$tagID){
+       $s = "INSERT INTO Follow(tagID,userID) VALUES('".$tagID."','".$currentUserID."')";
+       //var_dump($s);
+       $query = $this->db->query($s);
+     }
+
+     /*
+      * Removes a user tag relationship from the follow table
+      *
+     */
+     function makeUnFollow($currentUserID,$tagID){
+       $s = "DELETE FROM Follow WHERE tagID='".$tagID."' AND userID ='".$currentUserID."'";
+       //var_dump($s);
+       $query = $this->db->query($s);
+     }
+
+     /*
+     * Returns the userID for a username
+     */
+       function getUserID($userName){
+       $sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
+       $query    = $this->db->query($sql);
+       $result   = $query->result();
+       $userID   = $result[0]->userID;
+       return $userID;
+     }
+
+
+    /*
+    * A function to check if current user follows the current tag
+    * Takes input the userID and tagID
+    * returns a flag as 0 if does not follow pr 1 if follows
+    */
+    function doesFollow($tagID,$currentUserID)
+    {
+      $query  = $this->db->query("select * from Follow where tagID='".$tagID."' AND userID='".$currentUserID."'");
+      $result = $query->result_array();
+      //echo "<br>","<br>","<br>","<br>","<br>","<br>","<br>";
+      //var_dump($result);
+      if(count($result)>0)
+      return 1;
+      else return 0;
+
+    }
+     /*
+     *
+     *
+     *
+     ***/
+     function userExists($userName,$password){
+          $query = $this->get_user($userName);
+          if($query->num_rows()>0){
+            $row = $query->result();
+            $encryptedPassword = $this->encryptPassword($password,$row[0]->salt);
+     //            print_r($row);
+            if($encryptedPassword==$row[0]->password){
+              return 1;
+            }
+          }
+          return 0;
+     }
+     function userNameExists($userName){
+          $query = $this->get_user($userName);
+          if($query->num_rows()>0){
+            return 1;
+          }
+          return 0;
+     }
+     function updateUser($data,$userName){
+       $this->db->where('userName',$userName);
+       return $this->db->update('UserInfo',$data);
+     }
+
+     function getUserLikes($userID){
+       $query = $this->db->query("SELECT
+                                  GROUP_CONCAT(answerID SEPARATOR '".DELIMITER."') as answerIDs
+                                  from
+                                  `Like`
+                                  where
+                                  userID='".$userID."'
+                                ");
+       $data=$query->result_array();
+       return explode(DELIMITER,$data[0]['answerIDs']);
+     }
+
+      /*
+      * A function to remove a like from an answer.
+      * Takes answerID and userID as input
+      * returns true
+      */
+      function removeLike($answerID,$userID){
+         $query = $this->db->query("DELETE
+                                     FROM `Like`
+                                     WHERE
+                                     userID = '".$userID."'
+                                     AND
+                                     answerID = '".$answerID."'
+                                     ");
+         $this->db->set('likes', '`likes`-1', FALSE);
+         $this->db->where('answerID', $answerID);
+         $this->db->update('Answer');
+         return true;
+      }
+
+      /*
+      * A function to add a like to an answer.
+      * Takes answerID and userID as input
+      * returns true
+      */
+      function addLike($answerID,$userID){
+         $data=array(
+             'userID'      =>  $userID,
+             'answerID'    =>  $answerID
+         );
+         $this->db->insert('`Like`', $data);
+         $this->db->set('likes', '`likes`+1', FALSE);
+         $this->db->where('answerID', $answerID);
+         $this->db->update('Answer');
+         return true;
+      }
+
+
+
+
+
+
+
+
+
      /*
      * Returns the name of the based on the number of the month
      */
@@ -92,40 +242,10 @@ class Ansquick_model extends CI_Model{
        $query = $this->db->query($sql);
        return $topQuestionID+1;
      }
-     /*
-      * Returns true if currentUserID already follows current tagid
-      * returns false otherwise
-     */
-     function alradyFollows($currentUserID,$tagID){
-       $query=$this->db->query("SELECT * FROM Follow WHERE tagID='".$tagID."' AND userID='".$currentUserID."'");
-       $result = $query->result_array();
-       if(count($result)>0){
-         return 1;
-       }
-       else return 0;
-     }
 
 
 
-     /*
-      * Add a user tag relationship to the follow table
-      *
-     */
-     function makeFollow($currentUserID,$tagID){
-       $s = "INSERT INTO Follow(tagID,userID) VALUES('".$tagID."','".$currentUserID."')";
-       //var_dump($s);
-       $query = $this->db->query($s);
-     }
 
-     /*
-      * Removes a user tag relationship from the follow table
-      *
-     */
-     function makeUnFollow($currentUserID,$tagID){
-       $s = "DELETE FROM Follow WHERE tagID='".$tagID."' AND userID ='".$currentUserID."'";
-       //var_dump($s);
-       $query = $this->db->query($s);
-     }
 
 
     /*
@@ -159,16 +279,7 @@ class Ansquick_model extends CI_Model{
           return $categoryID;
 
      }
-     /*
-     * Returns the userID for a username
-     */
-     function getUserID($userName){
-       $sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
-       $query    = $this->db->query($sql);
-       $result   = $query->result();
-       $userID   = $result[0]->userID;
-       return $userID;
-     }
+
 
 
      function insertQuestionTag($questionID,$tagID){
@@ -325,34 +436,7 @@ class Ansquick_model extends CI_Model{
          return $password;
 
      }
-     /*
-     *
-     *
-     *
-     ***/
-     function userExists($userName,$password){
-          $query = $this->get_user($userName);
-          if($query->num_rows()>0){
-            $row = $query->result();
-            $encryptedPassword = $this->encryptPassword($password,$row[0]->salt);
-//            print_r($row);
-            if($encryptedPassword==$row[0]->password){
-              return 1;
-            }
-          }
-          return 0;
-     }
-     function userNameExists($userName){
-          $query = $this->get_user($userName);
-          if($query->num_rows()>0){
-            return 1;
-          }
-          return 0;
-     }
-     function updateUser($data,$userName){
-       $this->db->where('userName',$userName);
-       return $this->db->update('UserInfo',$data);
-     }
+
 
 
      /*
@@ -476,22 +560,6 @@ class Ansquick_model extends CI_Model{
 
      }
 
-     /*
-     * A function to check if current user follows the current tag
-     * Takes input the userID and tagID
-     * returns a flag as 0 if does not follow pr 1 if follows
-     */
-     function doesFollow($tagID,$currentUserID)
-     {
-       $query  = $this->db->query("select * from Follow where tagID='".$tagID."' AND userID='".$currentUserID."'");
-       $result = $query->result_array();
-       //echo "<br>","<br>","<br>","<br>","<br>","<br>","<br>";
-       //var_dump($result);
-       if(count($result)>0)
-       return 1;
-       else return 0;
-
-     }
      function countRowsRecentTagFeed($tagID){
        $query = $this->db->query("SELECT
 
@@ -680,41 +748,6 @@ class Ansquick_model extends CI_Model{
         return true;
      }
 
-     /*
-     * A function to add a like to an answer.
-     * Takes answerID and userID as input
-     * returns true
-     */
-     function addLike($answerID,$userID){
-        $data=array(
-            'userID'      =>  $userID,
-            'answerID'    =>  $answerID
-        );
-        $this->db->insert('`Like`', $data);
-        $this->db->set('likes', '`likes`+1', FALSE);
-        $this->db->where('answerID', $answerID);
-        $this->db->update('Answer');
-        return true;
-     }
-
-     /*
-     * A function to remove a like from an answer.
-     * Takes answerID and userID as input
-     * returns true
-     */
-     function removeLike($answerID,$userID){
-        $query = $this->db->query("DELETE
-                                    FROM `Like`
-                                    WHERE
-                                    userID = '".$userID."'
-                                    AND
-                                    answerID = '".$answerID."'
-                                    ");
-        $this->db->set('likes', '`likes`-1', FALSE);
-        $this->db->where('answerID', $answerID);
-        $this->db->update('Answer');
-        return true;
-     }
 
      /*
      * A function to return All the answers of a question.
@@ -782,17 +815,7 @@ class Ansquick_model extends CI_Model{
                 return $data;
 
      }
-     function getUserLikes($userID){
-       $query = $this->db->query("SELECT
-                                  GROUP_CONCAT(answerID SEPARATOR '".DELIMITER."') as answerIDs
-                                  from
-                                  `Like`
-                                  where
-                                  userID='".$userID."'
-                                ");
-       $data=$query->result_array();
-       return explode(DELIMITER,$data[0]['answerIDs']);
-     }
+  
 
 
      function countRowsAskedQuestion($currentUserID){
