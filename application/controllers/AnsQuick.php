@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$data['questionDetails'] = $topFeed['questionDetails'];
 					$data['pagination'] = $this->pagination->create_links();
 
-						var_dump($data);
+						//var_dump($data);
 					$this->load->view('AnsQuick/index',$data);
 
 				}
