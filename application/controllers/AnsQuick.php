@@ -172,7 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						  $config['max_size']      = 200;
 						  $config['max_width']     = 1920;
 						  $config['max_height']    = 1080;
-							$config['overwrite'] = TRUE;
+							$config['overwrite'] 		 = TRUE;
 							$config['file_name'] 		 = $this->session->userdata('userID').".png";
 						  $this->load->library('upload', $config);
 							if ( ! is_dir($config['upload_path'])) {
