@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 			public function index(){
 				//echo "asdas";
-				$this->Ansquick_model->getTags();
+				$this->Ansquick_model->searchTags();
 			//	$this->load->view('AnsQuick/aq.php');
 			}
 		}

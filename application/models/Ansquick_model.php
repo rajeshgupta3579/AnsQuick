@@ -226,11 +226,19 @@ class Ansquick_model extends CI_Model{
       if(!isset($_REQUEST['term'])){
          exit();
       }
+        $term = $_REQUEST['term'];
+        $json= file_get_contents('http://localhost:8983/solr/collection1/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&wt=json&suggest.q='.$term);
+        $obj=json_decode($json,true);
+        $suggestions=$obj['suggest']['mySuggester'][$term]['suggestions'];
+        $tags = array();
+        for($i=0;$i<count($suggestions);$i++){
+          $tag  = $suggestions[$i]['term'];
+          $tags[] = array('label'=>$tag,'value'=>$tag);
+        }
+        echo json_encode($tags);
+        flush();
+        /*$questionObj=$obj->response->docs;
 
-        $json= file_get_contents('http://localhost:8983/solr/collection1/select?q=firstName+%3A+%22Ashu%22%0A&wt=json&indent=true');
-        $obj=json_decode($json);
-        $questionObj=$obj->response->docs;
-      //  print_r($obj);
       //  echo "<br><br>";
       //  print_r($questionObj);
         $noOfQuestion = count($questionObj);
@@ -244,7 +252,7 @@ class Ansquick_model extends CI_Model{
       //  var_dump($obj);
       echo json_encode($questions);
       flush();
-
+*/
      }
 
 
@@ -285,7 +293,7 @@ class Ansquick_model extends CI_Model{
                 $data[] = array(
               		'label' => $tagName,
               		'value' => $tagName,
-                  'name' =>$tagID,
+
               	);
               //  echo $row->tagName;
               }
