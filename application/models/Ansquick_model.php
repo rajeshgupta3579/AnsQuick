@@ -407,8 +407,7 @@ class Ansquick_model extends CI_Model{
                 $tagID   = $row->tagID;
                 $data[] = array(
               		'label' => $tagName,
-              		'value' => $tagID,
-
+              		'value' => $tagName,
               	);
               //  echo $row->tagName;
               }
@@ -547,14 +546,14 @@ class Ansquick_model extends CI_Model{
      * Takes Input a TagID
      * Returns a string containing the tagName
      */
-     function currentTag($tagID){
-       $query  = $this->db->query("SELECT tagName from Tags WHERE tagID='".$tagID."'");
+     function currentTag($tagName){
+       $query  = $this->db->query("SELECT tagID from Tags WHERE tagName='".$tagName."'");
        $result = $query->result_array();
        //var_dump ($result);
        $currentTag="noTag";
        //echo count($result);
        if(count($result)>0)
-       $currentTag= $result[0]['tagName'];
+       $currentTag= $result[0]['tagID'];
       // echo "adasdassd",$currentTag;
        return $currentTag;
 
@@ -599,7 +598,7 @@ class Ansquick_model extends CI_Model{
                                   ORDER BY c.time DESC
                                   limit " . $start . ", " . $limit
                                   );
-        $currentTag=$this->currentTag($tagID);
+        //$currentTag=$this->currentTag($tagID);
         $follow=0;
         if($currentUserID!="NoUser")
         $follow = $this->doesFollow($tagID,$currentUserID);
@@ -614,7 +613,7 @@ class Ansquick_model extends CI_Model{
             //   var_dump($data);
       $data =  $this->process_feed($data);
       $data['questionDetails']['type']          = "getRecentTagFeed";
-      $data['questionDetails']['currentTag']    = $currentTag;
+    //  $data['questionDetails']['currentTag']    = $currentTag;
       $data['questionDetails']['currentTagID']  = $tagID;
       $data['questionDetails']['follow']        = $follow;
       //var_dump($data);
@@ -815,7 +814,7 @@ class Ansquick_model extends CI_Model{
                 return $data;
 
      }
-  
+
 
 
      function countRowsAskedQuestion($currentUserID){

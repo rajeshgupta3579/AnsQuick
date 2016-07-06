@@ -10,7 +10,7 @@
 						$this->load->library(array('session', 'form_validation', 'email'));
 		        $this->load->model('Ansquick_model');
 						$this->load->library('pagination');
-						
+
 			}
 			function index(){
         redirect(base_url(""));
@@ -55,8 +55,8 @@
 						echo "noUser";
 					}
 			}
-      function recent($tagID){
-        if(!isset($tagID)){
+      function recent($tagName){
+        if(!isset($tagName)){
           redirect(base_url(""));
         }
         else{
@@ -66,11 +66,12 @@
 						if($this->session->userdata('userName')){
 							$currentUserID=$this->session->userdata('userID');
 						}
-						$tagExsists = $this->Ansquick_model->currentTag($tagID);
+						$tagExsists = $this->Ansquick_model->currentTag($tagName);
 						if($tagExsists=="noTag"){
 							//echo $tagExsists;
 							redirect(base_url(""));
 						}
+						$tagID = $tagExsists;
 						$config = unserialize(Pagination_links);
 						$config['base_url'] = base_url('index.php/Tag/recent/'.$tagID);
 						$config['total_rows'] = $this->Ansquick_model->countRowsRecentTagFeed($tagID);
@@ -85,13 +86,15 @@
 
 
 
-							$data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+						$data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
             $recentFeed = $this->Ansquick_model->getRecentTagFeed($config["per_page"], $data['page'],$tagID,$currentUserID);
           //   var_dump($recentFeed);
+						$recentFeed['questionDetails']['currentTag']    = $tagName;
 						$recentFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
 						//echo $currentUserID;
 						$data['questionDetails'] = $recentFeed['questionDetails'];
 						$data['pagination'] = $this->pagination->create_links();
+						//var_dump($data['questionDetails']);
             $this->load->view('AnsQuick/index',$data);
         }
       }
