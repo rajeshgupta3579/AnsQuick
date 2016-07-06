@@ -174,12 +174,16 @@ $("#forgotPasswordSubmit").click(function(){
         $("#userNameForgotPasswordError").show(500);
     }
     else{
-        $("#userNameForgotPasswordError").hide();
+        $(".alert").hide();
+        $("#userNameForgotPasswordError").html("Your Request has been accepted");
+        $("#userNameForgotPasswordError").show(500);
         $.post("http://www.ansquick.com/index.php/ForgotPassword/sendmail",data,function(res){
+
           if(res=="true"){
-            $("#forgotPasswordForm").submit();
+            $(".alert").hide();
           }
           else {
+              alert(res);
               $("#userNameForgotPasswordError").html("Error Sending Email!!");
               $("#userNameForgotPasswordError").show(500);
           }
@@ -460,7 +464,7 @@ $(document).ready(function() {
         }
     });
 
-    
+
 
 });
 /*$('#searchBox').focus( function(){

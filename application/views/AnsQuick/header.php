@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <!-- x-editable (bootstrap version) -->
   <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-  
+
 
 
   <style>
@@ -227,7 +227,7 @@
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
                             <button id="loginSubmit" type="submit" class="btn btn-success">Submit</button>
-                            <button  class="btn btn-success" type="submit" formaction="<?php echo base_url('index.php/ForgotPassword/'); ?>"> Forgot Password</button>
+                            <a  class="btn btn-success" type="button" href="<?php echo base_url('index.php/ForgotPassword/'); ?>"> Forgot Password</a>
                           </div>
                         </div>
                       <?php echo form_close(); ?>

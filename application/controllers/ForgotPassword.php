@@ -52,11 +52,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $this->email->from($from_email, HOST_NAME);
           $this->email->to($row[0]->emailID);
           $this->email->subject('Password Recovery');
-          $this->email->message(base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".md5($row[0]->salt));
+					$message = "Follow the link to change your Password :";
+          $this->email->message($message.base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".md5($row[0]->salt));
           if($this->email->send())
-            echo "true";
-          else
-            echo "false";
+						echo "true";
+					else
+						echo $this->email->print_debugger();
+
         }
         else
           echo "false";
@@ -77,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						'salt'  		=> $salt
         	);
 				  if($this->Ansquick_model->updateUser($data,$userName)){
-						redirect('AnsQuick/success');
+						redirect(base_url());
 					}
 					else{
 						echo "Password could not be changed";
