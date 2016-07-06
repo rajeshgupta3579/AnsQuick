@@ -11,6 +11,7 @@
 
 
   <style>
+  p { width:400px; }
   #searchBox{
     width: 400px;
   }
