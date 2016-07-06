@@ -465,8 +465,29 @@ $(document).ready(function() {
     });
 
 
-
 });
+
+$("#profilePicFile").change(function() {
+    $filename = $("#profilePicFile").val();
+    $filename = $filename.replace('C:\\fakepath\\','');
+    $filename = $filename.substr($filename.length-10,$filename.length);
+    $("#imagePath").html("..."+$filename);
+    $("#imagePath").show(500);
+
+    return true;
+});
+
+$("#profilePicSubmit").click(function(){
+  $filename = $("#profilePicFile").val();
+  $filename = $.trim($filename);
+  if($filename  == null || $filename == "" ){    
+    $("#profilePicError").html("Select a File to Upload");
+    $("#profilePicError").show(500);
+    return false;
+  }
+  return true;
+});
+
 /*$('#searchBox').focus( function(){
   alert("expanded");
 });*/

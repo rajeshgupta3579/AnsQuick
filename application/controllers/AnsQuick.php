@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$this->load->library('session');
 						$this->load->model('Ansquick_model');
 						$this->load->library('pagination');
+
 			}
 			public function index(){
 				//var_dump($_REQUEST);
@@ -190,6 +191,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							echo "Error in updating";
 						}
 					}
+			}
+
+			public function editProfilePic(){
+					if(!$this->session->userdata('userName')){
+						redirect(base_url());
+					}
+					else{
+							$config['upload_path']   = './Uploads/Profile/';
+						  $config['allowed_types'] = 'gif|jpg|jpeg|png';
+						  $config['max_size']      = 200;
+						  $config['max_width']     = 1920;
+						  $config['max_height']    = 1080;
+							$config['overwrite'] = TRUE;
+							$config['file_name'] 		 = $this->session->userdata('userID').".png";
+						  $this->load->library('upload', $config);
+							if ( ! is_dir($config['upload_path'])) {
+		            die("The Upload Folder Does not exists");
+		         	}
+						  if ( !$this->upload->do_upload('profilePicFile')) {
+						  	$error = array('error' => $this->upload->display_errors());
+						    die($error['error']);
+						  }
+						  else {
+								$uploadData=$this->upload->data();
+								$fileName=$uploadData['file_name'];
+								$data = array('profilePic'=>$fileName);
+								$userName = $this->session->userdata('userName');
+								if($this->Ansquick_model->updateUser($data,$userName))
+									redirect(base_url("index.php/AnsQuick/profile/".$userName));
+								else {
+										echo "Error Uploading File";
+								}
+							}
+					}
+
 			}
 			public function logout(){
    			$this->session->unset_userdata('userName');
