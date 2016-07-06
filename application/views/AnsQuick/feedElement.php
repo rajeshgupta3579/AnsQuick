@@ -51,7 +51,7 @@
                         $offset=5;
                         ?>
                         <ul class="list-inline">
-                        <li >  <h3>Tag: <a href="#" id="<?php ?>"><?php echo $questionDetails['currentTag']; ?></a></h3><?php
+                        <li >  <h3>Tag: <a href="<?php echo $questionDetails['currentTag']; ?>" id=""><?php echo $questionDetails['currentTag']; ?></a></h3><?php
                           ?></li>
                           <li class="pull-right">
                           <?php if($questionDetails['follow']){
