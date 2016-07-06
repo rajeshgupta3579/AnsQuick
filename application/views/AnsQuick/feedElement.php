@@ -59,8 +59,8 @@
 
                                             }
                                         else {
-                                          echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><i class="glyphicon glyphicon-ok"></i>Follow</button>';
-                                        }
+                                          echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><span class="glyphicon glyphicon-ok" id="asdtagEvent"></span>Follow</button>';
+                                        }}
                                       ?>
                                     </li>
                         </ul>
@@ -98,7 +98,7 @@
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->
-                <?php if(isset($questionDetails[$i])){?>
+                <?php if(isset($questionDetails[$i])){  ?>
                 <div class="row">
                   <div class="col-md-10">
 
