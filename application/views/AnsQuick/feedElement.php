@@ -35,18 +35,20 @@
 
     <!-- Main feed: A cell that spans 7 columns -->
 
-    <?php /*loop is upto count-offset because there are four
-            extra rows,  request type,currentTag,currentTagID, and follow flag.
+    <?php /*loop is upto count-offset because there are five
+            extra rows,  request type,currentTag,userLikes,currentTagID, and follow flag.
             Last two rows are only for tag discription page
             */
       $offset=2;
+    //  var_dump($questionDetails);
       for($i=0;$i<count($questionDetails)-$offset;$i++) {
+
     ?>
     <div class="col-md-7" style="margin-left:180px">
                   <!-- Status update #1 -->
 
                     <?php if($questionDetails['type']=="getRecentTagFeed"&&$i==0){
-                        $offset=4;
+                        $offset=5;
                         ?>
                         <ul class="list-inline">
                         <li >  <h3>Tag: <a href="#" id="<?php ?>"><?php echo $questionDetails['currentTag']; ?></a></h3><?php
@@ -157,9 +159,9 @@
                 </div>
                 <?php }
                 else {
-                ?>
-                  No Questions yet.
-                <?php }?>
+
+                  echo "No Questions yet.";
+                }?>
               </div>
               <?php if(isset($questionDetails[$i])){?>
             <div class="panel-footer">

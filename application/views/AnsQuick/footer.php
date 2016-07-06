@@ -52,6 +52,7 @@ jQuery(document).ready(function(){
 										autoFocus:true,
                     select: function( event, ui ) {
 											//alert("asd");
+
                               var terms = split( this.value );
                               // remove the current input
                               terms.pop();
@@ -84,7 +85,8 @@ jQuery(document).ready(function(){
           autoFocus:true,
           select: function( event, ui ) {
             //alert("asd");
-                    var terms = split( this.value );
+              window.location.replace("http://www.ansquick.com/index.php/tag/recent/"+ui.item.value);
+                    /*var terms = split( this.value );
                     // remove the current input
                     terms.pop();
                     // add the selected item
@@ -92,6 +94,7 @@ jQuery(document).ready(function(){
                     // add placeholder to get the comma-and-space at the end
                     terms.push( "" );
                     this.value = terms.join( ", " );
+                    */
                     return false;
                    }
         });

@@ -293,7 +293,7 @@ class Ansquick_model extends CI_Model{
                 $tagID   = $row->tagID;
                 $data[] = array(
               		'label' => $tagName,
-              		'value' => $tagName,
+              		'value' => $tagID,
 
               	);
               //  echo $row->tagName;
