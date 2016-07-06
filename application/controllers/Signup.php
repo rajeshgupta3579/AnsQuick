@@ -40,7 +40,7 @@
 					}
     	}
 			function success(){
-				redirect('AnsQuick/success');
+				redirect(base_url());
 			}
 
 		}
