@@ -118,7 +118,16 @@
                                 <div class="navbar-login navbar-login-session">
                                     <div class="row">
                                         <div class="col-lg-10">
-                                                <a href="<?php echo base_url('index.php/AnsQuick/activity'); ?>" class="btn btn-block">Activity</a>
+                                                <a href="<?php echo base_url('index.php/activity'); ?>" class="btn btn-block">Activity</a>
+                                        </div>
+                                    </div>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <div class="navbar-login navbar-login-session">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                                <a href="<?php echo base_url('index.php/AnsQuick/changePassword'); ?>" class="btn btn-block">Change Password</a>
                                         </div>
                                     </div>
                               </li>

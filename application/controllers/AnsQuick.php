@@ -191,6 +191,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 
 			}
+			public function changePassword(){
+				if(!$this->session->userdata('userName')){
+						redirect(base_url());
+				}
+				else{
+						$userName = $this->session->userdata('userName');
+						$data = Array(
+							'userName'  => $userName
+						);
+						$this->load->view('AnsQuick/changePassword',$data);
+				}
+			}
 			public function logout(){
    			$this->session->unset_userdata('userName');
    			$this->session->unset_userdata('loginUser');
