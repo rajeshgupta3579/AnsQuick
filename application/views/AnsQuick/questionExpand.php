@@ -5,7 +5,7 @@
   <div class="row">
     <!-- Left sidebar: A cell that spans 2 columns -->
 
-    <div class="col-md-2" style="position: fixed;left: 0;">
+    <div class="col-md-2" style="position: fixed;left: 0;margin-top:2%">
       <?php
       if($this->session->userdata('userName')) {
         ?>

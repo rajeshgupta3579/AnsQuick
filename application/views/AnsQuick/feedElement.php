@@ -54,13 +54,13 @@
                         <li >  <h3>Tag: <a href="<?php echo $questionDetails['currentTag']; ?>" id=""><?php echo $questionDetails['currentTag']; ?></a></h3><?php
                           ?></li>
                           <li class="pull-right">
-                          <?php if($questionDetails['follow']){
-                                    echo '<button type="button" class="btn btn-danger" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="unFollow(this)"><span class="glyphicon glyphicon-remove" id="asdtagEvent"></span>Unfollow</button>';
+                          <?php if($this->session->userdata('userName')){if($questionDetails['follow']){
+                                    echo '<button style="margin-top:15px;"type="button"  class="btn btn-danger" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="unFollow(this)"><span class="glyphicon glyphicon-remove" id="asdtagEvent"></span>Unfollow</button>';
 
                                             }
                                         else {
                                           echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><span class="glyphicon glyphicon-ok" id="asdtagEvent"></span>Follow</button>';
-                                        }
+                                        }}
                                       ?>
                                     </li>
                         </ul>

@@ -2,6 +2,8 @@ var nameRX      = /^[A-Za-z\s]+$/ ;
 var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 var userNameRX  = /^[0-9a-zA-Z]+$/;
 var mobileNoRX  = /^\d{10}$/;
+
+
 function follow(obj){
   var completeTagID = obj.id;
   var tagID = completeTagID.replace("currentTagID","");
@@ -9,9 +11,9 @@ function follow(obj){
   //alert(s);
   //alert(tagID);
   $.post(s,function(res){
-    alert(res);
+  //  alert(res);
     if(res=="nowFollowing"){
-        alert(completeTagID);
+        //alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","unFollow(this)");
         $("#".concat(completeTagID)).html("Unfollow");
         $("#".concat(completeTagID)).attr("class","btn btn-danger");
@@ -33,9 +35,9 @@ function unFollow(obj){
   //alert(s);
   //alert(tagID);
   $.post(s,function(res){
-    alert(res);
+  //  alert(res);
     if(res=="nowNotFollowing"){
-        alert(completeTagID);
+        //alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","follow(this)");
         $("#".concat(completeTagID)).html("Follow");
         $("#".concat(completeTagID)).attr("class","btn btn-success");
@@ -480,7 +482,7 @@ $("#profilePicFile").change(function() {
 $("#profilePicSubmit").click(function(){
   $filename = $("#profilePicFile").val();
   $filename = $.trim($filename);
-  if($filename  == null || $filename == "" ){    
+  if($filename  == null || $filename == "" ){
     $("#profilePicError").html("Select a File to Upload");
     $("#profilePicError").show(500);
     return false;
