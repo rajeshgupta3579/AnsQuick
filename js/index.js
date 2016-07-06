@@ -9,14 +9,12 @@ function follow(obj){
   //alert(s);
   //alert(tagID);
   $.post(s,function(res){
-    alert(res);
+    //alert(res);
     if(res=="nowFollowing"){
-        alert(completeTagID);
+        //alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","unFollow(this)");
-        $("#".concat(completeTagID)).html("Unfollow");
+        $("#".concat(completeTagID)).html('<i class="glyphicon glyphicon-remove"></i>Unfollow');
         $("#".concat(completeTagID)).attr("class","btn btn-danger");
-        $('#asdtagEvent').attr("class","glyphicon glyphicon-remove");
-
     }
     else if(res=="noUser"){
         alert("please login");
@@ -33,14 +31,12 @@ function unFollow(obj){
   //alert(s);
   //alert(tagID);
   $.post(s,function(res){
-    alert(res);
+    //alert(res);
     if(res=="nowNotFollowing"){
-        alert(completeTagID);
+        //alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","follow(this)");
-        $("#".concat(completeTagID)).html("Follow");
+        $("#".concat(completeTagID)).html('<i class="glyphicon glyphicon-ok"></i>Follow');
         $("#".concat(completeTagID)).attr("class","btn btn-success");
-        $('#asdtagEvent').attr("class","glyphicon glyphicon-ok");
-
     }
     else if(res=="noUser"){
         alert("please login");
@@ -480,7 +476,7 @@ $("#profilePicFile").change(function() {
 $("#profilePicSubmit").click(function(){
   $filename = $("#profilePicFile").val();
   $filename = $.trim($filename);
-  if($filename  == null || $filename == "" ){    
+  if($filename  == null || $filename == "" ){
     $("#profilePicError").html("Select a File to Upload");
     $("#profilePicError").show(500);
     return false;

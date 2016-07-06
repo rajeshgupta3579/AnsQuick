@@ -55,11 +55,11 @@
                           ?></li>
                           <li class="pull-right">
                           <?php if($questionDetails['follow']){
-                                    echo '<button type="button" class="btn btn-danger" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="unFollow(this)"><span class="glyphicon glyphicon-remove" id="asdtagEvent"></span>Unfollow</button>';
+                                    echo '<button type="button" class="btn btn-danger" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="unFollow(this)"><i class="glyphicon glyphicon-remove"></i>Unfollow</button>';
 
                                             }
                                         else {
-                                          echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><span class="glyphicon glyphicon-ok" id="asdtagEvent"></span>Follow</button>';
+                                          echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><i class="glyphicon glyphicon-ok"></i>Follow</button>';
                                         }
                                       ?>
                                     </li>
