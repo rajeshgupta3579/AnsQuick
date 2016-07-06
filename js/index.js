@@ -2,8 +2,6 @@ var nameRX      = /^[A-Za-z\s]+$/ ;
 var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 var userNameRX  = /^[0-9a-zA-Z]+$/;
 var mobileNoRX  = /^\d{10}$/;
-
-
 function follow(obj){
   var completeTagID = obj.id;
   var tagID = completeTagID.replace("currentTagID","");
@@ -11,11 +9,11 @@ function follow(obj){
   //alert(s);
   //alert(tagID);
   $.post(s,function(res){
-  //  alert(res);
+    //alert(res);
     if(res=="nowFollowing"){
         //alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","unFollow(this)");
-        $("#".concat(completeTagID)).html("Unfollow");
+        $("#".concat(completeTagID)).html('<i class="glyphicon glyphicon-remove"></i>Unfollow');
         $("#".concat(completeTagID)).attr("class","btn btn-danger");
         $('#asdtagEvent').attr("class","glyphicon glyphicon-remove");
 
@@ -35,11 +33,11 @@ function unFollow(obj){
   //alert(s);
   //alert(tagID);
   $.post(s,function(res){
-  //  alert(res);
+    //alert(res);
     if(res=="nowNotFollowing"){
         //alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","follow(this)");
-        $("#".concat(completeTagID)).html("Follow");
+        $("#".concat(completeTagID)).html('<i class="glyphicon glyphicon-ok"></i>Follow');
         $("#".concat(completeTagID)).attr("class","btn btn-success");
         $('#asdtagEvent').attr("class","glyphicon glyphicon-ok");
 

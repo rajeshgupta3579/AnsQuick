@@ -59,8 +59,8 @@
 
                                             }
                                         else {
-                                          echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><span class="glyphicon glyphicon-ok" id="asdtagEvent"></span>Follow</button>';
-                                        }}
+                                          echo '<button type="button" class="btn btn-success" id="currentTagID'.$questionDetails['currentTagID'].'" onclick="follow(this)"><i class="glyphicon glyphicon-ok"></i>Follow</button>';
+                                        }
                                       ?>
                                     </li>
                         </ul>
