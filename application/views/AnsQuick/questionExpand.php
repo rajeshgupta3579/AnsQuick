@@ -1,5 +1,3 @@
-<?php// var_dump($questionDetails);
-?>
 <div class="container" style="margin-top:6%">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
@@ -75,10 +73,8 @@
                       Tags :
                       <?php $tagsOfQuestion  = $questionDetails['tags'][0]['tag_names'];
                             $tagIDOfQuestion = $questionDetails['tags'][0]['tag_ids'];
-                          //  echo $tagIDOfQuestion,"<br>";
                             $tagsOfQuestion  = explode(DELIMITER,$tagsOfQuestion);
-                            $tagIDOfQuestion = explode(DELIMITER,$tagIDOfQuestion);
-                          //  var_dump($tagIDOfQuestion);
+                            $tagIDOfQuestion = explode(DELIMITER,$tagIDOfQuestion);                          
                             for($j=0;$j<count($tagsOfQuestion);$j++){
                       ?>
                       <li><a href="<?php  echo base_url("index.php/tag/recent/".$tagIDOfQuestion[$j])?>"><?php echo $tagsOfQuestion[$j]; ?></a><?php if($j!=count($tagsOfQuestion)-1)echo " , ";?></li>

@@ -28,7 +28,6 @@
 <script type="text/javascript">
 
 jQuery(document).ready(function(){
-//alert("heelffflo");
                 function split( val ) {
                     return val.split( /,\s*/ );
                 }
@@ -37,8 +36,6 @@ jQuery(document).ready(function(){
                 }
 
                 $('#tags').autocomplete({
-
-                //  alert("nice");
                 minLength : 1,
                     source: function( request, response ) {
                               $.getJSON( "http://www.AnsQuick.com/index.php/TagSuggester", {
@@ -48,8 +45,6 @@ jQuery(document).ready(function(){
 										appendTo : $('#postQuestionForm'),
 										autoFocus:true,
                     select: function( event, ui ) {
-											//alert("asd");
-
                               var terms = split( this.value );
                               // remove the current input
                               terms.pop();
@@ -63,15 +58,6 @@ jQuery(document).ready(function(){
 
 
               });
-
-
-
-
-
-      /*  var URL_PREFIX="http://localhost:8983/solr/collection1/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&wt=json&suggest.q=";
-        var a = "http://localhost:8983/solr/jcg/select?q=name:";
-        var URL_SUFFIX = "";
-        */
         $("#searchBox").autocomplete({
           minLength : 1,
           source: function( request, response ) {
@@ -82,17 +68,7 @@ jQuery(document).ready(function(){
           appendTo : $('#searchBoxForm'),
           autoFocus:true,
           select: function( event, ui ) {
-            //alert("asd");
               window.location.replace("http://www.ansquick.com/index.php/tag/recent/"+ui.item.value);
-                    /*var terms = split( this.value );
-                    // remove the current input
-                    terms.pop();
-                    // add the selected item
-                    terms.push( ui.item.value );
-                    // add placeholder to get the comma-and-space at the end
-                    terms.push( "" );
-                    this.value = terms.join( ", " );
-                    */
                     return false;
                    }
         });
