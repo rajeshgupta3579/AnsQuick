@@ -243,26 +243,21 @@ class Ansquick_model extends CI_Model{
        return $topTagID+1;
      }
 
-     function topQuestionID(){
-       $sql = "SELECT MAX(questionID) as maxQuestionID FROM Question";
-       $query = $this->db->query($sql)->result();
-       $result = $query[0]->maxQuestionID;
-       return $result;
-     }
+     /*function topQuestionID(){
+         $sql = "SELECT MAX(questionID) as maxQuestionID FROM Question";
+         $query = $this->db->query($sql)->result();
+         $result = $query[0]->maxQuestionID;
+         return $result;
+     }*/
 
      function insertQuestion($question,$userID,$categoryID){
+         $data = array('questionText'=>$question,'userID'=>$userID,'categoryID'=>$categoryID);
+         $this->db->insert('Question', $post_data);
+         $insert_id = $this->db->insert_id();
 
-       $topQuestionID=$this->topQuestionID();
-       //echo $topTagID;
-       $sql = "INSERT INTO Question (questionText,userID,categoryID) VALUES ('".$question."','".$userID."','".$categoryID."')";
-       $query = $this->db->query($sql);
-       return $topQuestionID+1;
+         
+         return  $insert_id;
      }
-
-
-
-
-
 
     /*
     * A function to fetch tagID of the tags which already exsists in the DB
