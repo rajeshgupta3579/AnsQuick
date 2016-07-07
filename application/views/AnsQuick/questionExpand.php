@@ -74,7 +74,7 @@
                       <?php $tagsOfQuestion  = $questionDetails['tags'][0]['tag_names'];
                             $tagIDOfQuestion = $questionDetails['tags'][0]['tag_ids'];
                             $tagsOfQuestion  = explode(DELIMITER,$tagsOfQuestion);
-                            $tagIDOfQuestion = explode(DELIMITER,$tagIDOfQuestion);                          
+                            $tagIDOfQuestion = explode(DELIMITER,$tagIDOfQuestion);
                             for($j=0;$j<count($tagsOfQuestion);$j++){
                       ?>
                       <li><a href="<?php  echo base_url("index.php/tag/recent/".$tagIDOfQuestion[$j])?>"><?php echo $tagsOfQuestion[$j]; ?></a><?php if($j!=count($tagsOfQuestion)-1)echo " , ";?></li>
@@ -88,7 +88,8 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a href="#addAnswerText<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
+                      <a onclick="writeAnswerFocus(this)" id="writeAnswer<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" >
+                        <span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                       <li>
                       <a href="<?php echo base_url('index.php/Question/expand/'.$questionDetails['questionDiscription'][0]['questionID']);?>"><span class="glyphicon glyphicon-comment"></span> View All Answers</a>

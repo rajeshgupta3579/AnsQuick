@@ -229,6 +229,12 @@ $("#postQuestionSubmit").click(function(){
     }
     return true;
 });
+function writeAnswerFocus(obj){
+  $(".alert").hide();
+  var questionID = obj.id.replace('writeAnswer','');
+  $('#addAnswerText'+questionID).focus();
+  return true;
+}
 function addAnswer(obj) {
   $(".alert").hide();
   var questionID = obj.id.replace('addAnswerSubmit','');
