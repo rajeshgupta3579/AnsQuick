@@ -23,6 +23,7 @@ class Ansquick_model extends CI_Model{
       * returns false otherwise
      */
      function alradyFollows($currentUserID,$tagID){
+       
        $query=$this->db->query("SELECT * FROM Follow WHERE tagID='".$tagID."' AND userID='".$currentUserID."'");
        $result = $query->result_array();
        if(count($result)>0){
@@ -37,9 +38,15 @@ class Ansquick_model extends CI_Model{
       *
      */
      function makeFollow($currentUserID,$tagID){
-       $s = "INSERT INTO Follow(tagID,userID) VALUES('".$tagID."','".$currentUserID."')";
+       $data=array(
+           'tagID'      =>  $tagID,
+           'userID'  =>  $currentUserID,
+       );
+       $this->db->insert('Follow', $data);
+       /*$s = "INSERT INTO Follow(tagID,userID) VALUES('".$tagID."','".$currentUserID."')";
        //var_dump($s);
        $query = $this->db->query($s);
+       */
      }
 
      /*
@@ -47,17 +54,26 @@ class Ansquick_model extends CI_Model{
       *
      */
      function makeUnFollow($currentUserID,$tagID){
-       $s = "DELETE FROM Follow WHERE tagID='".$tagID."' AND userID ='".$currentUserID."'";
+       $data=array(
+           'tagID'      =>  $tagID,
+           'userID'  =>  $currentUserID,
+       );
+       $this->db->delete('Follow', $data);
+       /*$s = "DELETE FROM Follow WHERE tagID='".$tagID."' AND userID ='".$currentUserID."'";
        //var_dump($s);
        $query = $this->db->query($s);
+       */
      }
 
      /*
      * Returns the userID for a username
      */
        function getUserID($userName){
-       $sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
+         $query = $this->db->select("userID")->from("UserInfo")->where("userName", $userName)->get();
+
+       /*$sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
        $query    = $this->db->query($sql);
+       */
        $result   = $query->result();
        $userID   = $result[0]->userID;
        return $userID;
