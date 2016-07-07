@@ -18,7 +18,7 @@ class Login extends CI_Controller{
           if ($this->Ansquick_model->userExists($userNameLogin,$passwordLogin)){
               $query = $this->Ansquick_model->get_user($userNameLogin);
               $row = $query->result();
-              var_dump($row);
+              //var_dump($row);
               $sessiondata = array(
                    'firstName' => $row[0]->firstName,
                    'lastName'  => $row[0]->lastName,

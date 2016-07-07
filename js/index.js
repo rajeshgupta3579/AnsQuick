@@ -146,12 +146,13 @@ $("#loginSubmit").click(function(){
   }
   data = {'userNameLogin' : userNameLogin, 'passwordLogin' : passwordLogin };
   $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){
-    if(res=="false"){
-      $("#passwordLoginError").html("Invalid Username or Password");
-      $("#passwordLoginError").show(500);
+    //alert(res);
+    if(res=="true"){
+      $("#loginForm").submit();
     }
     else{
-      $("#loginForm").submit();
+      $("#passwordLoginError").html("Invalid Username or Password");
+      $("#passwordLoginError").show(500);
     }
   });
   return false;

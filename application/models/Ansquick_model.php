@@ -12,8 +12,8 @@ class Ansquick_model extends CI_Model{
           /*$this->db->where('userName', $userName);
           $q = $this->db->get('my_users_table');
           */
-          $sql = "select * from UserInfo where userName = '".$userName."'OR emailID='".$userName."'";
-          $query = $this->db->query($sql);
+          $this->db->or_where(array('userName' => $userName, 'emailID' => $userName));
+          $query = $this->db->get('UserInfo');
           return $query;
      }
 
