@@ -188,6 +188,8 @@ $("#forgotPasswordSubmit").click(function(){
 
           if(res=="true"){
             $(".alert").hide();
+            $("#userNameForgotPasswordSuccess").html("A link to reset password has been sent to yout Email.");
+            $("#userNameForgotPasswordSuccess").show(500);
           }
           else {
               alert(res);
