@@ -238,6 +238,8 @@ class Ansquick_model extends CI_Model{
          $data = array('questionText'=>$question,'userID'=>$userID,'categoryID'=>$categoryID);
          $this->db->insert('Question', $post_data);
          $insert_id = $this->db->insert_id();
+
+         
          return  $insert_id;
      }
 
