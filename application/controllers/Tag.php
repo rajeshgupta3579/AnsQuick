@@ -68,7 +68,6 @@
 						}
 						$tagExsists = $this->Ansquick_model->currentTag($tagName);
 						if($tagExsists=="noTag"){
-							//echo $tagExsists;
 							redirect(base_url(""));
 						}
 						$tagID = $tagExsists;
@@ -87,14 +86,11 @@
 
 
 						$data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $recentFeed = $this->Ansquick_model->getRecentTagFeed($config["per_page"], $data['page'],$tagID,$currentUserID);
-          //   var_dump($recentFeed);
+            $recentFeed   = $this->Ansquick_model->getRecentTagFeed($config["per_page"], $data['page'],$tagID,$currentUserID);
 						$recentFeed['questionDetails']['currentTag']    = $tagName;
-						$recentFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
-						//echo $currentUserID;
+						$recentFeed['questionDetails']['userLikes']     = $this->Ansquick_model->getUserLikes($currentUserID);
 						$data['questionDetails'] = $recentFeed['questionDetails'];
-						$data['pagination'] = $this->pagination->create_links();
-						//var_dump($data['questionDetails']);
+						$data['pagination']      = $this->pagination->create_links();
             $this->load->view('AnsQuick/index',$data);
         }
       }

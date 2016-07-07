@@ -1,4 +1,4 @@
-
+<!-- This view is not used as of now -->
 <html>
 <body>
 <form metho="GET">

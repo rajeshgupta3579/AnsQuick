@@ -7,8 +7,6 @@ class Login extends CI_Controller{
           $this->load->library('session');
           $this->load->helper(array('form','url'));
           $this->load->database();
-          //load the login model
-          $this->load->model('AnsQuick_model');
           $this->load->model('Ansquick_model');
      }
 
@@ -18,7 +16,6 @@ class Login extends CI_Controller{
           if ($this->Ansquick_model->userExists($userNameLogin,$passwordLogin)){
               $query = $this->Ansquick_model->get_user($userNameLogin);
               $row = $query->result();
-              //var_dump($row);
               $sessiondata = array(
                    'firstName' => $row[0]->firstName,
                    'lastName'  => $row[0]->lastName,

@@ -23,6 +23,7 @@ class Ansquick_model extends CI_Model{
       * returns false otherwise
      */
      function alradyFollows($currentUserID,$tagID){
+
        $query=$this->db->query("SELECT * FROM Follow WHERE tagID='".$tagID."' AND userID='".$currentUserID."'");
        $result = $query->result_array();
        if(count($result)>0){
@@ -34,12 +35,17 @@ class Ansquick_model extends CI_Model{
 
      /*
       * Add a user tag relationship to the follow table
-      *
      */
      function makeFollow($currentUserID,$tagID){
-       $s = "INSERT INTO Follow(tagID,userID) VALUES('".$tagID."','".$currentUserID."')";
+       $data=array(
+           'tagID'      =>  $tagID,
+           'userID'  =>  $currentUserID,
+       );
+       $this->db->insert('Follow', $data);
+       /*$s = "INSERT INTO Follow(tagID,userID) VALUES('".$tagID."','".$currentUserID."')";
        //var_dump($s);
        $query = $this->db->query($s);
+       */
      }
 
      /*
@@ -47,17 +53,26 @@ class Ansquick_model extends CI_Model{
       *
      */
      function makeUnFollow($currentUserID,$tagID){
-       $s = "DELETE FROM Follow WHERE tagID='".$tagID."' AND userID ='".$currentUserID."'";
+       $data=array(
+           'tagID'      =>  $tagID,
+           'userID'  =>  $currentUserID,
+       );
+       $this->db->delete('Follow', $data);
+       /*$s = "DELETE FROM Follow WHERE tagID='".$tagID."' AND userID ='".$currentUserID."'";
        //var_dump($s);
        $query = $this->db->query($s);
+       */
      }
 
      /*
      * Returns the userID for a username
      */
        function getUserID($userName){
-       $sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
+         $query = $this->db->select("userID")->from("UserInfo")->where("userName", $userName)->get();
+
+       /*$sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
        $query    = $this->db->query($sql);
+       */
        $result   = $query->result();
        $userID   = $result[0]->userID;
        return $userID;
@@ -73,24 +88,19 @@ class Ansquick_model extends CI_Model{
     {
       $query  = $this->db->query("select * from Follow where tagID='".$tagID."' AND userID='".$currentUserID."'");
       $result = $query->result_array();
-      //echo "<br>","<br>","<br>","<br>","<br>","<br>","<br>";
-      //var_dump($result);
       if(count($result)>0)
       return 1;
       else return 0;
 
     }
      /*
-     *
-     *
-     *
-     ***/
+     *A function to check if the user has given the correct username and password combination
+     */
      function userExists($userName,$password){
           $query = $this->get_user($userName);
           if($query->num_rows()>0){
             $row = $query->result();
             $encryptedPassword = $this->encryptPassword($password,$row[0]->salt);
-     //            print_r($row);
             if($encryptedPassword==$row[0]->password){
               return 1;
             }
@@ -168,7 +178,7 @@ class Ansquick_model extends CI_Model{
      /*
      * Returns the name of the based on the number of the month
      */
-     function getMonth($monthNumber){
+     /*function getMonth($monthNumber){
        $arr = array("1"=>"Jan",
                     "2"=>"Feb",
                     "3"=>"Mar",
@@ -185,25 +195,24 @@ class Ansquick_model extends CI_Model{
           //  return $arr[$monthNumber];
 
      }
+     */
      /*
      * A function which returns the date from the timestamp
      * Input is a timestamp
      */
+     /*
      function getDate($timee){
        $arr = explode(" ",$timee);
        $date= $arr[0];
-
        $date = explode("-",$date);
-       //print_r($date);
        $day  = $date[2];
        $month = $date[1];
        $year = $date[0];
-        $date2 = $day.",".$month.",".$year;
-        //var_dump($date2)
+       $date2 = $day.",".$month.",".$year;
         return $date2;
 
      }
-
+     */
      /*
      * Returns the maximum tagID present in the database
      */
@@ -219,9 +228,7 @@ class Ansquick_model extends CI_Model{
      * Takes input a tag in string
      */
      function insertTag($tag){
-       //echo $tag;
        $topTagID=$this->topTagID();
-       //echo $topTagID;
        $sql = "INSERT INTO Tags (tagName) VALUES ('".$tag."')";
        $query = $this->db->query($sql);
        return $topTagID+1;
@@ -239,7 +246,7 @@ class Ansquick_model extends CI_Model{
          $this->db->insert('Question', $post_data);
          $insert_id = $this->db->insert_id();
 
-         
+
          return  $insert_id;
      }
 
@@ -250,9 +257,9 @@ class Ansquick_model extends CI_Model{
 
            $tagListQuery = implode("', '", $tagList);
 
-           $sql  = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
-           $query = $this->db->query($sql);
-           $result=$query->result();
+           $sql     = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
+           $query   = $this->db->query($sql);
+           $result  = $query->result();
 
            $tagsArray = array();
            foreach ($result as $row){
@@ -267,8 +274,8 @@ class Ansquick_model extends CI_Model{
 */
      function getCategoryID($category){
 
-          $sql = "SELECT categoryID FROM Category WHERE categoryName='".$category."'";
-          $query = $this->db->query($sql);
+          $sql    = "SELECT categoryID FROM Category WHERE categoryName='".$category."'";
+          $query  = $this->db->query($sql);
           $result = $query->result();
           $categoryID = $result[0]->categoryID;
           return $categoryID;
@@ -290,33 +297,20 @@ class Ansquick_model extends CI_Model{
      */
     function postQuestion($question,$category,$tagList,$userName){
 
-
-
       $tagsArray = $this->getTagsArray($tagList);
       $categoryID= $this->getCategoryID($category);
       $userID    = $this->getUserID($userName);
-      /*print_r($tagsArray);
-      echo "<br>",$categoryID,"<br>";
-      print_r($tagList);
-      */
-
-       $questionID=$this->insertQuestion($question,$userID,$categoryID);
-
-
-       //echo "<br>",$questionID,"<br>";
-       $length = count($tagList);
+      $questionID=$this->insertQuestion($question,$userID,$categoryID);
+       $length   = count($tagList);
        for($i=0;$i<$length;$i++){
          $temp_tag = $tagList[$i];
-         //echo $temp_tag;
          $tagID=0;
          if(!isset($tagsArray[$temp_tag])){
-            //echo "andar";
             $tagID=$this->insertTag($temp_tag);
          }
          else {
             $tagID=$tagsArray[$temp_tag];
          }
-         //echo $tagID;
          $this->insertQuestionTag($questionID,$tagID);
 
        }
@@ -348,18 +342,12 @@ class Ansquick_model extends CI_Model{
         echo json_encode($tags);
         flush();
         /*$questionObj=$obj->response->docs;
-
-      //  echo "<br><br>";
-      //  print_r($questionObj);
         $noOfQuestion = count($questionObj);
         $questions = array();
         for($i=0;$i<$noOfQuestion;$i++){
           $question  = $questionObj[$i]->firstName;
-        //  var_dump($question);
           $questions[]=array("label"=>$question,"value"=>$question);
         }
-
-      //  var_dump($obj);
       echo json_encode($questions);
       flush();
 */
@@ -372,12 +360,9 @@ class Ansquick_model extends CI_Model{
      * Output is list of suggestions in json format
      */
      function getTags(){
-        //  echo "jkj,";
-        //  die();
 
              if(!isset($_REQUEST['term'])){
                //$_REQUEST['term']='g';
-               //echo "adad";
                 exit();
              }
 
@@ -396,7 +381,6 @@ class Ansquick_model extends CI_Model{
               	);
               }*/
               $result=$query->result();
-              //print_r($dd);
               foreach ($result as $row){
                 $tagName = $row->tagName;
                 $tagID   = $row->tagID;
@@ -404,7 +388,6 @@ class Ansquick_model extends CI_Model{
               		'label' => $tagName,
               		'value' => $tagName,
               	);
-              //  echo $row->tagName;
               }
               echo json_encode($data);
               flush();
@@ -452,15 +435,11 @@ class Ansquick_model extends CI_Model{
                                       $answerTime         = $answerDetails[0]['time'];
                   $answerDetails[0]['answerdBy']          = $answerdBy;
                   //$answerTime = getDate($answerTime);;
-                  //var_dump($answerTime);
                   $answerDetails[0]['answerTime']         = $answerTime;
-                  //var_dump($result);
                   $answerDetails[0]['answerdByPic']       = $answerdByPic;
                   $answerDetails[0]['answerdByUserName']  = $answerdByUserName;
           }
 
-
-          //var_dump($answerDetails);
           return $answerDetails;
 
      }
@@ -481,10 +460,7 @@ class Ansquick_model extends CI_Model{
                                   b.questionID='".$questionID."'
                                   GROUP BY(b.questionID)
                                 ");
-      //echo $questionID;
-      //var_dump($query->result());
       $tagsOfQuestion = $query->result_array();
-      //var_dump($tagsOfQuestion);
       return $tagsOfQuestion;
      }
      /*
@@ -493,10 +469,8 @@ class Ansquick_model extends CI_Model{
      * Ouputs an aray with one row for each question
      */
      function process_feed($data){
-        //var_dump($data);
         $questionDetails =   $data['question'];
         $feed            =   array();
-      //  var_dump($questionDetails);
         for($i=0;$i<count($questionDetails);$i++){
 
           $questionID      =   $questionDetails[$i]['questionID'];
@@ -522,16 +496,11 @@ class Ansquick_model extends CI_Model{
                 $questionDetails[$i]['answerdByPic']        =   "";
                 $questionDetails[$i]['answerdByUserName']   =   "";
           }
-        //  echo "1";
-        //  var_dump($questionDetails);
-        //  echo "2";
           $questionDetails[$i]['tag_names'] = $tagsOfQuestion[0]['tag_names'];
           $questionDetails[$i]['tag_ids']   = $tagsOfQuestion[0]['tag_ids'];
-          //var_dump($questionDetails);
+
 
         }
-        //var_dump($answerDetails);
-        //var_dump($questionDetails);
         $temp = array('questionDetails'=>$questionDetails);
         return $temp;
 
@@ -544,16 +513,14 @@ class Ansquick_model extends CI_Model{
      function currentTag($tagName){
        $query  = $this->db->query("SELECT tagID from Tags WHERE tagName='".$tagName."'");
        $result = $query->result_array();
-       //var_dump ($result);
        $currentTag="noTag";
-       //echo count($result);
        if(count($result)>0)
        $currentTag= $result[0]['tagID'];
-      // echo "adasdassd",$currentTag;
        return $currentTag;
-
      }
-
+     /*
+     * Returns total number of rows in the recent tag feed of a teg.
+     */
      function countRowsRecentTagFeed($tagID){
        $query = $this->db->query("SELECT
 
@@ -569,17 +536,14 @@ class Ansquick_model extends CI_Model{
                                 ");
 
       $result = $query->result_array();
-    //  var_dump($result);
       $numRows = count($result);
-    //  var_dump($numRows);
       return $numRows;
      }
+
      /*
      A function fetches recent feed from the database having tag as selected tag
      */
      function getRecentTagFeed($limit,$start,$tagID,$currentUserID){
-       //$tagID = (int)$tagID;$limit,$start
-      // echo $tagID;
        $query = $this->db->query("SELECT
 
                                   b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
@@ -597,22 +561,16 @@ class Ansquick_model extends CI_Model{
         $follow=0;
         if($currentUserID!="NoUser")
         $follow = $this->doesFollow($tagID,$currentUserID);
-        //echo $follow;
-        //echo $currentTag;
       //$result=$query->result_array();
       //$result['type']="getRecentTagFeed";
-    //  var_dump($result);
       $data=array(
               'question'  =>  $query->result_array(),
               );
-            //   var_dump($data);
       $data =  $this->process_feed($data);
       $data['questionDetails']['type']          = "getRecentTagFeed";
     //  $data['questionDetails']['currentTag']    = $currentTag;
       $data['questionDetails']['currentTagID']  = $tagID;
       $data['questionDetails']['follow']        = $follow;
-      //var_dump($data);
-      //echo $follow;
       return $data;
      }
 
@@ -665,15 +623,12 @@ class Ansquick_model extends CI_Model{
                                         GROUP BY (b.questionID)");
                                         */
                                     //      var_dump("<br><br><br><br>");
-        //var_dump($query->result_array());
        $data=array(
                'question'  =>  $query->result_array(),
                );
        $data =  $this->process_feed($data);
        $data['questionDetails']['type']="getRecentFeed";
-      // var_dump($data);
        return $data;
-       //$query ="";
      }
 
 
@@ -682,16 +637,13 @@ class Ansquick_model extends CI_Model{
      */
      function countRowsTopFeed($currentUserID){
        $query = $this->db->query("SELECT
-                                  b.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
+                                  b.questionID
                                   from
-                                  Follow a,QuestionTag b,Question c,UserInfo d
+                                  Follow a,QuestionTag b
                                   where
                                   a.userID='".$currentUserID."' AND
-                                  a.tagID = b.tagID AND
-                                  b.questionID=c.questionID AND
-                                  c.userID=d.userID
-                                  GROUP BY(c.questionID)
-                                  ORDER BY c.time DESC"
+                                  a.tagID = b.tagID
+                                  "
                                 );
       $result = $query->result_array();
       $numRows = count($result);
@@ -719,9 +671,7 @@ class Ansquick_model extends CI_Model{
                   );
        $data =  $this->process_feed($data);
        $data['questionDetails']['type']="getTopFeed";
-      // var_dump($data);
        return $data;
-       //$query ="";
      }
 
      /*
@@ -764,11 +714,7 @@ class Ansquick_model extends CI_Model{
                   $answerDetails[$i]['answerTime']        = $answerTime;
                   $answerDetails[$i]['answerdByPic']      = $answerdByPic;
                   $answerDetails[$i]['answerdByUserName'] = $answerdByUserName;
-                  //var_dump($result);
           }
-
-
-          //var_dump($answerDetails);
           return $answerDetails;
 
      }
@@ -787,7 +733,6 @@ class Ansquick_model extends CI_Model{
                                   where
                                   c.userID=d.userID AND
                                   c.questionID='".$questionID."'
-
                                 ");
        $data=$query->result_array();
        return $data;
@@ -811,19 +756,19 @@ class Ansquick_model extends CI_Model{
      }
 
 
-
+     /*
+     * A function to return the total number of questions asked by a user
+     */
      function countRowsAskedQuestion($currentUserID){
        $query = $this->db->query("SELECT
-                                  c.questionID,c.answerCount,c.questionText,c.time, d.firstName,d.lastName,d.profilePic,d.userName
+                                  c.questionID
                                   from
-                                  Question c,UserInfo d
+                                  Question c
                                   where
-                                  c.userID='".$currentUserID."' AND
-                                  c.userID=d.userID
-                                  ORDER BY c.time DESC
+                                  c.userID='".$currentUserID."'
                                 ");
        $result = $query->result_array();
-       $rows = count($result);
+       $rows   = count($result);
        return $rows;
      }
 

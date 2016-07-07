@@ -31,7 +31,6 @@ if(!defined('BASEPATH'))exit ('No direct scripts allowed');
 
                 $askedQuestion = $this->Ansquick_model->getAskedQuestion($config["per_page"], $data['page'],$currentUserID);
                 $askedQuestion['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
-                //  var_dump($askedQuestion);
                 $data['questionDetails'] = $askedQuestion['questionDetails'];
                 $data['pagination'] = $this->pagination->create_links();
                 $this->load->view('AnsQuick/index',$data);
@@ -39,7 +38,6 @@ if(!defined('BASEPATH'))exit ('No direct scripts allowed');
       }
       else{
         redirect(base_url());
-        //echo "not";
       }
     }
 }

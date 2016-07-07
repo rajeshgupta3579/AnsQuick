@@ -7,8 +7,6 @@
           $this->load->library('session');
           $this->load->helper(array('form','url'));
           $this->load->database();
-          //load the login model
-          $this->load->model('Ansquick_model');
           $this->load->model('Ansquick_model');
       }
       public function index(){

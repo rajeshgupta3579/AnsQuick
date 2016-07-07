@@ -9,7 +9,6 @@
 		        $this->load->database();
 						$this->load->library(array('session', 'form_validation', 'email'));
 		        $this->load->model('Ansquick_model');
-						$this->load->model('Ansquick_model');
 			}
 			function index(){
 					$password = $this->input->post('password');

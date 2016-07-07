@@ -1,8 +1,5 @@
 <?php include('header.php'); ?>
-<!-- Page Content -->
     <div class="container" style="margin-top:3%;">
-
-        <!-- Introduction Row -->
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">About Us
@@ -39,5 +36,6 @@
 
 
 
+      </div>
     </div>
 <?php include('footer.php'); ?>

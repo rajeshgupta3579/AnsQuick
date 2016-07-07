@@ -35,7 +35,7 @@
                         <?php echo form_close(); }?>
                         <h4><?php echo $userInfo['userName']; ?></h4>
                         <h4  id = "emaiID2"><?php echo $userInfo['emailID'] ?></h4>
-                        <h4  id = "tags"><b>Tags Followed</b> : <ul class="list-inline"> <?php if(count($userTags)){foreach($userTags as $tag) {?> <li> <a href="<?php echo base_url("index.php/tag/recent/".$tag['tagID']) ; ?>"><?php echo $tag['tagName'] ; ?></a> </li> <?php }}else{ echo "<li>No Tags Followed Yet</li>";}?> </ul></h4>
+                        <h4  id = "tags"><b>Tags Followed</b> : <ul class="list-inline"> <?php if(count($userTags)){foreach($userTags as $tag) {?> <li> <a href="<?php echo base_url("index.php/tag/recent/".$tag['tagName']) ; ?>"><?php echo $tag['tagName'] ; ?></a> </li> <?php }}else{ echo "<li>No Tags Followed Yet</li>";}?> </ul></h4>
                     </div>
                     <div class="col-sm-6 col-md-8" style="padding-left:15%">
 
