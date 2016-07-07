@@ -13,6 +13,8 @@ if(!defined('BASEPATH'))exit ('No direct scripts allowed');
     public function index(){
 
       	if($this->session->userdata('userID')){
+
+
                 $config = unserialize(Pagination_links);
                 $currentUserID = $this->session->userdata('userID');
                 $config['base_url'] = base_url('index.php/Activity/index');
@@ -24,19 +26,16 @@ if(!defined('BASEPATH'))exit ('No direct scripts allowed');
 
 
 
-              $this->pagination->initialize($config);
+                $this->pagination->initialize($config);
+                $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-
-
-              $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-          $askedQuestion = $this->Ansquick_model->getAskedQuestion($config["per_page"], $data['page'],$currentUserID);
-          $askedQuestion['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
-        //  var_dump($askedQuestion);
-        $data['questionDetails'] = $askedQuestion['questionDetails'];
-        $data['pagination'] = $this->pagination->create_links();
-        $this->load->view('AnsQuick/index',$data);
-          //$this->load->view('AnsQuick/index',$askedQuestion);
+                $askedQuestion = $this->Ansquick_model->getAskedQuestion($config["per_page"], $data['page'],$currentUserID);
+                $askedQuestion['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
+                //  var_dump($askedQuestion);
+                $data['questionDetails'] = $askedQuestion['questionDetails'];
+                $data['pagination'] = $this->pagination->create_links();
+                $this->load->view('AnsQuick/index',$data);
+                //$this->load->view('AnsQuick/index',$askedQuestion);
       }
       else{
         redirect(base_url());

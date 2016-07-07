@@ -16,6 +16,7 @@ class AddAnswer extends CI_Controller{
 						 $addAnswerText = $this->input->post('addAnswerText');
 						 $questionID 		= $this->input->post('questionID');
 						 $userID = $this->session->userdata('userID');
+						 
 						 if($this->Ansquick_model->addAnswer($addAnswerText,$questionID,$userID)){
 							 echo "true";
 						 }

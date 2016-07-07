@@ -30,8 +30,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			public function top(){
 
 				if($this->session->userdata('userID')){
-									$currentUserID = $this->session->userdata('userID');
+
 								//	var_dump(Pagination_links);
+								  $currentUserID = $this->session->userdata('userID');
 									$config = unserialize(Pagination_links);
 									$config['base_url'] = base_url('index.php/AnsQuick/top');
 									$config['total_rows'] = $this->Ansquick_model->countRowsTopFeed($currentUserID);
@@ -45,16 +46,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-								$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-								$topFeed = $this->Ansquick_model->getTopFeed($config["per_page"], $data['page'],$currentUserID);
-								$topFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
-						//			var_dump($topFeed);
+									$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+									$topFeed = $this->Ansquick_model->getTopFeed($config["per_page"], $data['page'],$currentUserID);
+									$topFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
+									//var_dump($topFeed);
 
-					$data['questionDetails'] = $topFeed['questionDetails'];
-					$data['pagination'] = $this->pagination->create_links();
+									$data['questionDetails'] = $topFeed['questionDetails'];
+									$data['pagination'] = $this->pagination->create_links();
 
-						//var_dump($data);
-					$this->load->view('AnsQuick/index',$data);
+									//var_dump($data);
+									$this->load->view('AnsQuick/index',$data);
 
 				}
 				else{
@@ -78,22 +79,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-								$this->pagination->initialize($config);
+									$this->pagination->initialize($config);
 
 
-					$currentUserID = $this->session->userdata('userID');
-					$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-					$recentFeed = $this->Ansquick_model->getRecentFeed($config["per_page"], $data['page']);
-					$recentFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
-					//var_dump($recentFeed);
+									$currentUserID = $this->session->userdata('userID');
+									$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+									$recentFeed = $this->Ansquick_model->getRecentFeed($config["per_page"], $data['page']);
+									$recentFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
+									//var_dump($recentFeed);
 
 
 
-					$data['questionDetails'] = $recentFeed['questionDetails'];
-					$data['pagination'] = $this->pagination->create_links();
+									$data['questionDetails'] = $recentFeed['questionDetails'];
+									$data['pagination'] = $this->pagination->create_links();
 
-					//var_dump($data);return ;
-					$this->load->view('AnsQuick/index',$data);
+									//var_dump($data);return ;
+									$this->load->view('AnsQuick/index',$data);
 			}
 
 			public function success(){
@@ -110,10 +111,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           redirect(base_url());
         }
 				if($this->Ansquick_model->userNameExists($userName)){
-					$query = $this->Ansquick_model->get_user($userName);
-	        if($query->num_rows()>0){
-	          $row = $query->result_array();
 
+					$query = $this->Ansquick_model->get_user($userName);
+
+	        if($query->num_rows()>0){
+
+	          $row = $query->result_array();
 						//var_dump($row[0]);
 						$tags = $this->Ansquick_model->getUserTags($row[0]['userID']);
 						$data = array('userInfo' => $row[0],'userTags' => $tags );

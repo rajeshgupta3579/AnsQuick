@@ -12,6 +12,7 @@
 
   <style>
   p { width:400px; }
+
   #searchBox{
     width: 400px;
   }
@@ -46,6 +47,8 @@
   </style>
 </head>
 <body>
+  <div id=wrapper>
+    <div id="header">
 <nav class="navbar navbar-fixed-top navbar-default "  role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
@@ -77,12 +80,11 @@
     </ul>
   -->
     <div class="col-sm-6 col-md-6">
-        <form class="navbar-form" id="searchBoxForm" role="search" >
+        <form class="navbar-form" id="searchBoxForm" onsubmit="return searchFormSubmit()">
         <div class="input-group">
             <input id="searchBox" type="text" class="form-control searchBox" placeholder="Search a Tag" name="q">
             <!-- <div class="input-group-btn">
                 <button class="btn btn-success " type="submit"  ><i class="glyphicon glyphicon-search"></i></button>
-
             </div>
           -->
         </div>
@@ -112,6 +114,7 @@
                                                 <a href="<?php echo base_url("index.php/AnsQuick/profile/".$this->session->userdata('userName')); ?>" class="btn btn-block">Profile</a>
                                         </div>
                                     </div>
+                                  </div>
                               </li>
                               <li class="divider"></li>
                               <li>
@@ -121,6 +124,7 @@
                                                 <a href="<?php echo base_url('index.php/activity'); ?>" class="btn btn-block">Activity</a>
                                         </div>
                                     </div>
+                                  </div>
                               </li>
                               <li class="divider"></li>
                               <li>
@@ -130,6 +134,7 @@
                                                 <a href="<?php echo base_url('index.php/AnsQuick/changePassword'); ?>" class="btn btn-block">Change Password</a>
                                         </div>
                                     </div>
+                                  </div>
                               </li>
                               <li class="divider"></li>
                               <li>
@@ -323,4 +328,5 @@
         </div>
     </div>
   </div>
+</div>
 </div>

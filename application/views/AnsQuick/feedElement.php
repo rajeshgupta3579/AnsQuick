@@ -1,3 +1,4 @@
+<div id="content">
 <div class="container" style="margin-top:6%">
   <!-- The row that contains the three main columns of the website. -->
   <div class="row">
@@ -39,10 +40,11 @@
             extra rows,  request type,currentTag,userLikes,currentTagID, and follow flag.
             Last two rows are only for tag discription page
             */
-      $offset=2;
-    //  var_dump($questionDetails);
+      $offset=1;
+      //var_dump($questionDetails);
       for($i=0;$i<count($questionDetails)-$offset;$i++) {
-
+        //var_dump("<br><br>asda",$asdasi);
+        $offset=2;
     ?>
     <div class="col-md-7" style="margin-left:180px">
                   <!-- Status update #1 -->
@@ -95,6 +97,7 @@
                               <?php
                             }
                         ?>
+
               <div class="panel panel-default">
               <div class="panel-body">
                 <!-- Post metadata -->
@@ -157,7 +160,7 @@
                 </div>
                 <?php }
                 else {
-
+                  if(!isset($questionDetails[0]))
                   echo "No Questions yet.";
                 }?>
               </div>
@@ -237,3 +240,4 @@
   </div>
 
   </div>
+</div>

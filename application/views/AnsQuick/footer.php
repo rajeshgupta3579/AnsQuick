@@ -1,11 +1,13 @@
-
+<div id="footer">
     <div class="footer" >
           <div class="col-md-4"> </div>
-              <div class=" col-md-4" style="text-align: center;">
+              <div class=" col-md-4" style="text-align: center; bottom:0">
                 <h4>  © 2016 Copyright: <a href="http://www.AnsQuick.com"> AnsQuick.com </a></h4>
               </div>
           <div class="col-md-4"></div>
         </div>
+      </div>
+      </div>
         </body>
 
 
