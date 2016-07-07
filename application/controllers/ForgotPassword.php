@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $this->email->from($from_email, HOST_NAME);
           $this->email->to($row[0]->emailID);
           $this->email->subject('Password Recovery');
-					$message = "Follow the link to change your Password :";
+					$message = mailMessage;
           $this->email->message($message.base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".md5($row[0]->salt));
           if($this->email->send())
 						echo "true";
