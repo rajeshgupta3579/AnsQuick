@@ -132,4 +132,4 @@ define ("EMAIL_ADDRESS",'quickanswer16@gmail.com');
 define ("HOST_NAME",'AnsQuick');
 define ("DELIMITER",'-|::|-');
 define ("mailMessage","Follow the link to change your Password : ");
-define ("suggestorMethod","sql");
+define ("suggestorMethod","solr");

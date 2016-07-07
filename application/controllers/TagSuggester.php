@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$this->Ansquick_model->getTags();
 				}
 				else if($methodName="solr"){
-					$this->Ansquick_model->searchTags();
+					$this->Ansquick_model->searchTags2();
 				}
 			}
 		}

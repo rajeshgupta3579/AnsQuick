@@ -318,6 +318,38 @@ class Ansquick_model extends CI_Model{
 
      }
 
+     function searchTags2(){
+
+
+       if(!isset($_REQUEST['term'])){
+          exit();
+       }
+         $term = $_REQUEST['term'];
+         $json= file_get_contents("http://localhost:8983/solr/collection1/select?q=tag_Names%3A*".$term."*&wt=json&indent=true");
+         $obj=json_decode($json,true);
+        // var_dump($obj);
+
+         $suggestions=$obj['response']['docs'];
+         var_dump($suggestions);
+         /*$tags = array();
+         for($i=0;$i<count($suggestions);$i++){
+           $tag  = $suggestions[$i]['tagName'];
+           $tags[] = array('label'=>$tag,'value'=>$tag);
+         }
+         echo json_encode($tags);
+         flush();
+         */
+         /*$questionObj=$obj->response->docs;
+         $noOfQuestion = count($questionObj);
+         $questions = array();
+         for($i=0;$i<$noOfQuestion;$i++){
+           $question  = $questionObj[$i]->firstName;
+           $questions[]=array("label"=>$question,"value"=>$question);
+         }
+       echo json_encode($questions);
+       flush();
+ */
+      }
 
           /*
           * A function to give suggestions of tags when user is posting a question
