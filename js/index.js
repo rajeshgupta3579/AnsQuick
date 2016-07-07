@@ -2,12 +2,9 @@ var nameRX      = /^[A-Za-z\s]+$/ ;
 var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 var userNameRX  = /^[0-9a-zA-Z]+$/;
 var mobileNoRX  = /^\d{10}$/;
-function searchFormSubmit(evt) {
-  alert("da");
-  evt.preventDefault();
-  someBug();
+$("#searchBoxForm").submit(function(){
   return false;
-}
+});
 function follow(obj){
   var completeTagID = obj.id;
   var tagID = completeTagID.replace("currentTagID","");

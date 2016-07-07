@@ -80,7 +80,7 @@
     </ul>
   -->
     <div class="col-sm-6 col-md-6">
-        <form class="navbar-form" id="searchBoxForm" onsubmit="return searchFormSubmit()">
+        <form class="navbar-form" id="searchBoxForm">
         <div class="input-group">
             <input id="searchBox" type="text" class="form-control searchBox" placeholder="Search a Tag" name="q">
             <!-- <div class="input-group-btn">
