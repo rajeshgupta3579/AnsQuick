@@ -477,7 +477,6 @@ $("#profilePicFile").change(function() {
     $filename = $filename.substr($filename.length-10,$filename.length);
     $("#imagePath").html("..."+$filename);
     $("#imagePath").show(500);
-
     return true;
 });
 
