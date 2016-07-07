@@ -22,9 +22,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 			}
 			public function changePassword($userName,$salt){
-					$query = $this->Ansquick_model->get_user($userName);
-	        if($query->num_rows()>0){
-	          $row = $query->result();
+					$row = $this->Ansquick_model->getUserDetails($userName);
+	        if(count($row)){
 						if($salt==md5($row[0]->salt)){
 							$data = Array(
 		            'userName'  => $row[0]->userName
@@ -41,9 +40,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 			public function sendmail() {
         $userNameForgotPassword = $this->input->post('userNameForgotPassword');
-        $query = $this->Ansquick_model->get_user($userNameForgotPassword);
-        if($query->num_rows()>0){
-          $row = $query->result();
+        $row = $this->Ansquick_model->getUserDetails($userNameForgotPassword);
+        if(count($row)){          
           $config = unserialize(EMAIL_CONFIG);
           $this->load->library('email', $config);
           $this->email->set_newline("\r\n");

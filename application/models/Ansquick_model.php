@@ -8,15 +8,22 @@ class Ansquick_model extends CI_Model{
         return $this->db->insert('UserInfo', $data);
     }
     //get the username & password from tbl_usrs
-     function get_user($userName){
+    function getUserDetails($userName){
           /*$this->db->where('userName', $userName);
           $q = $this->db->get('my_users_table');
           */
           $this->db->or_where(array('userName' => $userName, 'emailID' => $userName));
           $query = $this->db->get('UserInfo');
-          return $query;
-     }
-
+          return $query->result();
+    }
+    function getUserArray($userName){
+          /*$this->db->where('userName', $userName);
+          $q = $this->db->get('my_users_table');
+          */
+          $this->db->or_where(array('userName' => $userName, 'emailID' => $userName));
+          $query = $this->db->get('UserInfo');
+          return $query->result_array();
+    }
 
      /*
       * Returns true if currentUserID already follows current tagid
@@ -97,8 +104,8 @@ class Ansquick_model extends CI_Model{
      *A function to check if the user has given the correct username and password combination
      */
      function userExists($userName,$password){
-          $query = $this->get_user($userName);
-          if($query->num_rows()>0){
+          $row = $this->getUserDetails($userName);
+          if(count($row)){
             $row = $query->result();
             $encryptedPassword = $this->encryptPassword($password,$row[0]->salt);
             if($encryptedPassword==$row[0]->password){
@@ -108,8 +115,8 @@ class Ansquick_model extends CI_Model{
           return 0;
      }
      function userNameExists($userName){
-          $query = $this->get_user($userName);
-          if($query->num_rows()>0){
+          $row = $this->getUserDetails($userName);
+          if(count($row)){
             return 1;
           }
           return 0;

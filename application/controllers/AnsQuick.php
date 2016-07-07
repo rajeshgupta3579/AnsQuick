@@ -87,11 +87,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 				if($this->Ansquick_model->userNameExists($userName)){
 
-					$query = $this->Ansquick_model->get_user($userName);
+					$row = $this->Ansquick_model->getUserArray($userName);
 
-	        if($query->num_rows()>0){
-
-	          $row = $query->result_array();
+	        if(count($row)){
 						$tags = $this->Ansquick_model->getUserTags($row[0]['userID']);
 						$data = array('userInfo' => $row[0],'userTags' => $tags );
 						$this->load->view('AnsQuick/profile',$data);
