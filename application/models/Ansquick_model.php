@@ -106,7 +106,6 @@ class Ansquick_model extends CI_Model{
      function userExists($userName,$password){
           $row = $this->getUserDetails($userName);
           if(count($row)){
-            $row = $query->result();
             $encryptedPassword = $this->encryptPassword($password,$row[0]->salt);
             if($encryptedPassword==$row[0]->password){
               return 1;

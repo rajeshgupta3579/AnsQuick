@@ -131,7 +131,7 @@ $("#loginSubmit").click(function(){
       return false;
   }
   data = {'userNameLogin' : userNameLogin, 'passwordLogin' : passwordLogin };
-  $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){
+  $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){    
     if(res=="true"){
       $("#loginForm").submit();
     }
