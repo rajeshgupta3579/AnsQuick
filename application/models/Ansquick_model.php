@@ -216,22 +216,22 @@ class Ansquick_model extends CI_Model{
      /*
      * Returns the maximum tagID present in the database
      */
-     function topTagID(){
+     /*function topTagID(){
         $sql = "SELECT MAX(tagID) as maxTagID FROM Tags";
         $query = $this->db->query($sql)->result();
         $result = $query[0]->maxTagID;
         return $result;
-     }
+     }*/
 
      /*
      * A function to insert a new tag into database
      * Takes input a tag in string
      */
      function insertTag($tag){
-       $topTagID=$this->topTagID();
-       $sql = "INSERT INTO Tags (tagName) VALUES ('".$tag."')";
-       $query = $this->db->query($sql);
-       return $topTagID+1;
+       $data = array('tagName'=>$tag);
+       $this->db->insert('Tags', $data);
+       $insert_id = $this->db->insert_id();
+       return  $insert_id;
      }
 
      /*function topQuestionID(){
@@ -242,7 +242,7 @@ class Ansquick_model extends CI_Model{
      }*/
 
      function insertQuestion($question,$userID,$categoryID){
-         $data = array('questionText'=>$question,'userID'=>$userID,'categoryID'=>$categoryID);
+         $post_data = array('questionText'=>$question,'userID'=>$userID,'categoryID'=>$categoryID);
          $this->db->insert('Question', $post_data);
          $insert_id = $this->db->insert_id();
 

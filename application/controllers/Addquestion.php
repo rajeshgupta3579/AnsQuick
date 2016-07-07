@@ -10,8 +10,9 @@ class Addquestion extends CI_Controller{
 	}
   public function index(){
 			if($this->session->userdata('userName')==null){
-				echo "No user";
-				exit();
+				redirect(base_url());
+				/*echo "No user";
+				exit();*/
 			}
 			else {
 						 $question = $_GET['question'];
