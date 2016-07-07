@@ -28,7 +28,7 @@
                               $attributes = array("class" => "form-horizontal", "id" => "profilePicForm", "name" => "profilePicForm","role"=>"form");
                               echo form_open_multipart("AnsQuick/editProfilePic", $attributes);?>
                                 <label class="btn btn-default btn-file">
-                                    <span class="glyphicon glyphicon-upload"></span> Edit Image <input name="profilePicFile" id="profilePicFile" type="file" style="display: none;" accept="image/*"><span id="imagePath"></span>
+                                    <span class="glyphicon glyphicon-upload"></span> Upload Image <input name="profilePicFile" id="profilePicFile" type="file" style="display: none;" accept="image/*"><span id="imagePath"></span>
                                 </label>
                                 <button type="submit" class="btn btn-success pull-right" id="profilePicSubmit" >Submit</button>
                                 <div class="alert alert-danger" role="alert" id="profilePicError" hidden="true"> </div>

@@ -9,22 +9,14 @@ function follow(obj){
   var completeTagID = obj.id;
   var tagID = completeTagID.replace("currentTagID","");
   var s="http://www.ansquick.com/index.php/Tag/follow/".concat(tagID);
-  //alert(s);
-  //alert(tagID);
   $.post(s,function(res){
-    //alert(res);
     if(res=="nowFollowing"){
-        //alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","unFollow(this)");
         $("#".concat(completeTagID)).html('<i class="glyphicon glyphicon-remove"></i>Unfollow');
         $("#".concat(completeTagID)).attr("class","btn btn-danger");
-        //$('#asdtagEvent').attr("class","glyphicon glyphicon-remove");
-
     }
     else if(res=="noUser"){
         alert("please login");
-      //  $("#logIn").modal('show');
-      //  alert("asda");
     }
   });
 
@@ -33,29 +25,20 @@ function unFollow(obj){
   var completeTagID = obj.id;
   var tagID = completeTagID.replace("currentTagID","");
   var s="http://www.ansquick.com/index.php/Tag/Unfollow/".concat(tagID);
-  //alert(s);
-  //alert(tagID);
   $.post(s,function(res){
-    //alert(res);
     if(res=="nowNotFollowing"){
-        //alert(completeTagID);
         $("#".concat(completeTagID)).attr("onclick","follow(this)");
         $("#".concat(completeTagID)).html('<i class="glyphicon glyphicon-ok"></i>Follow');
         $("#".concat(completeTagID)).attr("class","btn btn-success");
-        //$('#asdtagEvent').attr("class","glyphicon glyphicon-ok");
-
     }
     else if(res=="noUser"){
         alert("please login");
-      //  $("#logIn").modal('show');
-      //  alert("asda");
     }
   });
 
 }
 $("#signUpSubmit").click(function(){
     $(".alert").hide();
-
     var firstName   = document.forms["signUpForm"]["firstName"].value.trim();
     var lastName    = document.forms["signUpForm"]["lastName"].value.trim();
     var userName    = document.forms["signUpForm"]["userName"].value.trim();
@@ -149,7 +132,6 @@ $("#loginSubmit").click(function(){
   }
   data = {'userNameLogin' : userNameLogin, 'passwordLogin' : passwordLogin };
   $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){
-    //alert(res);
     if(res=="true"){
       $("#loginForm").submit();
     }
@@ -280,13 +262,7 @@ function addLike(obj) {
   $likeCount = $("#likeCount"+answerID).html();
   data = {'answerID' : answerID };
   $.post("http://www.ansquick.com/index.php/Like/addLike",data,function(res){
-    //alert(res);
     if(res=="true"){
-      /*
-      $("#"+obj.id).attr("onclick","removeLike(this)");
-      $("#"+obj.id).html("Unlike");
-      $("#likeCount"+answerID).html(parseInt($likeCount,10)+1);
-      */
       location.reload();
     }
     else if(res=="noUser") {
@@ -306,13 +282,7 @@ function removeLike(obj) {
   $likeCount = $("#likeCount"+answerID).html();
   data = {'answerID' : answerID };
   $.post("http://www.ansquick.com/index.php/Like/removeLike",data,function(res){
-    //alert(res);
     if(res=="true"){
-      /*
-      $("#"+obj.id).attr("onclick","addLike(this)");
-      $("#"+obj.id).html("Like");
-      $("#likeCount"+answerID).html(parseInt($likeCount,10)-1);
-      */
       location.reload();
     }
     else if(res=="noUser") {
@@ -328,10 +298,7 @@ function removeLike(obj) {
 }
 
 $(document).ready(function() {
-    //toggle `popup` / `inline` mode
     $.fn.editable.defaults.mode = 'inline';
-
-
     //make First Name editable
     $('#profileFirstName').editable({
         type: 'text',
@@ -346,7 +313,6 @@ $(document).ready(function() {
         },
         send: 'always',
         autotext: $.trim($(this).text),
-        //name: 'profileFirstName',
         url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
         success: function(response, newValue) {
           if(response!="success"){
@@ -369,7 +335,6 @@ $(document).ready(function() {
         },
         send: 'always',
         autotext: $.trim($(this).text),
-        //name: 'profileFirstName',
         url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
         success: function(response, newValue) {
           if(response!="success"){
@@ -389,7 +354,6 @@ $(document).ready(function() {
         },
         send: 'always',
         autotext: $.trim($(this).text),
-        //name: 'profileFirstName',
         url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
         success: function(response, newValue) {
           if(response!="success"){
@@ -410,7 +374,6 @@ $(document).ready(function() {
         },
         send: 'always',
         autotext: $.trim($(this).text),
-        //name: 'profileFirstName',
         url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
         success: function(response, newValue) {
           if(response!="success"){
@@ -434,7 +397,6 @@ $(document).ready(function() {
         },
         send: 'always',
         autotext: $.trim($(this).text),
-        //name: 'profileFirstName',
         url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
         success: function(response, newValue) {
           if(response!="success"){
@@ -442,7 +404,6 @@ $(document).ready(function() {
           }
         }
     });
-
 
     //make Gender editable
     $('#profileGender').editable({
@@ -460,10 +421,8 @@ $(document).ready(function() {
         },
         send: 'always',
         autotext: $.trim($(this).text),
-        //name: 'profileFirstName',
         url: 'http://www.ansquick.com/index.php/AnsQuick/editProfile/',
         success: function(response, newValue) {
-          //alert(response);
           if(response!="success"){
             return response;
           }
@@ -492,7 +451,3 @@ $("#profilePicSubmit").click(function(){
   }
   return true;
 });
-
-/*$('#searchBox').focus( function(){
-  alert("expanded");
-});*/
