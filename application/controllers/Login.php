@@ -21,7 +21,7 @@ class Login extends CI_Controller{
                    'lastName'  => $row[0]->lastName,
                    'userID'    => $row[0]->userID,
                    'profilePic'=> $row[0]->profilePic,
-                 	 'userName'  => $userNameLogin,
+                 	 'userName'  => $row[0]->userName,
                    'loginUser' => TRUE
               );
               $this->session->set_userdata($sessiondata);

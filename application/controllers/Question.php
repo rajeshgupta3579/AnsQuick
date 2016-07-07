@@ -21,6 +21,7 @@
         else{
 						$currentUserID = $this->session->userdata('userID');
             $data = $this->Ansquick_model->expandQuestion($questionID);
+						if(!count($data['questionDetails']['questionDiscription']))	redirect(base_url());					
 						$data['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
             $this->load->view('AnsQuick/question.php',$data);
         }

@@ -78,7 +78,8 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a href="#addAnswerText<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>"><span class="glyphicon glyphicon-comment"></span> Write Answer</a>
+                      <a onclick="writeAnswerFocus(this)" id="writeAnswer<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" >
+                        <span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                       <li>
                       <a href="<?php echo base_url('index.php/Question/expand/'.$questionDetails['questionDiscription'][0]['questionID']);?>"><span class="glyphicon glyphicon-comment"></span> View All Answers</a>
