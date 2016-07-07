@@ -1,11 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 	class AnsQuick extends CI_Controller {
-			/***Function Header
-			*Constructor for the Controller
-			*Loads the helper for form and base_url, loads the database and the Model
-			*
-			***/
 			public function __construct(){
 		        parent::__construct();
 		        $this->load->helper(array('form','url'));
@@ -15,23 +10,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			}
 			public function index(){
-				//var_dump($_REQUEST);
-				//var_dump($_GET);
-				/*	$start=0;$end=0;
-					$topFeed = $this->Ansquick_model->getTopFeed($start,$end);
-					//var_dump($recentFeed);
-					$this->load->view('AnsQuick/index',$topFeed);
-					*/
-
-
-
 					$this->recent();
 			}
 			public function top(){
 
 				if($this->session->userdata('userID')){
-
-								//	var_dump(Pagination_links);
 								  $currentUserID = $this->session->userdata('userID');
 									$config = unserialize(Pagination_links);
 									$config['base_url'] = base_url('index.php/AnsQuick/top');
@@ -44,15 +27,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 								  $this->pagination->initialize($config);
 
-
-
 									$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-									$topFeed = $this->Ansquick_model->getTopFeed($config["per_page"], $data['page'],$currentUserID);
+									$topFeed      = $this->Ansquick_model->getTopFeed($config["per_page"], $data['page'],$currentUserID);
 									$topFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
 									//var_dump($topFeed);
 
 									$data['questionDetails'] = $topFeed['questionDetails'];
-									$data['pagination'] = $this->pagination->create_links();
+									$data['pagination']      = $this->pagination->create_links();
 
 									//var_dump($data);
 									$this->load->view('AnsQuick/index',$data);
@@ -66,14 +47,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 			public function recent(){
 
-				//var_dump($_REQUEST);
-				//var_dump($_GET);
-
 									$config = unserialize(Pagination_links);
-									$config['base_url'] = base_url('index.php/AnsQuick/recent');
+									$config['base_url']   = base_url('index.php/AnsQuick/recent');
 				        	$config['total_rows'] = $this->Ansquick_model->countRowsRecentFeed();
-				        	$config['per_page'] = "2";
-				        	$config["uri_segment"] = 3;
+				        	$config['per_page']   = "2";
+				        	$config["uri_segment"]= 3;
 				        	$choice = $config["total_rows"]/$config["per_page"];
 				        	$config["num_links"] = floor($choice);
 
@@ -83,17 +61,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 									$currentUserID = $this->session->userdata('userID');
-									$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-									$recentFeed = $this->Ansquick_model->getRecentFeed($config["per_page"], $data['page']);
+									$data['page']  = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+									$recentFeed    = $this->Ansquick_model->getRecentFeed($config["per_page"], $data['page']);
 									$recentFeed['questionDetails']['userLikes'] = $this->Ansquick_model->getUserLikes($currentUserID);
-									//var_dump($recentFeed);
 
 
 
 									$data['questionDetails'] = $recentFeed['questionDetails'];
 									$data['pagination'] = $this->pagination->create_links();
-
-									//var_dump($data);return ;
 									$this->load->view('AnsQuick/index',$data);
 			}
 
@@ -117,10 +92,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	        if($query->num_rows()>0){
 
 	          $row = $query->result_array();
-						//var_dump($row[0]);
 						$tags = $this->Ansquick_model->getUserTags($row[0]['userID']);
 						$data = array('userInfo' => $row[0],'userTags' => $tags );
-						//var_dump($data);return ;
 						$this->load->view('AnsQuick/profile',$data);
 					}
 				}
@@ -133,7 +106,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						redirect(base_url());
 					}
 					else{
-						//var_dump($_POST); return;
 						$data = array();
 						if($this->input->post("name")=="profileFirstName"){
 							$data['firstName'] = trim($this->input->post("value"));
