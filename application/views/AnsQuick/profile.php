@@ -60,7 +60,7 @@
                           <div class="form-group">
                             <ul class="list-inline">
                               <li>
-                                <label for="profileLastName">Last Name <?php $num = 18;while($num--) echo "&nbsp;";?>: &nbsp;&nbsp; </label>
+                                <label for="profileLastName">Last Name <?php $num = 17;while($num--) echo "&nbsp;";?>: &nbsp;&nbsp; </label>
                                 <?php if($editAccess) { ?>
                               <a href="#" id="profileLastName"><?php echo $userInfo['lastName']; ?></a>
                             <?php } else { ?>

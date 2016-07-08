@@ -131,7 +131,7 @@ $("#loginSubmit").click(function(){
       return false;
   }
   data = {'userNameLogin' : userNameLogin, 'passwordLogin' : passwordLogin };
-  $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){    
+  $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){
     if(res=="true"){
       $("#loginForm").submit();
     }
@@ -452,6 +452,12 @@ $("#profilePicSubmit").click(function(){
   $filename = $.trim($filename);
   if($filename  == null || $filename == "" ){
     $("#profilePicError").html("Select a File to Upload");
+    $("#profilePicError").show(500);
+    return false;
+  }
+  var ext = $('#profilePicFile').val().split('.').pop().toLowerCase();
+  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+    $("#profilePicError").html("Invalid Format");
     $("#profilePicError").show(500);
     return false;
   }

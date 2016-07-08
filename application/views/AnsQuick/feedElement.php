@@ -186,8 +186,7 @@
                                   <br><?php $a= $questionDetails[$i]['answerText'];
                                   echo wordwrap($a,70,"<br>\n",TRUE);;
                                   ?>
-                                  <br><?php echo $questionDetails[$i]['answerTime']; ?> ·<a style="cursor: pointer;" id="likeAnswerButton
-                                  <?php echo $questionDetails[$i]['answerID'];?>" onclick="<?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes']))
+                                  <br><?php echo $questionDetails[$i]['answerTime']; ?> ·<a style="cursor: pointer;" id="likeAnswerButton<?php echo $questionDetails[$i]['answerID'];?>" onclick="<?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes']))
                                   { echo "removeLike(this)";} else{echo "addLike(this)";} ?>"><?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes']))
                                   echo"Unlike"; else echo"Like"; ?></a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge" id="likeCount<?php echo $questionDetails[$i]['answerID'];?>">
                                     <?php echo $questionDetails[$i]['likes']?></span>

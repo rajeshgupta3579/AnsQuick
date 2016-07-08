@@ -17,9 +17,6 @@ class Ansquick_model extends CI_Model{
           return $query->result();
     }
     function getUserArray($userName){
-          /*$this->db->where('userName', $userName);
-          $q = $this->db->get('my_users_table');
-          */
           $this->db->or_where(array('userName' => $userName, 'emailID' => $userName));
           $query = $this->db->get('UserInfo');
           return $query->result_array();
@@ -30,13 +27,15 @@ class Ansquick_model extends CI_Model{
       * returns false otherwise
      */
      function alradyFollows($currentUserID,$tagID){
-
-       $query=$this->db->query("SELECT * FROM Follow WHERE tagID='".$tagID."' AND userID='".$currentUserID."'");
+       $this->db->where(array('userID' => $currentUserID, 'tagID' => $tagID));
+       $query = $this->db->get('Follow');
+       //$query=$this->db->query("SELECT * FROM Follow WHERE tagID='".$tagID."' AND userID='".$currentUserID."'");
        $result = $query->result_array();
        if(count($result)>0){
          return 1;
        }
-       else return 0;
+       else
+         return 0;
      }
 
 
@@ -74,15 +73,15 @@ class Ansquick_model extends CI_Model{
      /*
      * Returns the userID for a username
      */
-       function getUserID($userName){
+     function getUserID($userName){
          $query = $this->db->select("userID")->from("UserInfo")->where("userName", $userName)->get();
 
-       /*$sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
-       $query    = $this->db->query($sql);
-       */
-       $result   = $query->result();
-       $userID   = $result[0]->userID;
-       return $userID;
+         /*$sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
+         $query    = $this->db->query($sql);
+         */
+         $result   = $query->result();
+         $userID   = $result[0]->userID;
+         return $userID;
      }
 
 
@@ -93,7 +92,9 @@ class Ansquick_model extends CI_Model{
     */
     function doesFollow($tagID,$currentUserID)
     {
-      $query  = $this->db->query("select * from Follow where tagID='".$tagID."' AND userID='".$currentUserID."'");
+      $this->db->where(array('userID' => $currentUserID, 'tagID' => $tagID));
+      $query = $this->db->get('Follow');
+      //      $query  = $this->db->query("select * from Follow where tagID='".$tagID."' AND userID='".$currentUserID."'");
       $result = $query->result_array();
       if(count($result)>0)
       return 1;
@@ -143,13 +144,15 @@ class Ansquick_model extends CI_Model{
       * returns true
       */
       function removeLike($answerID,$userID){
-         $query = $this->db->query("DELETE
+        $this->db->where(array('userID'=>$userID,'answerID'=>$answerID));
+        $this->db->delete('`Like`');
+         /*$query = $this->db->query("DELETE
                                      FROM `Like`
                                      WHERE
                                      userID = '".$userID."'
                                      AND
                                      answerID = '".$answerID."'
-                                     ");
+                                     ");*/
          $this->db->set('likes', '`likes`-1', FALSE);
          $this->db->where('answerID', $answerID);
          $this->db->update('Answer');
@@ -262,9 +265,9 @@ class Ansquick_model extends CI_Model{
      function getTagsArray($tagList){
 
            $tagListQuery = implode("', '", $tagList);
-
-           $sql     = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
-           $query   = $this->db->query($sql);
+           $this->db->where_in('tagName', $tagListQuery);
+           //$sql     = "SELECT * FROM Tags WHERE tagName in ('$tagListQuery')";
+           $query   = $this->db->get('Tags');
            $result  = $query->result();
 
            $tagsArray = array();
@@ -280,8 +283,9 @@ class Ansquick_model extends CI_Model{
 */
      function getCategoryID($category){
 
-          $sql    = "SELECT categoryID FROM Category WHERE categoryName='".$category."'";
-          $query  = $this->db->query($sql);
+          $query = $this->db->select("categoryID")->from("Category")->where("categoryName", $category)->get();
+          //$sql    = "SELECT categoryID FROM Category WHERE categoryName='".$category."'";
+          //$query  = $this->db->query($sql);
           $result = $query->result();
           $categoryID = $result[0]->categoryID;
           return $categoryID;
@@ -291,9 +295,9 @@ class Ansquick_model extends CI_Model{
 
 
      function insertQuestionTag($questionID,$tagID){
-
-       $sql = "INSERT INTO QuestionTag (questionID,tagID) VALUES ('".$questionID."','".$tagID."')";
-       $query = $this->db->query($sql);
+       return $this->db->insert('QuestionTag', array('questionID' => $questionID, 'tagID'=>$tagID));
+       //$sql = "INSERT INTO QuestionTag (questionID,tagID) VALUES ('".$questionID."','".$tagID."')";
+       //$query = $this->db->query($sql);
 
      }
      /*
@@ -549,7 +553,8 @@ class Ansquick_model extends CI_Model{
      * Returns a string containing the tagName
      */
      function currentTag($tagName){
-       $query  = $this->db->query("SELECT tagID from Tags WHERE tagName='".$tagName."'");
+       $query = $this->db->select("tagID")->from("Tags")->where("tagName", $tagName)->get();
+       //$query  = $this->db->query("SELECT tagID from Tags WHERE tagName='".$tagName."'");
        $result = $query->result_array();
        $currentTag="noTag";
        if(count($result)>0)
@@ -798,13 +803,14 @@ class Ansquick_model extends CI_Model{
      * A function to return the total number of questions asked by a user
      */
      function countRowsAskedQuestion($currentUserID){
-       $query = $this->db->query("SELECT
+       $query = $this->db->select("questionID")->from("Question")->where("userID", $currentUserID)->get();
+       /*$query = $this->db->query("SELECT
                                   c.questionID
                                   from
                                   Question c
                                   where
                                   c.userID='".$currentUserID."'
-                                ");
+                                ");*/
        $result = $query->result_array();
        $rows   = count($result);
        return $rows;
