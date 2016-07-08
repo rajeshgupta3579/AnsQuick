@@ -131,5 +131,6 @@ define ("EMAIL_CONFIG", serialize (Array(
 define ("EMAIL_ADDRESS",'quickanswer16@gmail.com');
 define ("HOST_NAME",'AnsQuick');
 define ("DELIMITER",'-|::|-');
-define ("mailMessage","Follow the link to change your Password : ");
-define ("suggestorMethod","sql");
+define ("FORGOT_PASSWORD_MAIL_MESSAGE","Follow the link to change your Password : ");
+define ("SUGGESTOR_METHOD","sql");
+define ("MAILER_LOG","mailers.log");

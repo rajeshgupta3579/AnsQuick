@@ -857,5 +857,27 @@ class Ansquick_model extends CI_Model{
                                 ");
        return $query->result_array();
      }
+
+     function getQuestionContributerEmails($questionID,$answeredByUserID){
+         $query = $this->db->select("userID")->from("Question")->where("questionID", $questionID)->get();
+         $row = $query->result_array();
+         $userIDs = array();
+         foreach ($row as $r) {
+            $userIDs[] = $r['userID'];
+         }
+         // var_dump($row);
+         $query = $this->db->select("userID")->from("Answer")->where("questionID", $questionID)->get();
+         $row = $query->result_array();
+         foreach ($row as $r) {
+            $userIDs[] = $r['userID'];
+         }
+         $uniqueUsers = array_unique($userIDs, SORT_REGULAR);
+         //var_dump($uniqueUsers);
+         $answeredByUser = array();
+         $answeredByUser[] = $answeredByUserID ;
+         $uniqueUsers = array_diff($uniqueUsers,$answeredByUser);
+         $query = $this->db->select("emailID")->from("UserInfo")->where_in("userID", $uniqueUsers)->get();
+         return $query->result_array();
+     }
 }
 ?>

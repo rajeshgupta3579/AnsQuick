@@ -1,4 +1,5 @@
 <?php include('header.php'); ?>
+<div id="content" style="margin-top:6%; padding-bottom:5%;">
     <div class="container" style="margin-top:3%;">
         <div class="row">
             <div class="col-lg-12">
@@ -38,4 +39,5 @@
 
       </div>
     </div>
+  </div>
 <?php include('footer.php'); ?>

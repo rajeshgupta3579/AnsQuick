@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			public function sendmail() {
         $userNameForgotPassword = $this->input->post('userNameForgotPassword');
         $row = $this->Ansquick_model->getUserDetails($userNameForgotPassword);
-        if(count($row)){          
+        if(count($row)){
           $config = unserialize(EMAIL_CONFIG);
           $this->load->library('email', $config);
           $this->email->set_newline("\r\n");
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $this->email->from($from_email, HOST_NAME);
           $this->email->to($row[0]->emailID);
           $this->email->subject('Password Recovery');
-					$message = mailMessage;
+					$message = FORGOT_PASSWORD_MAIL_MESSAGE;
           $this->email->message($message.base_url()."index.php/ForgotPassword/changePassword/".$row[0]->userName."/".md5($row[0]->salt));
           if($this->email->send())
 						echo "true";

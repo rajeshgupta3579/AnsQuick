@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	          $this->load->model('Ansquick_model');
 			}
 			public function index(){
-				$methodName=suggestorMethod;
+				$methodName=SUGGESTOR_METHOD;
 				if($methodName=="sql"){
 					$this->Ansquick_model->getTags();
 				}
