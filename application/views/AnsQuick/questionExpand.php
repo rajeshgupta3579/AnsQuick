@@ -1,4 +1,5 @@
-<div class="container" style="margin-top:6%">
+<div id="content" style="margin-top:6%;padding-bottom:5%;">
+<div class="container">
   <div class="row">
 
     <div class="col-md-2" style="position: fixed;left: 0;margin-top:2%">
@@ -155,8 +156,9 @@
               </div>
     </div>
     <div class="col-md-3" style="position: absolute;right: 0;">
-      <img src="<?php echo base_url("Uploads/Ads/ad.png");?>" class="pull-left img-responsive" style="margin-right:5px; height:75%" />
+      <img src="<?php echo base_url("Uploads/Ads/ad.jpg");?>" class="pull-left img-responsive" style="margin-right:5px; height:550px;width:300px;" />
     </div>
   </div>
 
   </div>
+</div>

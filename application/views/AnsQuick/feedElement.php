@@ -1,5 +1,5 @@
-<div id="content">
-<div class="container" style="margin-top:6%">
+<div id="content" style="margin-top:6%; padding-bottom:5%;">
+<div class="container">
 
   <div class="row">
     <div class="col-md-2" style="position: fixed;left: 0;margin-top:2%">
@@ -242,7 +242,7 @@
     <div class="col-md-7" style="margin-left:180px;text-align:center"> <p><?php  if(isset($pagination))echo $pagination; ?> </p></div>
     <!-- Right sidebar: A cell that spans 3 columns -->
     <div class="col-md-3" style="position: absolute;right: 0;">
-      <img src="<?php echo base_url("Uploads/Ads/ad.png");?>" class="pull-left img-responsive" style="margin-right:5px; height:700px;width:300px;" />
+      <img src="<?php echo base_url("Uploads/Ads/ad.jpg");?>" class="pull-left img-responsive" style="margin-right:5px; height:550px;width:300px;" />
     </div>
   </div>
 
