@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$this->load->library('session');
 						$this->load->model('Ansquick_model');
 						$this->load->library('pagination');
-						
+
 
 			}
 			public function index(){
@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				if($this->session->userdata('userID')){
 								  $currentUserID = $this->session->userdata('userID');
 									$config = unserialize(Pagination_links);
-									$config['base_url'] = base_url('index.php/AnsQuick/top');
+									$config['base_url'] = base_url(TOP_FEED_PAGE_URL);
 									$config['total_rows'] = $this->Ansquick_model->countRowsTopFeed($currentUserID);
 									$config['per_page'] = "1";
 									$config["uri_segment"] = 3;

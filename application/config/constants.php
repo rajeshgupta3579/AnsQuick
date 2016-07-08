@@ -135,3 +135,7 @@ define ("FORGOT_PASSWORD_MAIL_MESSAGE","Follow the link to change your Password 
 define ("SUGGESTOR_METHOD","sql");
 define ("MAILER_LOG","mailers.log");
 define ("QUESTION_QUERY_METHOD","solr");
+define ("TAG_DETAIL_PAGE_URL","index.php/Tag/recent/");
+define ("TOP_FEED_PAGE_URL","index.php/AnsQuick/top");
+define("TAG_DETAIL_PAGE_PER_PAGE","1");
+define("TAG_DETAIL_PAGE_URI_SEGMENT","1");
