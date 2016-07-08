@@ -9,6 +9,7 @@
 		        $this->load->database();
 						$this->load->library(array('session', 'form_validation', 'email'));
 		        $this->load->model('Ansquick_model');
+						$this->load->model('Solr_model');
 						$this->load->library('pagination');
 
 			}
@@ -70,23 +71,28 @@
 						if($tagExsists=="noTag"){
 							redirect(base_url(""));
 						}
-						$tagID = $tagExsists;
-						$config = unserialize(Pagination_links);
-						$config['base_url'] = base_url('index.php/Tag/recent/'.$tagID);
-						$config['total_rows'] = $this->Ansquick_model->countRowsRecentTagFeed($tagID);
-						$config['per_page'] = "1";
-						$config["uri_segment"] = 4;
-						$choice = $config["total_rows"]/$config["per_page"];
-						$config["num_links"] = floor($choice);
+							$tagID 								= $tagExsists;
+							$config 							= unserialize(Pagination_links);
+							$config['base_url'] 	= base_url('index.php/Tag/recent/'.$tagName);
+							$config['per_page'] 	= "1";
+							$config["uri_segment"]= 4;
+							$data['page'] 				= ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+						if(questionQueryMethod=="sql"){
+							$config['total_rows'] = $this->Ansquick_model->countRowsRecentTagFeed($tagID);
+							$choice = $config["total_rows"]/$config["per_page"];
+							$config["num_links"]  = floor($choice);
+							$this->pagination->initialize($config);
+							$recentFeed   = $this->Ansquick_model->getRecentTagFeed($config["per_page"], $data['page'],$tagID,$currentUserID);
+						}
+						else if(questionQueryMethod=="solr"){
+							$config['total_rows'] = $this->Solr_model->countRowsRecentTagFeed($tagID);
+							//var_dump($config['total_rows']);
 
-
-					$this->pagination->initialize($config);
-
-
-
-
-						$data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $recentFeed   = $this->Ansquick_model->getRecentTagFeed($config["per_page"], $data['page'],$tagID,$currentUserID);
+							$choice = $config["total_rows"]/$config["per_page"];
+							$config["num_links"]  = floor($choice);
+							$this->pagination->initialize($config);
+							$recentFeed   = $this->Solr_model->getRecentTagFeed($config["per_page"], $data['page'],$tagID,$currentUserID);
+						}
 						$recentFeed['questionDetails']['currentTag']    = $tagName;
 						$recentFeed['questionDetails']['userLikes']     = $this->Ansquick_model->getUserLikes($currentUserID);
 						$data['questionDetails'] = $recentFeed['questionDetails'];

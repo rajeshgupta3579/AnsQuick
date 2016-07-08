@@ -324,38 +324,6 @@ class Ansquick_model extends CI_Model{
 
      }
 
-     function searchTags2(){
-
-
-       if(!isset($_REQUEST['term'])){
-          exit();
-       }
-         $term = $_REQUEST['term'];
-         $json= file_get_contents("http://localhost:8983/solr/collection1/select?q=tag_Names%3A*".$term."*&wt=json&indent=true");
-         $obj=json_decode($json,true);
-        // var_dump($obj);
-
-         $suggestions=$obj['response']['docs'];
-         var_dump($suggestions);
-         /*$tags = array();
-         for($i=0;$i<count($suggestions);$i++){
-           $tag  = $suggestions[$i]['tagName'];
-           $tags[] = array('label'=>$tag,'value'=>$tag);
-         }
-         echo json_encode($tags);
-         flush();
-         */
-         /*$questionObj=$obj->response->docs;
-         $noOfQuestion = count($questionObj);
-         $questions = array();
-         for($i=0;$i<$noOfQuestion;$i++){
-           $question  = $questionObj[$i]->firstName;
-           $questions[]=array("label"=>$question,"value"=>$question);
-         }
-       echo json_encode($questions);
-       flush();
- */
-      }
 
           /*
           * A function to give suggestions of tags when user is posting a question
@@ -512,7 +480,12 @@ class Ansquick_model extends CI_Model{
         for($i=0;$i<count($questionDetails);$i++){
 
           $questionID      =   $questionDetails[$i]['questionID'];
-          $tagsOfQuestion  =   $this->getTagsOfQuestion($questionID);
+
+          if(!isset($questionDetails[$i]['tag_names'])){
+                $tagsOfQuestion  =   $this->getTagsOfQuestion($questionID);
+                $questionDetails[$i]['tag_names'] = $tagsOfQuestion[0]['tag_names'];
+                $questionDetails[$i]['tag_ids']   = $tagsOfQuestion[0]['tag_ids'];
+          }
 
           if($questionDetails[$i]['answerCount']>0){
 
@@ -534,8 +507,7 @@ class Ansquick_model extends CI_Model{
                 $questionDetails[$i]['answerdByPic']        =   "";
                 $questionDetails[$i]['answerdByUserName']   =   "";
           }
-          $questionDetails[$i]['tag_names'] = $tagsOfQuestion[0]['tag_names'];
-          $questionDetails[$i]['tag_ids']   = $tagsOfQuestion[0]['tag_ids'];
+
 
 
         }
@@ -604,11 +576,13 @@ class Ansquick_model extends CI_Model{
       $data=array(
               'question'  =>  $query->result_array(),
               );
+      var_dump($data);
       $data =  $this->process_feed($data);
       $data['questionDetails']['type']          = "getRecentTagFeed";
     //  $data['questionDetails']['currentTag']    = $currentTag;
       $data['questionDetails']['currentTagID']  = $tagID;
       $data['questionDetails']['follow']        = $follow;
+      var_dump($data);
       return $data;
      }
 

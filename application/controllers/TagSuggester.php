@@ -7,6 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$this->load->database();
 						$this->load->library('session');
 	          $this->load->model('Ansquick_model');
+						$this->load->model('Solr_model');
 			}
 			public function index(){
 				$methodName=suggestorMethod;
@@ -14,7 +15,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$this->Ansquick_model->getTags();
 				}
 				else if($methodName="solr"){
-					$this->Ansquick_model->searchTags2();
+					$this->Solr_model->searchTags();
+					//$this->Solr_model->questionDetails("ni");
 				}
 			}
 		}
