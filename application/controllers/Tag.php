@@ -73,9 +73,9 @@
 						}
 							$tagID 								= $tagExsists;
 							$config 							= unserialize(Pagination_links);
-							$config['base_url'] 	= base_url('index.php/Tag/recent/'.$tagName);
-							$config['per_page'] 	= "1";
-							$config["uri_segment"]= 4;
+							$config['base_url'] 	= base_url(TAG_DETAIL_PAGE_URL.$tagName);
+							$config['per_page'] 	= TAG_DETAIL_PAGE_PER_PAGE;
+							$config["uri_segment"]= TAG_DETAIL_PAGE_URI_SEGMENT;
 							$data['page'] 				= ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
 						if(QUESTION_QUERY_METHOD=="sql"){
 							$config['total_rows'] = $this->Ansquick_model->countRowsRecentTagFeed($tagID);

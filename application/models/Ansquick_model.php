@@ -329,39 +329,7 @@ class Ansquick_model extends CI_Model{
      }
 
 
-          /*
-          * A function to give suggestions of tags when user is posting a question
-          * Input is taken from the request made by jquery
-          * Output is list of suggestions in json format
-          */
-    function searchTags(){
 
-
-      if(!isset($_REQUEST['term'])){
-         exit();
-      }
-        $term = $_REQUEST['term'];
-        $json= file_get_contents('http://localhost:8983/solr/collection1/suggest?suggest=true&suggest.build=true&suggest.dictionary=mySuggester&wt=json&suggest.q='.$term);
-        $obj=json_decode($json,true);
-        $suggestions=$obj['suggest']['mySuggester'][$term]['suggestions'];
-        $tags = array();
-        for($i=0;$i<count($suggestions);$i++){
-          $tag  = $suggestions[$i]['term'];
-          $tags[] = array('label'=>$tag,'value'=>$tag);
-        }
-        echo json_encode($tags);
-        flush();
-        /*$questionObj=$obj->response->docs;
-        $noOfQuestion = count($questionObj);
-        $questions = array();
-        for($i=0;$i<$noOfQuestion;$i++){
-          $question  = $questionObj[$i]->firstName;
-          $questions[]=array("label"=>$question,"value"=>$question);
-        }
-      echo json_encode($questions);
-      flush();
-*/
-     }
 
 
      /*
