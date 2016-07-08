@@ -146,7 +146,7 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a id="writeAnswer<?php echo $questionDetails[$i]['questionID'];?>"  onclick="writeAnswerFocus(this)">
+                      <a href="#" id="writeAnswer<?php echo $questionDetails[$i]['questionID'];?>"  onclick="writeAnswerFocus(this); return false;">
                         <span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                       <li>

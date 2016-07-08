@@ -233,7 +233,7 @@ function writeAnswerFocus(obj){
   $(".alert").hide();
   var questionID = obj.id.replace('writeAnswer','');
   $('#addAnswerText'+questionID).focus();
-  return true;
+  return false;
 }
 function addAnswer(obj) {
   $(".alert").hide();

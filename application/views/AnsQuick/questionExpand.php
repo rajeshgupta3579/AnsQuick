@@ -79,7 +79,7 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a onclick="writeAnswerFocus(this)" id="writeAnswer<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" >
+                      <a href="#" onclick="writeAnswerFocus(this);return false;" id="writeAnswer<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" >
                         <span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                       <li>
