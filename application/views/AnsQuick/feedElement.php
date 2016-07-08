@@ -11,16 +11,16 @@
                 <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$this->session->userdata('userName'));?>">
                   <span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
               </li>
-              <li role="presentation" >
+              <li role="presentation" <?php if($questionDetails['type']=="getTopFeed") echo 'class="active"'; ?> >
                 <a href="<?php echo base_url("index.php/AnsQuick/top");?>">
                   <span class="glyphicon glyphicon-list-alt"></span>   My Interests</a>
               </li>
-              <li role="presentation">
-                <a href="<?php echo base_url("index.php/AnsQuick/recent");?>" >
+              <li role="presentation"<?php if($questionDetails['type']=="getRecentFeed" || $questionDetails['type']=="getRecentTagFeed") echo 'class="active"'; ?>>
+                <a href="<?php echo base_url("index.php/AnsQuick/recent");?>">
                   <span class="glyphicon glyphicon-flash"></span> Recent Questions
                 </a>
               </li>
-              <li role="presentation">
+              <li role="presentation"<?php if($questionDetails['type']=="getAskedQuestion") echo 'class="active"'; ?>>
                 <a href=<?php echo base_url('index.php/Activity')?>>
                   <span class="glyphicon glyphicon-calendar"></span> Posted Questions</a>
               </li>
