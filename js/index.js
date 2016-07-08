@@ -131,7 +131,7 @@ $("#loginSubmit").click(function(){
       return false;
   }
   data = {'userNameLogin' : userNameLogin, 'passwordLogin' : passwordLogin };
-  $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){    
+  $.post("http://www.ansquick.com/index.php/Login/checkUser",data,function(res){
     if(res=="true"){
       $("#loginForm").submit();
     }
@@ -233,7 +233,7 @@ function writeAnswerFocus(obj){
   $(".alert").hide();
   var questionID = obj.id.replace('writeAnswer','');
   $('#addAnswerText'+questionID).focus();
-  return true;
+  return false;
 }
 function addAnswer(obj) {
   $(".alert").hide();
@@ -247,6 +247,7 @@ function addAnswer(obj) {
   data = {'addAnswerText' : addAnswerText, 'questionID' : questionID };
 
   $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){
+    //alert(res);
     if(res=="true"){
       location.reload();
 
@@ -452,6 +453,12 @@ $("#profilePicSubmit").click(function(){
   $filename = $.trim($filename);
   if($filename  == null || $filename == "" ){
     $("#profilePicError").html("Select a File to Upload");
+    $("#profilePicError").show(500);
+    return false;
+  }
+  var ext = $('#profilePicFile').val().split('.').pop().toLowerCase();
+  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+    $("#profilePicError").html("Invalid Format");
     $("#profilePicError").show(500);
     return false;
   }

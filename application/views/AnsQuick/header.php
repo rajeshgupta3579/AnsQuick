@@ -47,7 +47,7 @@
   </style>
 </head>
 <body>
-  <div id=wrapper>
+  <div id="wrapper">
     <div id="header">
 <nav class="navbar navbar-fixed-top navbar-default "  role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->

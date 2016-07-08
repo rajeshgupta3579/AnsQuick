@@ -1,5 +1,5 @@
-<div id="content">
-<div class="container" style="margin-top:6%">
+<div id="content" style="margin-top:6%; padding-bottom:5%;">
+<div class="container">
 
   <div class="row">
     <div class="col-md-2" style="position: fixed;left: 0;margin-top:2%">
@@ -11,16 +11,16 @@
                 <a href="<?php echo base_url("index.php/AnsQuick/Profile/".$this->session->userdata('userName'));?>">
                   <span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
               </li>
-              <li role="presentation" >
+              <li role="presentation" <?php if($questionDetails['type']=="getTopFeed") echo 'class="active"'; ?> >
                 <a href="<?php echo base_url("index.php/AnsQuick/top");?>">
                   <span class="glyphicon glyphicon-list-alt"></span>   My Interests</a>
               </li>
-              <li role="presentation">
-                <a href="<?php echo base_url("index.php/AnsQuick/recent");?>" >
+              <li role="presentation"<?php if($questionDetails['type']=="getRecentFeed" || $questionDetails['type']=="getRecentTagFeed") echo 'class="active"'; ?>>
+                <a href="<?php echo base_url("index.php/AnsQuick/recent");?>">
                   <span class="glyphicon glyphicon-flash"></span> Recent Questions
                 </a>
               </li>
-              <li role="presentation">
+              <li role="presentation"<?php if($questionDetails['type']=="getAskedQuestion") echo 'class="active"'; ?>>
                 <a href=<?php echo base_url('index.php/Activity')?>>
                   <span class="glyphicon glyphicon-calendar"></span> Posted Questions</a>
               </li>
@@ -146,7 +146,7 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a id="writeAnswer<?php echo $questionDetails[$i]['questionID'];?>"  onclick="writeAnswerFocus(this)">
+                      <a href="#" id="writeAnswer<?php echo $questionDetails[$i]['questionID'];?>"  onclick="writeAnswerFocus(this); return false;">
                         <span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                       <li>
@@ -186,8 +186,7 @@
                                   <br><?php $a= $questionDetails[$i]['answerText'];
                                   echo wordwrap($a,70,"<br>\n",TRUE);;
                                   ?>
-                                  <br><?php echo $questionDetails[$i]['answerTime']; ?> ·<a style="cursor: pointer;" id="likeAnswerButton
-                                  <?php echo $questionDetails[$i]['answerID'];?>" onclick="<?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes']))
+                                  <br><?php echo $questionDetails[$i]['answerTime']; ?> ·<a style="cursor: pointer;" id="likeAnswerButton<?php echo $questionDetails[$i]['answerID'];?>" onclick="<?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes']))
                                   { echo "removeLike(this)";} else{echo "addLike(this)";} ?>"><?php if(in_array($questionDetails[$i]['answerID'],$questionDetails['userLikes']))
                                   echo"Unlike"; else echo"Like"; ?></a> · <span class="glyphicon glyphicon-thumbs-up"></span><span class="badge" id="likeCount<?php echo $questionDetails[$i]['answerID'];?>">
                                     <?php echo $questionDetails[$i]['likes']?></span>
@@ -242,7 +241,7 @@
     <div class="col-md-7" style="margin-left:180px;text-align:center"> <p><?php  if(isset($pagination))echo $pagination; ?> </p></div>
     <!-- Right sidebar: A cell that spans 3 columns -->
     <div class="col-md-3" style="position: absolute;right: 0;">
-      <img src="<?php echo base_url("Uploads/Ads/ad.png");?>" class="pull-left img-responsive" style="margin-right:5px; height:700px;width:300px;" />
+      <img src="<?php echo base_url("Uploads/Ads/ad.jpg");?>" class="pull-left img-responsive" style="margin-right:5px; height:550px;width:300px;" />
     </div>
   </div>
 

@@ -1,4 +1,5 @@
-<div class="container" style="margin-top:6%">
+<div id="content" style="margin-top:6%;padding-bottom:5%;">
+<div class="container">
   <div class="row">
 
     <div class="col-md-2" style="position: fixed;left: 0;margin-top:2%">
@@ -68,7 +69,7 @@
                             $tagIDOfQuestion = explode(DELIMITER,$tagIDOfQuestion);
                             for($j=0;$j<count($tagsOfQuestion);$j++){
                       ?>
-                      <li><a href="<?php  echo base_url("index.php/tag/recent/".$tagIDOfQuestion[$j])?>"><?php echo $tagsOfQuestion[$j]; ?></a><?php if($j!=count($tagsOfQuestion)-1)echo " , ";?></li>
+                      <li><a href="<?php  echo base_url("index.php/tag/recent/".$tagsOfQuestion[$j])?>"><?php echo $tagsOfQuestion[$j]; ?></a><?php if($j!=count($tagsOfQuestion)-1)echo " , ";?></li>
                       <?php }?>
                     </ul>
                   </div>
@@ -78,7 +79,7 @@
                   <div class="col-md-12">
                     <ul class ="list-inline">
                       <li>
-                      <a onclick="writeAnswerFocus(this)" id="writeAnswer<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" >
+                      <a href="#" onclick="writeAnswerFocus(this);return false;" id="writeAnswer<?php echo $questionDetails['questionDiscription'][0]['questionID'];?>" >
                         <span class="glyphicon glyphicon-comment"></span> Write Answer</a>
                       </li>
                       <li>
@@ -155,8 +156,9 @@
               </div>
     </div>
     <div class="col-md-3" style="position: absolute;right: 0;">
-      <img src="<?php echo base_url("Uploads/Ads/ad.png");?>" class="pull-left img-responsive" style="margin-right:5px; height:75%" />
+      <img src="<?php echo base_url("Uploads/Ads/ad.jpg");?>" class="pull-left img-responsive" style="margin-right:5px; height:550px;width:300px;" />
     </div>
   </div>
 
   </div>
+</div>

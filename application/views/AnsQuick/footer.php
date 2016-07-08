@@ -1,4 +1,4 @@
-<div id="footer">
+<div id="footer" class="navbar navbar-fixed-bottom navbar-default">
     <div class="footer" >
           <div class="col-md-4"> </div>
               <div class=" col-md-4" style="text-align: center; bottom:0">
