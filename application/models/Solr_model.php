@@ -105,7 +105,7 @@ class Solr_model extends CI_Model{
                   //$currentTag=$this->currentTag($tagID);
                   $follow=0;
                   if($currentUserID!="NoUser")
-                  $follow = $this->doesFollow($tagID,$currentUserID);
+                  $follow = $this->Ansquick_model->doesFollow($tagID,$currentUserID);
                   //$result=$query->result_array();
                   //$result['type']="getRecentTagFeed";
                   $data=array(

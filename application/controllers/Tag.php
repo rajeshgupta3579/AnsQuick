@@ -77,14 +77,14 @@
 							$config['per_page'] 	= "1";
 							$config["uri_segment"]= 4;
 							$data['page'] 				= ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-						if(questionQueryMethod=="sql"){
+						if(QUESTION_QUERY_METHOD=="sql"){
 							$config['total_rows'] = $this->Ansquick_model->countRowsRecentTagFeed($tagID);
 							$choice = $config["total_rows"]/$config["per_page"];
 							$config["num_links"]  = floor($choice);
 							$this->pagination->initialize($config);
 							$recentFeed   = $this->Ansquick_model->getRecentTagFeed($config["per_page"], $data['page'],$tagID,$currentUserID);
 						}
-						else if(questionQueryMethod=="solr"){
+						else if(QUESTION_QUERY_METHOD=="solr"){
 							$config['total_rows'] = $this->Solr_model->countRowsRecentTagFeed($tagID);
 							//var_dump($config['total_rows']);
 
