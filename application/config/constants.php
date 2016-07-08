@@ -134,4 +134,4 @@ define ("DELIMITER",'-|::|-');
 define ("FORGOT_PASSWORD_MAIL_MESSAGE","Follow the link to change your Password : ");
 define ("SUGGESTOR_METHOD","sql");
 define ("MAILER_LOG","mailers.log");
-define ("QUESTION_QUERY_METHOD","solr");
+define ("QUESTION_QUERY_METHOD","sql");

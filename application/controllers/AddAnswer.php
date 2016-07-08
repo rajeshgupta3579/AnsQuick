@@ -28,15 +28,28 @@ class AddAnswer extends CI_Controller{
 	  }
 		private function addMailLog($questionID,$answeredByUserID){
 				$users = $this->Ansquick_model->getQuestionContributerEmails($questionID,$answeredByUserID);
-				$file = fopen(MAILER_LOG, 'a');
-				$data = array();
-				foreach ($users as $user) {
-					$data[] = implode(DELIMITER,array('emailID'=>$user['emailID'],'answeredByUserID'=>$answeredByUserID,'questionID'=>$questionID,'time'=>time()));
-				}
-				foreach ($data as $row) {
-					fwrite($file, $row.PHP_EOL);
-				}
-				fclose($file);
+				if(count($users)){
+					$file = fopen(MAILER_LOG, 'a');
+					$data = array();
+
+					foreach ($users as $user) {
+						$data[] = implode(DELIMITER,array('emailID'=>$user['emailID'],'answeredByUserID'=>$answeredByUserID,'questionID'=>$questionID,'time'=>time()));
+					}
+					foreach ($data as $row) {
+						fwrite($file, $row.PHP_EOL);
+					}
+					fclose($file);
+			  }
 	  }
+		/*public function sendEmails(){
+			$file = file_get_contents(MAILER_LOG);
+			file_put_contents(MAILER_LOG, "");
+			$data = explode(PHP_EOL,$file);
+			$row = array();
+			for($i=0;$i<count($data)-1;$i++){
+				$row[] = explode(DELIMITER,$data[$i]);
+			}
+			var_dump($row);
+		}*/
 }
 ?>

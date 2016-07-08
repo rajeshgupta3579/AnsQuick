@@ -246,8 +246,7 @@ function addAnswer(obj) {
   }
   data = {'addAnswerText' : addAnswerText, 'questionID' : questionID };
 
-  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){
-    //alert(res);
+  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){    
     if(res=="true"){
       location.reload();
 
