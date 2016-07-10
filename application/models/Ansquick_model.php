@@ -84,6 +84,19 @@ class Ansquick_model extends CI_Model{
          return $userID;
      }
 
+     /*
+     * Returns the userName for a userID
+     */
+     function getUserName($userID){
+         $query = $this->db->select("userName")->from("UserInfo")->where("userID", $userID)->get();
+
+         /*$sql      = "SELECT userID FROM UserInfo WHERE userName='".$userName."'";
+         $query    = $this->db->query($sql);
+         */
+         $result   = $query->result();
+         $userName   = $result[0]->userName;
+         return $userName;
+     }
 
     /*
     * A function to check if current user follows the current tag
