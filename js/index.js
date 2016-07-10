@@ -2,6 +2,7 @@ var nameRX      = /^[A-Za-z\s]+$/ ;
 var emailIDRX   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 var userNameRX  = /^[0-9a-zA-Z]+$/;
 var mobileNoRX  = /^\d{10}$/;
+var tagsRX = /^([a-z]+)(,\s*[a-z]+)*$/i;
 $("#searchBoxForm").submit(function(){
   return false;
 });
@@ -203,7 +204,6 @@ $("#changePasswordSubmit").click(function(){
 });
 $("#postQuestionSubmit").click(function(){
     $(".alert").hide();
-    var tagsRX = /^([a-z]+)(,\s*[a-z]+)*$/i;
     var category     = document.forms["postQuestionForm"]["category"].value.trim();
     var question     = document.forms["postQuestionForm"]["question"].value.trim();
     var tags         = document.forms["postQuestionForm"]["tags"].value.trim();
@@ -246,7 +246,7 @@ function addAnswer(obj) {
   }
   data = {'addAnswerText' : addAnswerText, 'questionID' : questionID };
 
-  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){    
+  $.post("http://www.ansquick.com/index.php/AddAnswer/",data,function(res){
     if(res=="true"){
       location.reload();
 

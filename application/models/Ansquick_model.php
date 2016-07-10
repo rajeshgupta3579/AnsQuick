@@ -707,7 +707,7 @@ class Ansquick_model extends CI_Model{
                                       $answerdBy          = $result[0]['firstName']." ".$result[0]['lastName'];
                                       $answerdByPic       = $result[0]['profilePic'];
                                       $answerdByUserName  = $result[0]['userName'];
-                                      $answerTime         = $answerDetails[0]['time'];
+                                      $answerTime         = $answerDetails[$i]['time'];
                   $answerDetails[$i]['answerdBy']         = $answerdBy;
                   $answerDetails[$i]['answerTime']        = $answerTime;
                   $answerDetails[$i]['answerdByPic']      = $answerdByPic;
