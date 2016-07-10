@@ -562,13 +562,13 @@ class Ansquick_model extends CI_Model{
       $data=array(
               'question'  =>  $query->result_array(),
               );
-      var_dump($data);
+      //var_dump($data);
       $data =  $this->process_feed($data);
       $data['questionDetails']['type']          = "getRecentTagFeed";
     //  $data['questionDetails']['currentTag']    = $currentTag;
       $data['questionDetails']['currentTagID']  = $tagID;
       $data['questionDetails']['follow']        = $follow;
-      var_dump($data);
+      //var_dump($data);
       return $data;
      }
 
