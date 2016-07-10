@@ -134,6 +134,7 @@ define ("DELIMITER",'-|::|-');
 define ("FORGOT_PASSWORD_MAIL_MESSAGE","Follow the link to change your Password : ");
 define ("SUGGESTOR_METHOD","sql");
 define ("MAILER_LOG","mailers.log");
+define ("MAILED_TO_LOG","mailedto.log");
 define ("QUESTION_QUERY_METHOD","sql");
 define ("TAG_DETAIL_PAGE_URL","index.php/Tag/recent/");
 define ("TOP_FEED_PAGE_URL","index.php/AnsQuick/top");
